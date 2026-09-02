@@ -1,0 +1,64 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+  "name": "Ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/base:resolute",
+  "runArgs": ["--name", "my-practice-container"],
+  "features": {
+    "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {},
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "1.15.0",
+      "tflint": "0.64.0",
+      "terragrunt": "1.1.4",
+      "installTerraformDocs": true,
+      "terraformDocsVersion": "0.24.0"
+    },
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "moby": false
+    },
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.27.0"
+    },
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "21",
+      "installMaven": true,
+      "mavenVersion": "3.9.16"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.14.7"
+    },
+    "ghcr.io/devcontainers/features/node:2":{
+      "version": "24"
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "1.36.0",
+      "helm": "4.2.4"
+    }
+  },
+  "remoteEnv": {
+    "GITLAB_TOKEN": "${localEnv:GITLAB_TOKEN}",
+    "GH_TOKEN": "${localEnv:GH_TOKEN}",
+    "GIT_USER_NAME": "${localEnv:GIT_USER_NAME}",
+    "GIT_USER_EMAIL": "${localEnv:GIT_USER_EMAIL}"
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind",
+    "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "hashicorp.terraform",
+        "amazonwebservices.aws-toolkit-vscode",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
+}
