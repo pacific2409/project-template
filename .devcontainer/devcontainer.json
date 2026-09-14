@@ -2,10 +2,20 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
   "name": "Ubuntu",
-  "image": "mcr.microsoft.com/devcontainers/base:resolute",
-  "runArgs": ["--name", "my-practice-container"],
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "GIT_USER_NAME": "${localEnv:GIT_USER_NAME}",
+      "GIT_USER_EMAIL": "${localEnv:GIT_USER_EMAIL}"
+    }
+  },
+  "runArgs": [
+    "--name",
+    "project-template-work-container",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
   "features": {
-    "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {},
     "ghcr.io/devcontainers/features/aws-cli:1": {},
     "ghcr.io/devcontainers/features/terraform:1": {
       "version": "1.15.0",
@@ -30,7 +40,7 @@
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.14.7"
     },
-    "ghcr.io/devcontainers/features/node:2":{
+    "ghcr.io/devcontainers/features/node:2": {
       "version": "24"
     },
     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
@@ -40,13 +50,12 @@
   },
   "remoteEnv": {
     "GITLAB_TOKEN": "${localEnv:GITLAB_TOKEN}",
-    "GH_TOKEN": "${localEnv:GH_TOKEN}",
-    "GIT_USER_NAME": "${localEnv:GIT_USER_NAME}",
-    "GIT_USER_EMAIL": "${localEnv:GIT_USER_EMAIL}"
+    "GH_TOKEN": "${localEnv:GH_TOKEN}"
   },
   "mounts": [
-    "source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind",
-    "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind"
+    "source=codex-data,target=/home/vscode/.codex,type=volume",
+    "source=aws_data,target=/home/vscode/.aws,type=volume",
+    "source=homebrew-cache,target=/home/vscode/.cache/Homebrew,type=volume"
   ],
   "customizations": {
     "vscode": {
@@ -59,6 +68,5 @@
         "dbaeumer.vscode-eslint"
       ]
     }
-  },
-  "postCreateCommand": "bash .devcontainer/post-create.sh"
+  }
 }
