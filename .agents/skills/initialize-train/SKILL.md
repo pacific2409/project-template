@@ -20,18 +20,18 @@ description: >
 ## Goal
 - ExecutionStepsに定義されたすべてのStepが完了していること。
 - 開発するプロダクトの基本的なアイデアが決定し、プロダクトコンセプト整理されていること。
-- `docs/product-concept-planning.md` の作成が完了し、内容が承認されていること。
-- 合意されたProject名およびTrain名が、`docs/train-status.md` に記録されていること。
+- `docs/ideas/product-concept-planning.md` の作成が完了し、内容が承認されていること。
+- 合意されたProject名およびTrain名が、`docs/persistent/train-status.md` に記録されていること。
 - `.steering/` 以下に、Current Trainと同名のディレクトリがExecutionStepsに定められた内容とともに作成されていること。
 
 ## Execution Steps
 ### Step 1: Get Initial Idea
 ユーザーにどのようなプロダクトを作りたいかを確認し、
-回答内容を整理し、開発アイデアの初期状態として `docs/product-concept-planning.md` を作成して記録する。
+回答内容を整理し、開発アイデアの初期状態として `docs/ideas/product-concept-planning.md` を作成して記録する。
 ※内容の詳細化や要件定義までは行わない。
 
 ### Step 2: Discuss the Product Concept
-`Step 1: Get Initial Idea`で確認・記録したアイデアについて、以下の観点について一つずつユーザーに確認する。議論の上で方向性が一定具体化できたら、その内容を `docs/product-concept-planning.md` に追記した後、次の観点の確認へ進む。
+`Step 1: Get Initial Idea`で確認・記録したアイデアについて、以下の観点について一つずつユーザーに確認する。議論の上で方向性が一定具体化できたら、その内容を `docs/ideas/product-concept-planning.md` に追記した後、次の観点の確認へ進む。
 
 確認は、常にそれまでの内容を踏まえた、かつ複数の選択肢を持つサジェストとセットで行う。
 
@@ -48,11 +48,11 @@ description: >
 - その他当プロダクトのコンセプトを決める上で重要とエージェントが判断した点
 
 ### Step 3: Finalize Product Concept Planning
-Step 2までに記録された `docs/product-concept-planning.md` の内容全体を確認し、合意された内容の意味を変更しない範囲で、重複や記述の整理を行う。整理の際は、「今回採用する内容」「将来の展望」「未決事項」を明確に区別するようにして、「将来の展望」「未決事項」は章を分け、文書の末尾に移動すること。
+Step 2までに記録された `docs/ideas/product-concept-planning.md` の内容全体を確認し、合意された内容の意味を変更しない範囲で、重複や記述の整理を行う。
 
 整理された内容からプロダクトの全体像を要約し、文書の冒頭に概要として追加する。尚、この概要には「将来の展望」「未決事項」に関する内容は含めないこと。
 
-最終的な `docs/product-concept-planning.md` の内容をユーザーに提示し、承認を得る。
+最終的な `docs/ideas/product-concept-planning.md` の内容をユーザーに提示し、承認を得る。
 
 ### Step 4: Name the Project and the Current Train
 整理したProduct Conceptをもとに、Projectおよび本Trainを識別する名称を考え、ユーザーに提示し、決定する。
@@ -69,7 +69,7 @@ Trainの名称は、以下の命名規則に従う。
 
 
 ### Step 5: Train Status Initialization
-`Step 4: Name the Project and the Current Train` で決定した内容をもとに、`docs/train-status.md` を作成する。
+`Step 4: Name the Project and the Current Train` で決定した内容をもとに、`docs/persistent/train-status.md` を作成する。
 
 作成にあたっては、`assets/train-status-template.md` をテンプレートとして利用する。
 
