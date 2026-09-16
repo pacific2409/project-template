@@ -6,6 +6,7 @@ description: >
   Use when: Projectにおいて、最初の開発を開始するとき。そして、その計画および準備を行うとき。
   Do not use for: 開発以降の工程の進行管理。既存Projectに対する機能追加・改修。
 ---
+# Flow Skill For Manager: project-setup-flow
 
 ## Summary
 あなたの役割は、新規の開発ProjectのManagerです。このSkillを用いて要件定義、設計など開発の準備・計画のための工程を管理・進行してください。具体的な作業の実施については、Workflowに従って都度対応するWork型 Skillを呼び出すことで対応します。

@@ -6,6 +6,7 @@ description: >
   Use when: Train Initialization を実施するとき。
   Do not use for: 要件定義、設計、開発以降の工程。
 ---
+# Work Skill: initialize-train
 
 ## Summary
 開発アイデアのヒアリングおよび内容整理、その結果に基づくProjectや本Trainのタイトルの決定・定義を行う。また、対応するSteering領域のセットアップを行う。
@@ -34,7 +35,7 @@ description: >
 `Step 1: Get Initial Idea`で確認・記録したアイデアについて、以下の観点について一つずつユーザーに確認する。議論の上で方向性が一定具体化できたら、その内容を `docs/ideas/product-concept-planning.md` に追記した後、次の観点の確認へ進む。
 
 #### **Guideline**
-- 確認作業中の合意・承認状況については文書の末尾にて管理・更新する。
+- 合意・承認状況については文書の末尾にて管理・更新する。
 - docs/ideas/product-concept-planning.md には、後続の工程・Phaseや次以降のStepの予定・実施内容を記載しない。
 - 今回対象外と合意した内容は、専用の節にまとめる。未決定の事項を、対象外とみなさない。
 - 確認は、それまでの内容を踏まえた複数の選択肢のサジェストとセットで行う。最後には必ず「その他」を設ける。
