@@ -22,7 +22,7 @@ description: >
 - ExecutionStepsに定義されたすべてのStepが完了していること。
 - 開発するプロダクトの基本的なアイデアが決定し、プロダクトコンセプト整理されていること。
 - `docs/ideas/product-concept-planning.md` の作成が完了し、内容が承認されていること。
-- 合意されたProject名およびTrain名が、`docs/persistent/train-status.md` に記録されていること。
+- 合意されたProject名およびTrain名が、`docs/train-status.md` に記録されていること。
 - `.steering/` 以下に、Current Trainと同名のディレクトリがExecutionStepsに定められた内容とともに作成されていること。
 
 ## Execution Steps
@@ -53,7 +53,7 @@ description: >
 - 将来的な発展可能性
 - その他当プロダクトのコンセプトを決める上で重要とエージェントが判断した点
 - ここまでの内容について、プロダクトコンセプトの範囲内で残っている未決定事項の確認・確定
-- ここまでの内容について、今回対象外にする内容の確認
+- ここまでの内容について、今回対象外にする内容の確認(今回対応しないだけなのか、永久に対応しないのかを明確に)
 
 ### Step 3: Finalize Product Concept Planning
 Step 2までに記録された `docs/ideas/product-concept-planning.md` の内容全体を確認し、合意された内容の意味を変更しない範囲で、重複や記述の整理を行う。
@@ -77,7 +77,7 @@ Trainの名称は、以下の命名規則に従う。
 
 
 ### Step 5: Train Status Initialization
-`Step 4: Name the Project and the Current Train` で決定した内容をもとに、`docs/persistent/train-status.md` を作成する。
+`Step 4: Name the Project and the Current Train` で決定した内容をもとに、`docs/train-status.md` を作成する。
 
 作成にあたっては、`assets/template.md` をテンプレートとして利用する。
 
