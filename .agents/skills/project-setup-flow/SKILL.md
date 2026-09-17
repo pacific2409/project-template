@@ -47,8 +47,14 @@ Work Skill `$initialize-train` を使用し、その内容の実施によって�
 - ProjectおよびCurrent Trainの命名・定義
 - Current Trainのsteering領域のセットアップ
 
-### Task 2: Process Retrospective
-Task 1で実施した工程を振り返り、Agentの観点から、工程の進めやすさおよび改善すべき課題についてユーザーへ報告する。
+### Task 2: Product Requirement Definition
+Work Skill `$write-prd` を使用し、プロダクト要求定義書(PRD)を作成する。
+- 定義内容についての協議とその記録
+- PRDの作成
+- サブエージェントによる成果物レビュー
+
+### Task 3: Process Retrospective
+Task 2で実施した工程を振り返り、Agentの観点から、工程の進めやすさおよび改善すべき課題についてユーザーへ報告する。
 
 - 工程全体の進めやすさ
 - 指示や手順の分かりやすさ
