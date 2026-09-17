@@ -15,10 +15,10 @@
 
 ## **Project Name**
 
-[Project名]
+### **[Project名]**
 
 ## **Train Status**
 
 | Train | Status |
 |-------|--------|
-| [YYYYMMDD]-[開発タイトル] | [OPEN / CLOSED] |
+| **[YYYYMMDD]-[開発タイトル]** | [OPEN / CLOSED] |
