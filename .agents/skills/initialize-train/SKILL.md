@@ -79,7 +79,7 @@ Trainの名称は、以下の命名規則に従う。
 ### Step 5: Train Status Initialization
 `Step 4: Name the Project and the Current Train` で決定した内容をもとに、`docs/train-status.md` を作成する。
 
-作成にあたっては、`assets/template.md` をテンプレートとして利用する。
+作成にあたっては、`assets/train-status-template.md` をテンプレートとして利用する。
 
 ### Step 6: Steering Setup
 `.steering/` 配下に、決定したCurrent Trainと同名のディレクトリおよびそのサブディレクトリを、以下の構成で作成する。
