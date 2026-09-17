@@ -123,5 +123,5 @@ Agent `document-reviewer` に **Artifact** のレビューを依頼する。
 #### Re-Review Guideline
 - *Artifact**の改善やレビューレポートへの記載を行う際、ならびに再レビュー依頼を行う際は、都度必ずその前にユーザーに確認し、承認を得る。
 
-### Step 8: Move **Draft** and Review Report to Steering for the Current Train
-**Step 7**までの全ての工程が完了したとき、今回のこれらの工程にて、作成もしくは受け取った**Draft**およびレビューレポートを、Current TrainのSteering領域にあるManagerディレクトリ下のそれぞれ対応する場所に移動する。
+### Step 8: Move **Source**, **Draft** and Review Report to Steering for the Current Train
+**Step 7**までの全ての工程が完了したとき、今回のこれらの工程にて、作成もしくは受け取った**Source**, **Draft**およびレビューレポートを、Current TrainのSteering領域にあるManagerディレクトリ下のそれぞれ対応する場所に移動する。
