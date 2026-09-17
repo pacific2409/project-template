@@ -21,6 +21,7 @@ description: >
 
 ## Rule
 - Workflowを開始する前に、Projectルートの`AGENTS.md`を全て読み、その内容を全ての作業の前提として進める。
+- ユーザーからの明示的な指示によってWorkflowを再開する際は、はじめにProjectルートの`AGENTS.md`を改めて全て読み込む。
 - 各TaskはWorkflowに記載された順序で実行する。
 - 各Taskの完了条件を満たすまで次のTaskへ進まない。
 - 各Taskの完了、および次のTaskへの進行にはユーザーの承認を得る。
