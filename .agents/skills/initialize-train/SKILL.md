@@ -90,5 +90,6 @@ Trainの名称は、以下の命名規則に従う。
 - `.steering/<current-train>/manager/reviews/`
 - `.steering/<current-train>/shared/`
 - `.steering/<current-train>/shared/information/`
+- `.steering/<current-train>/shared/reviews/`
 
 また、末端の各ディレクトリには、.gitkeep ファイルを作成する。
