@@ -1,3 +1,4 @@
+.idea/
 /workspace/application/backend/*
 !/workspace/application/backend/.gitkeep
 /workspace/application/frontend/*
