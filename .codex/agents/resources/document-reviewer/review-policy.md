@@ -1,6 +1,6 @@
 # Document Review Policy
 
-レビュワーエージェントは、本Policyに従ってドキュメントの品質を評価し、改善提案を行う。
+レビュアーエージェントは、本Policyに従ってドキュメントの品質を評価し、改善提案を行う。
 
 ## 目的
 
@@ -9,7 +9,11 @@
 ## Glossary
 ### **Review Subject**
 レビュー対象となる文書。
-レビュー依頼元から、そのファイルパスを受け取る。
+レビュー依頼元から、1つ以上のファイルパスを受け取る。
+
+### **Dependency Documents**
+**Review Subject**の前提となる文書。比較を行い、**Review Subject**がその内容に適切に対応し、矛盾なく整合しているかを確認する。
+レビュー依頼元から、1つ以上のファイルパスを受け取る。
 
 ### **Review Policy**
 文書レビューに共通する方針、手順およびルールを定義した本ドキュメント。
@@ -21,6 +25,12 @@
 
 ### **Review Report**
 Review Subjectに対するレビュー結果を記録する文書。(パスおよびファイル名についての指定は**Specific Review Points Sheet**に記載)
+
+### **Review Scope**
+- レビュー依頼元から任意で指定される、Review Subjectにおける作業対象および変更対象の範囲。
+- **Review Scope**が指定されている場合は、Review Scope内の作成・変更内容を重点的にレビューするとともに、その内容によって影響を受ける既存仕様との整合性も確認する。
+- 一方、Scopeと独立した既存仕様について、新たな問題の探索、改善または再設計を目的としてレビュー範囲を拡張しない。
+- **Review Scope**が指定されていない場合は、Review Subject全体を通常のレビュー対象とする。
 
 ## Evaluation Mode(Review Intensity)
 
@@ -124,6 +134,7 @@ Review Subjectに対するレビュー結果を記録する文書。(パスお�
 ### Step 0: 必要情報の特定
 1. 依頼元からの提供情報から下記を特定する。
     - レビュー対象となる文書（**Review Subject**）のパス
+    - 比較対象となる文書（**Dependency Documents**）のパス(提供がある場合のみ)
     - レビュー観点表(**Specific Review Points Sheet**) のパス
     - レビュー結果を記録する **Review Report** のパス(**Specific Review Points Sheet**に記載)
     - **Evaluation Mode**
@@ -134,7 +145,10 @@ Review Subjectに対するレビュー結果を記録する文書。(パスお�
 **Review Subject**と**Specific Review Points Sheet**を読み込み内容を確認する。
 
 ### Step 2: 内容のレビュー・評価
-上記3つの観点(完全性、明確性、一貫性)および、**Specific Review Points Sheet**指定の観点から評価・レビューする。※選択された**Evaluation Mode**を本文の指定に沿って反映させる。
+上記3つの観点(完全性、明確性、一貫性)および、**Specific Review Points Sheet**指定の観点から評価・レビューする。
+
+- 選択された**Evaluation Mode**を本文の指定に沿って反映させる。
+- **Review Scope**が指定されている場合は、**Glossary**に定義された扱いに従ってレビューへ反映させる。
 
 ### Step 3: **Review Report** の作成・更新
 本レビューが当該**Review Subject**の初回レビューの場合は、**Review Report** のパスに従ってファイルを作成する。再レビューの際は、**Review Report** を所定の方針に従って更新する。

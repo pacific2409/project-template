@@ -1,0 +1,13 @@
+## **Definition Policy**
+- 本API Definitionは、1 APIにつき1 Artifactとして作成し、対象APIを実装可能な粒度まで具体化する。
+- Function DesignおよびSystem Architecture等の上位設計で確定したAPIの目的、Service Boundary、Interface Relationship、Business RuleおよびArchitecture上のDecisionを前提とし、それらを本Definitionで再定義しない。
+- 本APIを提供するServiceを基準として、Requestの受付からResponseの返却までに必要となるRequest / Response Contract、Dependencies、Data Access、Transaction、処理Logic、Error等のAPI固有仕様を定義する。
+- Database、Internal Service、External Service等の他の設計対象を利用する場合、そのContractや内部仕様を再定義せず、対応するSpecificationを正とする。本Definitionでは、本APIからの利用方法およびInteractionを定義する。
+- Environment固有のEndpoint、Secret、Credentialその他のConfigurationについては、可能な限り実値を固定的に記載せず、Applicationが利用するPropertyおよびConfiguration / Secret等のReferenceをContractとして定義する。
+- APIとして外部へ公開するRequest / ResponseおよびError Contractと、API内部のProcessingを分離して定義する。
+- 各仕様は、追加の設計判断を行わず実装へ移行できる粒度まで具体化するとともに、同一仕様を複数Sectionで重複して定義せず、その仕様を担当するSectionを正とする。
+- Logging等のApplication横断的な実装RuleはDevelopment Guideline等の対応する横断方針を前提とし、本DefinitionではAPI固有の仕様のみを定義する。
+- Request / Response SamplesはDefinitionで確定した仕様の具体例として扱い、Sampleによって新たな仕様を追加・変更しない。
+- 各Sectionは原則としてTableで構造化し、処理順序、条件分岐、Interaction、Payload等については、情報の性質に応じてMermaid、疑似Code、Code Block等を使用する。
+
+

@@ -77,21 +77,21 @@ Executorは、インフラストラクチャ、オーケストレーション、
     - `20250115-add-tag-feature`
     - `20250115-initial-implementation`
 
-### **▪️.steering/**
+### **▪️docs/.steering/**
 - 作業単位ドキュメント
 - 特定のtrainにおける各Executorの担当ごとの作業・変更の意図と経緯を記録
 - Trainおよび担当領域ごとに新しいディレクトリを作成
 - 作業完了後は履歴として保持
 #### **構成**
-SteeringはTrainごとに `.steering/<train>/` 配下へ作成する。
+SteeringはTrainごとに `docs/.steering/<train>/` 配下へ作成する。
 
-各Trainの配下には、Train共通の情報を配置する `shared/` と、各担当の作業情報を配置する担当別ディレクトリを作成する。
+各Trainの配下には、Train共通の情報を配置する `docs/.steering/<train>/shared/` と、各担当の作業情報を配置する担当別ディレクトリを作成する。
 - 前者においては、shared/information/下に担当間、または担当とユーザーの間で、ファイルによって情報を共有し受け渡すための領域とする。担当間のファイルの受け渡しは必ずユーザーが仲介する。形式は各Flow SkillやWork Skillで定義する。
-- 担当別ディレクトリは、担当ごとに .steering/<current-train>/<担当>として配置する。
+- 担当別ディレクトリは、担当ごとに `docs/.steering/<current-train>/<担当>` として配置する。
 
 構造例:
 ```text
-.steering/
+docs/.steering/
 └── 20260911-initial-implementation/
     ├── shared/
     │   └── information/
@@ -114,10 +114,10 @@ SteeringはTrainごとに `.steering/<train>/` 配下へ作成する。
 
 #### **ExecutorのSteering参照ルール**
 - 各Executorは、Current Trainとユーザーから割り振られた担当領域をもとに、自身の担当ディレクトリを特定する。
-  - 例: Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、担当ディレクトリは以下となる。`.steering/20260911-initial-implementation/backend-a-service/`
+  - 例: Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、担当ディレクトリは以下となる。`docs/.steering/20260911-initial-implementation/backend-a-service/`
 - 各Executorは、共通ドキュメントに加えて、Current Trainにおける自身の担当ディレクトリ内のSteeringを参照して作業を進める。
 - `shared/information/` は、フローの中で明示的に参照を指示された場合、またはユーザーから指示があった場合にのみ参照する。
-- 各Executorについては、上記を除く、.steering/ 以下の全てのファイルおよびディレクトリの参照を禁ずる。
+- 各Executorについては、上記を除く、`docs/.steering/` 以下の全てのファイルおよびディレクトリの参照を禁ずる。
 
 
 ### **▪️workspace/**
@@ -146,7 +146,7 @@ workspace/
 #### **ExecutorのWorkspace参照・操作ルール**
 
 - 各Executorは、Current Trainにおける自身の担当と、共通ドキュメントおよび自身の担当Steeringの内容をもとに、対応する `workspace/` 配下の担当領域で構築・開発などの実作業を行う。
-- 例えば、Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、共通ドキュメントおよび `.steering/20260911-initial-implementation/backend-a-service/` の内容をもとに、`workspace/application/backend/a-service/` で実作業を行う。
+- 例えば、Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、共通ドキュメントおよび `docs/.steering/20260911-initial-implementation/backend-a-service/` の内容をもとに、`workspace/application/backend/a-service/` で実作業を行う。
 - Executorについては、`workspace/` 以下において自身の担当領域外のファイルおよびディレクトリへの書き込みを禁ずる。
 - また、ユーザーから明示的な指示がない限り、自身の担当領域外のファイルおよびディレクトリの参照を禁ずる。
 

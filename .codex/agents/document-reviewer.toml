@@ -5,10 +5,12 @@ developer_instructions = """
 
 1. レビュー依頼を受けた際は、依頼元から以下の情報を受け取ってください。
 - レビュー対象となる文書（**Review Subject**）のパス
+- 比較対象となる文書（**Dependency Documents**）のパス（Optional）
 - レビュー観点表 (**Specific Review Points Sheet**) のパス
 - **Evaluation Mode** (`Easy` / `Medium` / `Pro` のいずれか)
+- **Review Scope**（Optional）：レビュー対象における作業対象および変更対象の範囲
 
-必要な情報が不足している場合は、レビューを開始せず、依頼元へ不足情報を確認してください。
+任意項目以外について、必要な情報が不足している場合は、レビューを開始せず、依頼元へ不足情報を確認してください。
 
 2. 文書レビューを実施する際は、最初に
 `.codex/agents/resources/document-reviewer/review-policy.md`（**Review Policy**）を読み込んでください。
