@@ -12,6 +12,7 @@ description: >
 開発アイデアをもとにプロダクト要求を具体化・定義し、その内容をもとに要求定義書(PRD)の作成または追記を行う。
 
 ## Inputs
+- **Requirement Mode**: 本Skillにおける仕様定義の起点となった要求の性質によって、`INITIAL` または `CR` のいずれかに分かれる。
 - **Scope** *(Optional)*: 本Skillで扱う作業対象および変更対象の範囲
 
 ## Sources
@@ -26,6 +27,11 @@ docs/ideas/development-concept-planning.md
 
 ## Content Guide for the Skill (`references/guide.md`)
 PRDに定義する内容、その検討観点および記述内容の指針を定める。このガイドを参照しながら要求定義を進める。
+
+## Affected Modules
+```
+modules/*/*
+```
 
 ## Draft
 要求内容の検討過程において、ユーザーと議論した内容を以下に記録する。
@@ -42,12 +48,6 @@ docs/persistent/product-requirements.md
 ## Template for the Artifacts (`assets/template.md`)
 **Artifacts**を作成する際に、テンプレートとして利用する。
 
-## Comparison Review Report
-文書間の整合性確認の結果の出力先は以下のパスとする:
-```
-docs/reviews/prd-on-product-concept-comparison.md
-```
-
 ## Specific Review Points Sheet (`references/review-points.md`)
 Artifactsレビューを依頼する際に、レビュアーに提供する本ドキュメント特有のレビュー観点を定めている。
 
@@ -62,17 +62,24 @@ Artifactsレビューを依頼する際に、レビュアーに提供する本�
 
 ## Goal
 - ExecutionStepsに定義されたすべてのStepが完了していること。
-- **Artifacts** の作成およびレビューが完了し、内容が承認されていること。
+- **Artifacts** の作成または更新と、レビューが完了し、内容が承認されていること。
 
 ## Execution Steps
-### Initial Spec Establishment
-以下を本Skillの定義から特定した上で、**Initial Spec Establishment Flow**(`.agents/resources/common-flow/initial-spec-establishment-flow.md`)に従い、PRDの作成および関連作業を行う。
+### Procedure: Spec Definition
+**Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。それによって、PRDを作成・更新する。
+
+- `INITIAL`: **Initial Spec Establishment** (`.agents/resources/doc-procedure/initial-spec-establishment.md`)
+- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition-flow.md`)
+
+Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 
 - **Sources**
 - **Draft**
 - **Artifacts**
 - **Guide**
 - **Template**
-- **Comparison Review Report**
 - **Specific Review Points Sheet**
+- **Affected Modules** *(`CR`の場合のみ使用される)*
 - **Scope** *(Optional: Inputとして指定されている場合)*
+
+該当する **Procedure** から **Flow Required**=`False` が返却された場合、本Skillにおける以降のStepが存在しても、それらは実施せず、本Work Skillを終了する。

@@ -13,6 +13,7 @@ description: >
 Function DesignおよびSystem Architectureに基づき、各batchの仕様書を作成する。
 
 ## Inputs
+- **Requirement Mode**: 本Skillにおける仕様定義の起点となった要求の性質によって、`INITIAL` または `CR` のいずれかに分かれる。
 - **Scope** *(Optional)*: 本Skillで扱う作業対象および変更対象の範囲
 
 ## Sources
@@ -22,6 +23,7 @@ docs/persistent/function-design.md
 docs/persistent/system-architecture.md
 docs/persistent/development-guidelines.md
 docs/persistent/details/error-codes.md
+docs/persistent/details/database-definition.md
 docs/persistent/details/table/*.md
 docs/ideas/infrastructure-to-application-dependencies.md
 ```
@@ -33,6 +35,13 @@ docs/ideas/infrastructure-to-application-dependencies.md
 ## Content Guide for the Skill (`references/guide.md`)
 Batch Specificationsに定義する内容、その検討観点および記述内容の指針を定める。このガイドを参照しながら要求定義を進める。
 
+## Affected Modules
+
+```
+modules/database/*
+modules/backend/*
+```
+
 ## Draft
 要求内容の検討過程において、ユーザーと議論した内容を以下に記録する。
 ```
@@ -42,17 +51,11 @@ docs/drafts/batch-specification-draft.md
 ## Artifacts
 Batch Specificationは以下にBatchごとに作成・保存する:
 ```
-docs/persistent/details/<batch-name>-batch-spec.md
+docs/persistent/details/batch/<batch-name>-batch-spec.md
 ```
 
 ## Template for the Artifacts (`assets/template.md`)
 **Artifacts**を作成する際に、テンプレートとして利用する。
-
-## Comparison Review Report
-文書間の整合性確認の結果の出力先は以下のパスとする:
-```
-docs/reviews/batch-specifications-on-dependencies.md
-```
 
 ## Specific Review Points Sheet (`references/review-points.md`)
 Artifactsレビューを依頼する際に、レビュアーに提供する本ドキュメント特有のレビュー観点を定めている。
@@ -71,33 +74,44 @@ Artifactsレビューを依頼する際に、レビュアーに提供する本�
 
 ## Execution Steps
 ### Pre Step 1: Identify Required Batches
+まず**Artifacts** のパス規則に該当する既存のBatch Specificationのファイルを確認し、対応するBatch名を特定する。
 
-Agent `explorer` に以下の上位設計を確認の上、Application Detail DesignとしてBatch Specificationを作成すべきBatchを抽出してもらう。
+Agent `explorer` に、特定した既存のBatch名と以下の上位設計を連携し、Application Detail DesignとしてBatch Specificationを作成すべきBatchを抽出してもらう。
 
 - `docs/persistent/function-design.md`
 - `docs/persistent/system-architecture.md`
 
-その際、下記観点もAgentに連携する。
-- 上位設計で実装対象として確定しているBatchを対象とする。
+その際、以下の観点もAgentに連携する。
+
+- 連携された既存のBatch名を確定済みのものとして扱い、それらに加えてBatch Specificationが必要なBatchがないかを確認する。
+- 新たにBatch Specificationが必要なBatchがある場合は、それらを全て抽出する。
+- 既存のBatch名が0件の場合は、上位設計からBatch Specificationが必要なBatchをすべて抽出する。
+- 上位設計で実装対象として確定しているBatchのみを対象とする。
 - 上位設計からBatchの存在を確認できない場合は、推測によって新たなBatchを追加しない。
 
 ### Pre Step 2: Confirm Artifacts
-抽出結果をもとに、作成・更新するBatch Specificationの数、対象BatchおよびArtifact名を確定する。
+既存のBatch Specificationと前項の抽出結果を合わせ、本Skillで扱う **Artifacts** を確定する。
 
-- 抽出の結果に作成すべきBatchが存在しない場合は、以降のStepをすべてSkipし、本Work Skillを終了する。
+- 既存のBatch Specificationはそのまま **Artifacts** として引き継ぐ。
+- 新たに抽出された各Batchについて、対応するArtifact Pathを確定し、**Artifacts** に追加する。
 - 同一Batchについて重複したArtifactを作成しない。
-- 抽出した各Batchについて、対応するArtifact Pathを確定する。
+- 対象となる **Artifacts** が1つもない場合は、以降のStepをすべてスキップし、本Work Skillを終了する。
 
-### Initial Spec Establishment
-以下を本Skillの定義および前項までの作業結果から特定した上で、**Initial Spec Establishment Flow**(`.agents/resources/common-flow/initial-spec-establishment-flow.md`)に従い、PRDの作成および関連作業を行う。
+### Procedure: Spec Definition
+**Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。それによって、Batch Specificationを作成・更新する。
+
+- `INITIAL`: **Initial Spec Establishment** (`.agents/resources/doc-procedure/initial-spec-establishment.md`)
+- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition-flow.md`)
+
+Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 
 - **Sources**
 - **Draft**
 - **Artifacts**
 - **Guide**
 - **Template**
-- **Comparison Review Report**
 - **Specific Review Points Sheet**
+- **Affected Modules** *(`CR`の場合のみ使用される)*
 - **Scope** *(Optional: Inputとして指定されている場合)*
 
-
+該当する **Procedure** から **Flow Required**=`False` が返却された場合、本Skillにおける以降のStepが存在しても、それらは実施せず、本Work Skillを終了する。

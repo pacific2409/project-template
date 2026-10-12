@@ -10,7 +10,7 @@
 | --- | --- |
 | Physical Name |  |
 | Logical Name |  |
-| Application |  |
+| Platform |  |
 | Screen Type |  |
 | Route / Path |  |
 | Description |  |

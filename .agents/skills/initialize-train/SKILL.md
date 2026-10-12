@@ -13,7 +13,7 @@ description: >
 整理されたProduct ConceptをもとにProjectおよび本Trainを識別する名称を決定し、Train Status、Remote Repository、Steering等、本Trainの管理および作業開始に必要な領域・情報を初期化する。
 
 ## Input
-- **Train Type**: 本Skillを実行するTrainの種別。`LAUNCH` または `EVOLVE`。
+- **Requirement Mode**: 本Skillにおける仕様定義の起点となった要求の性質によって、`INITIAL` または `CR` のいずれかに分かれる。
 
 ## Sources
 このファイルの内容をもとにProjectやTrainのタイトルを導き出す。
@@ -45,6 +45,7 @@ docs/train-status.md
 ## List of Step
 - Name the Project and the Current Train
 - Train Status Initialization
+- Setup Branch for The Current Train
 - Setup Remote Repository
 - Steering Setup
 - Create the Table for Flow Status
@@ -54,7 +55,7 @@ docs/train-status.md
 ### Step 1: Name the Project and the Current Train
 **Sources**にて整理されたDevelopment Conceptをもとに、本Trainを識別する名称を考え、ユーザーに提示し、決定する。
 
-**Train Type**=`LAUNCH`の場合は、同文書にて整理されたProduct Conceptをもとに、Project名についても一緒に決定する。
+**Requirement Mode**=`INITIAL`の場合は、同文書にて整理されたProduct Conceptをもとに、Project名についても一緒に決定する。
 
 いずれの名前も特徴を表しつつ簡潔な名前にする。
 
@@ -72,8 +73,11 @@ Step **Name the Project and the Current Train** で決定した内容をもと�
 
 作成・更新にあたっては、`assets/train-status-template.md` をテンプレートとして利用・参照する。
 
-### Step 3: Setup Remote Repository
-**Train Type**=`LAUNCH`の場合にのみ、以下の手順を実行する。Otherwise, this Step is skipped.
+### Step 3: Setup Branch for The Current Train
+Git Branchを`feature/<current-train-name>` の形式で作成し、チェックアウトする。
+
+### Step 4: Setup Remote Repository
+**Requirement Mode**=`INITIAL`の場合にのみ、以下の手順を実行する。Otherwise, this Step is skipped.
 
 1. **Development Guidelines** に従い、`docs/` のRemote Repositoryを各Providerに作成する。
 
@@ -85,7 +89,7 @@ Step **Name the Project and the Current Train** で決定した内容をもと�
 3. 作成したRepositoryの情報を `docs/repository-info.md` の **Project Repositories** に記録する。
 
 
-### Step 4: Steering Setup
+### Step 5: Steering Setup
 `.steering/` 配下に、決定したCurrent Trainと同名のディレクトリおよびそのサブディレクトリを、以下の構成で作成する。
 - `.steering/<current-train>/`
 - `.steering/<current-train>/manager/`
@@ -94,20 +98,27 @@ Step **Name the Project and the Current Train** で決定した内容をもと�
 - `.steering/<current-train>/manager/reviews/`
 - `.steering/<current-train>/shared/`
 - `.steering/<current-train>/shared/information/`
+- `.steering/<current-train>/shared/examples/`
+- `.steering/<current-train>/shared/executor-reports/`
+- `.steering/<current-train>/shared/handover/`
+- `.steering/<current-train>/shared/release-info/`
 - `.steering/<current-train>/shared/reviews/`
+- `.steering/<current-train>/shared/work-requests/`
 
-**Train Type**=`EVOLVE`の場合は、`.steering/<current-train>/manager/change-requirements/` ディレクトリも作成する。
+**Requirement Mode**=`CR`の場合は、`.steering/<current-train>/manager/change-requirements/` ディレクトリも作成する。
+
+`.steering/<current-train>/shared/examples/`については、docs/.gitignore に追加し、Git管理対象外とする。
 
 また、末端の各ディレクトリには、.gitkeep ファイルを作成する。
 
-### Step 5: Create the Table for Flow Status
+### Step 6: Create the Table for Flow Status
 - `.steering/<current-train>/manager/` 配下に、`flow-status.md` を下記形式で作成する。
-- 上記の表に、本Task: Train Initializationを**development-planning-and-design-flow**の一つ目のTaskとして追加する。
+- 上記の表に、本Task: Train Initializationを**development-specification-flow**の一つ目のTaskとして追加する。
 
 ```
 # Flow Status
 
-## development-planning-and-design-flow
+## development-specification-flow
 
 | Task | Status | Started At | Completed At |
 |------|--------|------------|--------------|
@@ -115,7 +126,7 @@ Step **Name the Project and the Current Train** で決定した内容をもと�
 | [Task 2] | [IN_PROGRESS / COMPLETED] | [- / YYYY-MM-DD HH:mm] | [- / YYYY-MM-DD HH:mm] |
 | [Task 3] | [IN_PROGRESS / COMPLETED] | [- / YYYY-MM-DD HH:mm] | [- / YYYY-MM-DD HH:mm] |
 
-## development-management-flow
+## dev-progress-management-flow
 
 | Task | Status | Started At | Completed At |
 |------|--------|------------|--------------|

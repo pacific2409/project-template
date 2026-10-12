@@ -12,7 +12,7 @@ description: >
 新たな開発・Trainの開始にあたり、開発のアイデアを考え、そのコンセプトを整理する。
 
 ## Inputs
-- **Train Type**: 本Skillを実行するTrainの種別。`LAUNCH` または `EVOLVE`。
+- **Requirement Mode**: 本Skillにおける仕様定義の起点となった要求の性質によって、`INITIAL` または `CR` のいずれかに分かれる。
 
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
@@ -72,7 +72,7 @@ docs/persistent/future-ideas.md
 
 
 ## Procedure
-**Train Type** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。
+**Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。
 
-- `LAUNCH`: `references/procedure-on-launch.md`
-- `EVOLVE`: `references/procedure-on-evolve.md`
+- `INITIAL`: `references/procedure-on-initial.md`
+- `CR`: `references/procedure-on-cr.md`

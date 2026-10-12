@@ -14,6 +14,13 @@
 - 複数の領域・境界に適用するTopicは、対象を一つずつ取り上げる。各案は同じ対象・同じ判断軸で比較できるものにする。
 - 選択肢は3案程度を目安とするが、二択が自然な場合や前提上成立する案が限られる場合は、水増ししない。選択肢の違いを示すために対象外の技術・個別仕様へ踏み込まない。
 
+## **Overview**
+- System Boundary
+- Application Structure
+- Backend / Service Structure
+- Architecture Evolution
+- Responsibility & Ownership
+
 ## Decision Topics by Perspective
 
 ### System Boundary

@@ -2,7 +2,7 @@
 name: prepare-project-environment
 description: >
   特定の具体的な作業を実施するWork型 Skill。
-  Trainの開始にあたり、Train Typeに応じて、Projectでの作業およびGit運用に必要な領域・情報・Repositoryを準備する。
+  Trainの開始にあたり、Requirement Modeに応じて、Projectでの作業およびGit運用に必要な領域・情報・Repositoryを準備する。
   Use when: Train開始時にProject Environmentを準備するとき。
   Do not use for: 要件定義、設計、開発など、Project Environmentの準備以外の工程。
 ---
@@ -10,10 +10,10 @@ description: >
 # Work Skill: prepare-project-environment
 
 ## Summary
-Trainの開始にあたり、Train Typeに応じて、Projectでの作業およびGit運用に必要な領域・情報・Repositoryを準備する。
+Trainの開始にあたり、Requirement Modeに応じて、Projectでの作業およびGit運用に必要な領域・情報・Repositoryを準備する。
 
 ## Inputs
-- **Train Type**: 本Skillを実行するTrainの種別。`LAUNCH` または `EVOLVE`。
+- **Requirement Mode**: 本Skillにおける仕様定義の起点となった要求の性質によって、`INITIAL` または `CR` のいずれかに分かれる。
 
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
@@ -31,7 +31,7 @@ Trainの開始にあたり、Train Typeに応じて、Projectでの作業およ�
 - ExecutionStepsに定義されたすべてのStepが完了していること。
 
 ## Procedure
-**Train Type** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。
+**Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。
 
-- `LAUNCH`: `references/procedure-on-launch.md`
-- `EVOLVE`: `references/procedure-on-evolve.md`
+- `INITIAL`: `references/procedure-on-initial.md`
+- `CR`: `references/procedure-on-cr.md`

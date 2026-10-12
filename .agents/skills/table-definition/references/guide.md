@@ -40,8 +40,14 @@
 | --- | --- |
 | Physical Name | `favorite` |
 | Logical Name | お気に入り |
+| Database | `favorite` |
 | Description | Userが登録したお気に入り情報を保持する |
 
+#### **Table Summary Definition Notes**
+- `Physical Name`にはDB上の物理Table名を記載する。
+- `Logical Name`には設計上の論理名称を記載する。
+- `Database`にはTableが属するDatabase名を記載する。
+- `Description`にはTableの目的や役割を簡潔に記載する。
 
 ### **2. Columns**
 

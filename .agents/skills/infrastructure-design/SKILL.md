@@ -13,6 +13,7 @@ description: >
 Function DesignおよびSystem Architectureに基づき、Infrastructure Architectureについての仕様書を作成する。
 
 ## Inputs
+- **Requirement Mode**: 本Skillにおける仕様定義の起点となった要求の性質によって、`INITIAL` または `CR` のいずれかに分かれる。
 - **Scope** *(Optional)*: 本Skillで扱う作業対象および変更対象の範囲
 
 ## Sources
@@ -29,6 +30,11 @@ docs/persistent/system-architecture.md
 ## Content Guide for the Skill (`references/guide.md`)
 Infrastructure Architectureに定義する内容、その検討観点および記述内容の指針を定める。このガイドを参照しながら要求定義を進める。
 
+## Affected Modules
+```
+modules/infrastructure/*/*
+```
+
 ## Draft
 要求内容の検討過程において、ユーザーと議論した内容を以下に記録する。
 ```
@@ -44,17 +50,26 @@ docs/persistent/infrastructure-architecture.md
 ## Template for the Artifacts (`assets/template.md`)
 **Artifacts**を作成する際に、テンプレートとして利用する。
 
-## Comparison Review Report
-文書間の整合性確認の結果の出力先は以下のパスとする:
-```
-docs/reviews/infrastructure-architecture-on-dependencies.md
-```
-
 ## Specific Review Points Sheet (`references/review-points.md`)
 Artifactsレビューを依頼する際に、レビュアーに提供する本ドキュメント特有のレビュー観点を定めている。
 
+## Change Requirements
+**Requirement Mode** = `CR` の場合、仕様変更の定義は以下に保存される。
+```
+docs/change-requirements/infrastructure-architecture.md
+```
+
+## Cloud Architecture Image
+
+Cloud Infrastructureの構成図イメージは以下に保存される。
+```
+docs/persistent/infrastructure-architecture.png
+```
+
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
+- 本Skillは、通常実行時(**On-Demand Execution**の実行シナリオに該当しない全てのケース)には **Default Execution Steps** を、呼び出し元から **On-Demand Execution** が明示的に指定された場合には指定された **On-Demand Execution** のみを実行する。
+- **On-Demand Execution** を実行する場合、**Default Execution Steps** は実行しない。
 - 各StepはExecutionStepsに記載された順序で実行する。
 - 各Stepの完了条件を満たすまで次のStepへ進まない。
 - ユーザーとの対話が必要なStepでは、合意した内容を以降のStepの前提とする。
@@ -66,32 +81,50 @@ Artifactsレビューを依頼する際に、レビュアーに提供する本�
 - **Artifacts** の作成およびレビューが完了し、内容が承認されていること。
 
 ### Overview
-- Initial Spec Establishment Flow
+### **Default Execution**
+- Procedure: Spec Definition
 
 ── Post Steps ──
 
+- Determine Impact on Cloud Architecture Diagram
 - Request Cloud Architecture Diagram
 - Review Cloud Architecture Diagram
-- Extract Infrastructure-to-Application Dependencies 
+- Extract Infrastructure-to-Application Dependencies
 
-## Execution Steps
-### Initial Spec Establishment
-以下を本Skillの定義から特定した上で、**Initial Spec Establishment Flow**(`.agents/resources/common-flow/initial-spec-establishment-flow.md`)に従い、PRDの作成および関連作業を行う。
+### **On-Demand Execution**
+- Procedure: Specification Comparison Review
+
+## Default Execution Steps
+本Skillの通常実行時は、以下のStepを実行する。
+### Procedure: Spec Definition
+**Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。それによって、Infrastructure Architectureを作成・更新する。
+
+- `INITIAL`: **Initial Spec Establishment** (`.agents/resources/doc-procedure/initial-spec-establishment.md`)
+- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition-flow.md`)
+
+Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 
 - **Sources**
 - **Draft**
 - **Artifacts**
 - **Guide**
 - **Template**
-- **Comparison Review Report**
 - **Specific Review Points Sheet**
+- **Affected Modules** *(`CR`の場合のみ使用される)*
 - **Scope** *(Optional: Inputとして指定されている場合)*
 
-**Initial Spec Establishment Flow** から **Flow Required**=`False` が返却された場合、本Skillにおける以降の **Execution Steps** は実施せず、本Skillを終了する。
+該当する **Procedure** から **Flow Required**=`False` が返却された場合、本Skillにおける以降のStepが存在しても、それらは実施せず、本Work Skillを終了する。
 
-### Post Step 1: Request Cloud Architecture Diagram
+### Post Step 1: Determine Impact on Cloud Architecture Diagram
+**Requirement Mode**=`CR`の場合にのみ、以下の手順を実行する。Otherwise, this Step is skipped.
 
-**Artifacts** に基づくCloud Infrastructureの正式構成図をPNG形式で作成し、`docs/persistent/infrastructure-architecture.png` 配下の指定されたパスへ配置するようユーザーに依頼する。
+**Artifacts**に対する**Change Requirements**の内容から、**Cloud Architecture Image**に修正が必要かを確認し、`Yes/No`で判断する。
+  - `No`の場合は、本Skillにおける以降のPost Step 2 ~ 3をskipし、Post Step 4に進む。
+
+### Post Step 2: Request Cloud Architecture Diagram
+**Requirement Mode**次第で、下記のいずれかに従って、Cloud Infrastructureの正式構成図をPNG形式で**Cloud Architecture Image**パスへ配置するようユーザーに依頼する。
+- `INITIAL`: **Artifacts** に基づいて作成
+- `CR`: **Change Requirements**に基づいて、既存修正する形で再作成
 
 構成図は、利用するCloud Provider（AWS / Google Cloud / Azure等）に応じたCloud Architecture Diagramとして作成し、少なくとも **Artifacts** で定義された以下の内容を読み取れるものとする。
 
@@ -108,16 +141,16 @@ CIDR、IAM Policy、Security Group Rule、Resource Size等の詳細設定を網�
 ユーザーから配置完了の報告を受けるまで、次のStepへ進まない。
 
 
-### Post Step 2: Review Cloud Architecture Diagram
+### Post Step 3: Review Cloud Architecture Diagram
 
-ユーザーから提供されたCloud Architecture Diagramを **Artifacts** と比較し、以下を確認する。
+ユーザーから提供されたCloud Architecture Diagramを **Artifacts** や および`CR`の場合は**Change Requirements** と比較し、以下を確認する。
 
-- **Artifacts** で定義された主要Resourceが、構成図に必要な範囲で反映されていること。
+- **Artifacts** で定義された主要Resourceや、**Change Requirements** による追加・変更が、構成図に必要な範囲で反映されていること。
 - Environment、Network、Availability Zone等のBoundaryが **Artifacts** と一致していること。
 - Application / WorkloadおよびInfrastructure Resourceの配置関係が一致していること。
 - Resource間のConnectivity / Traffic Flowが **Artifacts** と矛盾していないこと。
 - External Connectivity、Security、Management、Observability等の主要構成に欠落・矛盾がないこと。
-- 構成図だけに、**Artifacts** に存在しないArchitecture Decisionが追加されていないこと。
+- 構成図だけに、**Artifacts** または **Change Requirements** に存在しないArchitecture Decisionが追加されていないこと。
 
 不一致または不足がある場合は、その内容と該当箇所をユーザーへ提示し、構成図を修正するか確認する。
 
@@ -125,13 +158,42 @@ CIDR、IAM Policy、Security Group Rule、Resource Size等の詳細設定を網�
 
 不一致、不足、不整合がない場合は、レビュー結果をユーザーへ報告して本Stepを完了する。
 
-### Post Step 3: Extract Infrastructure-to-Application Dependencies
-Agent `explorer` に**Sources**および**Artifacts**のパスを連携の上、下記内容を依頼する。完了報告を受けたら、その旨と、抽出結果の出力先をユーザーに報告する。
+
+### Post Step 4: Extract Infrastructure-to-Application Dependencies
+
+**Requirement Mode** に応じて、Agent `explorer` に以下の調査を依頼する。
+
+#### `INITIAL`
+**Sources** および **Artifacts** のパスを連携し、以下を依頼する。
 
 ```
-**Sources**をApplication設計上の前提として理解したうえで、**Artifacts**全体を確認し、Application Detail Design（API、Batch、UI等）の設計・実装に影響する事項を抽出する。
+ **Sources**をApplication設計上の前提として理解したうえで、**Artifacts**全体を確認し、Application Detail Design（API、Batch、UI等）の設計・実装に影響する事項を抽出する。
 
-**Artifacts**の単純な要約ではなく、Application側で考慮・実現・利用する必要がある事項に限定する。また、新たなApplication Architecture Decisionは行わない。
-
-抽出結果は、`docs/ideas/infrastructure-to-application-dependencies.md` に整理する。
+ **Artifacts**の単純な要約ではなく、Application側で考慮・実現・利用する必要がある事項に限定する。また、新たなApplication Architecture Decisionは行わない。
 ```
+
+#### `CR`
+**Sources** および **Change Requirements** のパスを連携し、以下を依頼する。
+
+```
+ **Sources**をApplication設計上の前提として理解したうえで、**Change Requirements**を確認し、今回のInfrastructure Architectureの追加・変更によって、Application Detail Design（API、Batch、UI等）側に新たに考慮・対応が必要となる事項を抽出する。
+
+ 今回の変更によって新たに発生または変更された依存事項に限定する。また、新たなApplication Architecture Decisionは行わない。
+```
+
+
+
+## On-Demand Execution
+
+呼び出し元から以下のExecutionが明示的に指定された場合にのみ実行する。
+この場合、通常の **Execution Steps** は実行しない。
+
+### Procedure: Request Specification Comparison Review
+Procedure: Specification Comparison Review(`.agents/resources/doc-procedure/comparison-review.md`)の内容を実行する。
+Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
+
+- **Review Sources** : 呼び出し元から指定
+- **Artifacts**
+- **Comparison Review Report** : 呼び出し元から指定
+- **Specific Review Points Sheet**
+- **Scope** *(Optional: Inputとして指定されている場合)*

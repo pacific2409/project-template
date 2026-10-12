@@ -12,6 +12,7 @@
 | --- | --- |
 | Physical Name | |
 | Logical Name | |
+| Database | |
 | Description | |
 
 ## **2. Columns**

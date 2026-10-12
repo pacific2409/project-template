@@ -58,7 +58,7 @@
 | --- | --- |
 | Physical Name | `contentSearchView` |
 | Logical Name | コンテンツ検索画面 |
-| Application | `web-frontend` |
+| Platform | `Web` |
 | Screen Type | `Page` |
 | Route / Path | `/contents/search` |
 | Description | 検索条件を指定してコンテンツを検索し、検索結果を確認するための画面。 |
@@ -67,7 +67,7 @@
 
 - `Physical Name`には、対象Screenを識別する物理名を記載する。
 - `Logical Name`には、対象Screenの論理名を記載する。
-- `Application`には、対象Screenが所属するFrontend Applicationの物理名を記載する。
+- `Platform`には、対象Screenを提供するPlatformを記載する。(`Web`、`iOS`、`Android`等)
 - `Screen Type`には、UI上のScreenの性質を表す分類を記載する。`Page`、`Modal`、`Dialog`等を基本とし、対象UIに応じて同等の粒度で追加する。
 - `Route / Path`には、対象Screenを識別するRoute / Pathが存在する場合に記載し、独立したRouteを持たない場合は`-`とする。
 - `Description`には、対象Screenがユーザーに提供する目的を簡潔に記載する。
