@@ -45,8 +45,8 @@ docs/train-status.md
 ## List of Step
 - Name the Project and the Current Train
 - Train Status Initialization
-- Setup Branch for The Current Train
 - Setup Remote Repository
+- Setup Branch for The Current Train
 - Steering Setup
 - Create the Table for Flow Status
 
@@ -73,10 +73,7 @@ Step **Name the Project and the Current Train** で決定した内容をもと�
 
 作成・更新にあたっては、`assets/train-status-template.md` をテンプレートとして利用・参照する。
 
-### Step 3: Setup Branch for The Current Train
-Git Branchを`feature/<current-train-name>` の形式で`master`ブランチから作成し、チェックアウトする。
-
-### Step 4: Setup Remote Repository
+### Step 3: Setup Remote Repository
 **Requirement Mode**=`INITIAL`の場合にのみ、以下の手順を実行する。Otherwise, this Step is skipped.
 
 1. **Development Guidelines** に従い、`docs/` のRemote Repositoryを各Providerに作成する。
@@ -88,7 +85,12 @@ Git Branchを`feature/<current-train-name>` の形式で`master`ブランチか�
 
 3. 作成したRepositoryの情報を `docs/repository-info.md` の **Project Repositories** に記録する。
 
-4. 空の `.gitkeep` を作成して初回Commitとして`master` ブランチをRemote RepositoryへPushする。
+4. `master` ブランチに初回Commitを作成し、各Remote RepositoryへPushする。
+
+5. 各Remote RepositoryのDefault Branchが `master` であることを確認する。
+
+### Step 4: Setup Branch for The Current Train
+Git Branchを`feature/<current-train-name>` の形式で`master`ブランチから作成し、チェックアウトする。
 
 
 ### Step 5: Steering Setup
