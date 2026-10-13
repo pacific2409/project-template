@@ -18,6 +18,17 @@ Project に対して、1回の新規開発・機能追加・改修を最初か�
 ### ▪️Current Train
 現在進行中のTrain。各担当が作業対象とする。
 要件定義・設計時に`docs/train-status.md` に記録された情報をもとに特定することができる。
+### ▪️Requirement Mode
+Current Trainにおいて、要求・仕様および既存の成果物をどの形式で扱い、構築・開発を行うかを表す区分。
+
+- **INITIAL**: Projectの初回開発として、定義された要求・仕様に基づいて新規に構築・開発を行う。
+- **CR**: 既存Projectへの変更として、現行の要求・仕様および成果物を前提とし、Current TrainのChange Requirementsに基づいて必要な追加・変更を行う。
+### ▪️Domain
+Projectにおける構築・開発対象を、その性質や責務に基づいて分類する単位。
+Infrastructure、Database、Backend、Frontendなどを指し、各Domainは一つ以上のModuleによって構成される。
+### ▪️Module
+Domainを構成する、独立した担当・構築・開発の単位。
+各Moduleには担当Executorが割り当てられ、対応するWorkspaceを単位として構築・開発を行う。
 ### ▪️Phase
 Train を構成する工程上の区切り。
 要件定義、設計、構築、開発、IT、リリースなどを指す。
@@ -77,21 +88,21 @@ Executorは、インフラストラクチャ、オーケストレーション、
     - `20250115-add-tag-feature`
     - `20250115-initial-implementation`
 
-### **▪️.steering/**
+### **▪️docs/.steering/**
 - 作業単位ドキュメント
 - 特定のtrainにおける各Executorの担当ごとの作業・変更の意図と経緯を記録
 - Trainおよび担当領域ごとに新しいディレクトリを作成
 - 作業完了後は履歴として保持
 #### **構成**
-SteeringはTrainごとに `.steering/<train>/` 配下へ作成する。
+SteeringはTrainごとに `docs/.steering/<train>/` 配下へ作成する。
 
-各Trainの配下には、Train共通の情報を配置する `shared/` と、各担当の作業情報を配置する担当別ディレクトリを作成する。
+各Trainの配下には、Train共通の情報を配置する `docs/.steering/<train>/shared/` と、各担当の作業情報を配置する担当別ディレクトリを作成する。
 - 前者においては、shared/information/下に担当間、または担当とユーザーの間で、ファイルによって情報を共有し受け渡すための領域とする。担当間のファイルの受け渡しは必ずユーザーが仲介する。形式は各Flow SkillやWork Skillで定義する。
-- 担当別ディレクトリは、担当ごとに .steering/<current-train>/<担当>として配置する。
+- 担当別ディレクトリは、担当ごとに `docs/.steering/<current-train>/<担当>` として配置する。
 
 構造例:
 ```text
-.steering/
+docs/.steering/
 └── 20260911-initial-implementation/
     ├── shared/
     │   └── information/
@@ -114,10 +125,10 @@ SteeringはTrainごとに `.steering/<train>/` 配下へ作成する。
 
 #### **ExecutorのSteering参照ルール**
 - 各Executorは、Current Trainとユーザーから割り振られた担当領域をもとに、自身の担当ディレクトリを特定する。
-  - 例: Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、担当ディレクトリは以下となる。`.steering/20260911-initial-implementation/backend-a-service/`
+  - 例: Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、担当ディレクトリは以下となる。`docs/.steering/20260911-initial-implementation/backend-a-service/`
 - 各Executorは、共通ドキュメントに加えて、Current Trainにおける自身の担当ディレクトリ内のSteeringを参照して作業を進める。
 - `shared/information/` は、フローの中で明示的に参照を指示された場合、またはユーザーから指示があった場合にのみ参照する。
-- 各Executorについては、上記を除く、.steering/ 以下の全てのファイルおよびディレクトリの参照を禁ずる。
+- 各Executorについては、上記を除く、`docs/.steering/` 以下の全てのファイルおよびディレクトリの参照を禁ずる。
 
 
 ### **▪️workspace/**
@@ -146,7 +157,7 @@ workspace/
 #### **ExecutorのWorkspace参照・操作ルール**
 
 - 各Executorは、Current Trainにおける自身の担当と、共通ドキュメントおよび自身の担当Steeringの内容をもとに、対応する `workspace/` 配下の担当領域で構築・開発などの実作業を行う。
-- 例えば、Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、共通ドキュメントおよび `.steering/20260911-initial-implementation/backend-a-service/` の内容をもとに、`workspace/application/backend/a-service/` で実作業を行う。
+- 例えば、Current Trainが `20260911-initial-implementation` で、`backend-a-service` のExecutorとして割り振られた場合、共通ドキュメントおよび `docs/.steering/20260911-initial-implementation/backend-a-service/` の内容をもとに、`workspace/application/backend/a-service/` で実作業を行う。
 - Executorについては、`workspace/` 以下において自身の担当領域外のファイルおよびディレクトリへの書き込みを禁ずる。
 - また、ユーザーから明示的な指示がない限り、自身の担当領域外のファイルおよびディレクトリの参照を禁ずる。
 
@@ -165,11 +176,21 @@ Skillは、以下の2種類に分類する。
 各Skillがどの分類に該当するかは、各Skillのdescriptionの先頭に記載される。
 
 #### **Skillの利用ルール**
-
 - 作業を開始する前に、役割および担当内容に該当するSkillを特定する。
 - 使用するSkill名を明示してから作業を開始する。
 - Skillに工程、順序またはフローが定められている場合は、必ず定められた順番に従って処理する。
 - Flow Skillから特定の作業に必要なWork Skillが指定されている場合は、そのSkillを使用して処理する。
+
+#### **Intent-Oriented Execution**
+- 各Skill、WorkflowおよびGuideline、Procedureの指示について、その意図・目的を理解した上で実行する。
+- 指示の字面的な解釈や形式的な遵守に終始せず、目的の達成に必要な確認・判断・対応を柔軟に行う。
+- ただし、明示された制約、責務範囲、完了条件およびユーザー承認を省略・変更してはならない。
+- 指示の内容と目的が矛盾する場合や、指示どおりの実施が適切でないと判断した場合は、独断で変更せず、理由と代替案をユーザーに提示して協議する。
+
+#### **Context-Aware Workflow Execution**
+- Skillの実行開始・再開時にWorkflow全体を確認し、工程の規模、必要な参照情報および想定される作業量を把握する。
+- 現在のコンテキストウィンドウの制約を考慮し、継続して実行可能な範囲を見積もり可能な場合は、ユーザーに提示する。
+
 
 ## **開発プロセス**
 ### **開発作業への着手**
@@ -224,7 +245,7 @@ Read-onlyな調査は、許可された参照範囲内であれば事前承認�
 
 ドキュメントの作成・更新を除くRepositoryへの書き込み、設定変更、状態変更を伴うコマンド実行、Deploy、Infrastructureの適用、その他外部への副作用を伴う操作を行う場合は、以下の順序に従う。
 
-1. 実行する内容・目的・対象範囲をPlanとしてユーザーへ提示する。
+1. 実行する内容・方法・目的・対象範囲(= `こんなふうに実施しよう`)をPlanとしてユーザーへ提示・説明する。
 2. ユーザーから明示的な承認を得る。
 3. 承認された内容を実行する。
 4. 実行後、実施内容・変更内容・結果・残された確認事項をユーザーへ説明と報告を行う。

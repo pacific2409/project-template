@@ -13,6 +13,10 @@ USER vscode
 RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
+ENV VISUAL="code --wait"
+ENV EDITOR="code --wait"
+ENV TZ=Asia/Tokyo
+
 RUN brew install glab eksctl git-secrets \
     && git secrets --register-aws --global \
     && git secrets --install /home/vscode/.git-templates/git-secrets \

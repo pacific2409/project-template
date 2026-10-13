@@ -1,0 +1,22 @@
+## Definition Policy
+- 本UI Specificationは、1 Screenにつき1 Artifactとして作成し、対象Screenを実装可能な粒度まで具体化する。
+- Function DesignおよびSystem Architecture等の上位設計で確定したScreenの目的、画面間関係、User Interaction、Business Rule、Application BoundaryおよびArchitecture上のDecisionを前提とし、それらを本Specificationで再定義しない。
+- 本Screenが所属するFrontend Applicationを基準として、Screenの構造、UI Component、Form、Screen State、表示・操作Rule、およびUser OperationからScreen Updateまでに必要となるFrontend内部の仕様を定義する。
+- Screenを構成する領域およびUI Componentの包含関係・基本的な表示順序はScreen Structureを正とし、Tree構造と必要最小限のPosition Annotationによって表現する。具体的なPixel、Margin、Padding等のVisual Layout値は本Specificationでは原則として固定しない。
+- UI Componentの種類、Label / Text、Model / Value、入力・編集特性等、Component単体の基本仕様はComponent Definitionを正とする。List、Table、Composite Component等について内部仕様の追加定義が必要な場合のみ、個別のComponent Detailを追加する。
+- Screen全体として意味を持つ表示・操作状態、およびStateによるComponentのVisible / Hidden、Enabled / Disabled等の変化はScreen Stateを正とする。Component内部だけで完結する局所的なStateは、必要な場合のみ対応する個別仕様で定義する。
+- Formが存在する場合は、Field、Type、Required、Size、値域、Pattern、ValidationおよびValidation Message等の入力ContractをForm Definitionで定義する。
+- Validation条件およびValidation MessageそのものはForm Definitionを正とし、Validation / Display RulesではValidation ErrorのPresentation、および値・条件に応じた表示Format、Visible / Hidden、Enabled / Disabled、強調表示等のUI上のRuleを定義する。
+- Color、Typography、Iconその他の複数Screenに共通するVisual / Interaction RuleはUI Guideline等の横断的な方針を前提とし、本Specificationではその適用条件およびScreen固有の振る舞いを定義する。
+- Interaction Flowは主要なUser Operationを起点として、Validation、Frontend内部処理、Backend API等との連携、View ModelへのMapping、およびScreen Updateまでの処理全体を縦方向に俯瞰する。
+- SequenceはUserを起点として、Frontendの`This View`とBackendの`Target API`とのInteractionを横方向に表現する。Backend内部のService、Database、External Service等には展開せず、Target APIへのRequestおよびTarget APIからのResponseまでを本Specificationの範囲とする。
+- 独立した主要User Interactionが複数存在する場合は、Interaction Flow、SequenceおよびProcessing DetailsをInteraction単位で分割して記載し、一つの巨大なFlowへ統合しない。
+- Processing DetailsはStep単位で構造化し、User Operation、Validation、Screen State変更、API Request Mapping、API呼出し、Response判定、View Model MappingおよびScreen Update等を、追加の設計判断を行わず実装へ移行できる粒度まで定義する。
+- Backend APIを利用する場合、Endpoint、HTTP Method、Request / Response Field、Error Code等のAPI Contractを本Specificationで再定義せず、対応するAPI Specificationを正とする。本Specificationでは、それらをFrontendからどのように利用し、その結果をどのようにScreenへ反映するかを定義する。
+- Backendから取得したDataをScreen表示に使用する場合は、必要に応じてView ModelへMappingし、BackendのResponse構造とUI Componentを直接結合しない。View ModelへのMappingはProcessing Details、各Componentが参照するModel / ValueはComponent Definitionを正とする。
+- Error Presentationでは、ErrorそのもののBackend側Contractを再定義せず、対象Screenにおける表示方法、表示内容、およびError発生後にユーザーが実行可能な操作を定義する。
+- Backend APIとの連携におけるErrorは、Frontendから見た性質に応じて、既知のError Responseを受信した`API Error`、Responseを正常に取得できない`Communication Error`、Responseは受信したが既知のErrorへMappingできない`Unmapped Error`を区別して扱う。
+- Logging、Frontend Frameworkの利用方法、共通Componentの実装方式、State Management方式等のApplication横断的な実装RuleはDevelopment Guideline等の対応する横断方針を前提とし、本SpecificationではScreen固有の仕様のみを定義する。
+- 各Sectionは原則としてTableで構造化し、Screen StructureにはTree、State TransitionにはMermaid State Diagram、処理順序・条件分岐にはMermaid Flowchartまたは疑似Code、InteractionにはMermaid Sequence Diagram等、情報の性質に適した表現を使用する。
+- 各Sectionの記載方法は原則としてFormat and Exampleによって示し、Formatだけでは表現できない規則や補足が必要な場合にのみDefinition Notesを記載する。
+- Format and Exampleは記載粒度および構造の基準を示すものであり、実際のScreenおよびInteractionの特性に応じて、不要な要素の省略、必要な構造・Table・Diagram・疑似Code等の追加、および構成の調整を行う。
