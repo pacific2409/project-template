@@ -87,7 +87,7 @@ Step **Name the Project and the Current Train** で決定した内容をもと�
 
 4. `master` ブランチに初回Commitを作成し、各Remote RepositoryへPushする。
 
-5. 各Remote RepositoryのDefault Branchが `master` であることを確認する。
+5. 各Remote RepositoryのDefault Branchが `master` であることを確認する。各Remote RepositoryのDefault Branchが `master` でない場合は `master` に設定し、その後Default Branchが `master` であることを確認する。
 
 ### Step 4: Setup Branch for The Current Train
 Git Branchを`feature/<current-train-name>` の形式で`master`ブランチから作成し、チェックアウトする。
