@@ -38,7 +38,7 @@ docs/change-requirements/architecture-outline.md
     - Architecture Evolution
     - Responsibility & Ownership
 
-## Step 2: Analyze Impact on Artifact
+### Step 2: Analyze Impact on Artifact
 - **Artifact** の内容が、その定義時に、どのように**Current Architecture**に反映されたかを理解する。
 - その上で、前項で把握した仕様変更要求を**Guide**と照らして、**Artifact**に対してどのような内容の追加・変更があり得るのかを整理する。
 
