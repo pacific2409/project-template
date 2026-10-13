@@ -12,7 +12,7 @@ description: >
 ## Summary
 担当ModuleのSpecification、Task、既存・参考実装および関連するExternal Informationに基づき、後続のImplementation Loopで継続的にBuild・Deploy・Runtime Verificationを実施するためのRuntime Environmentを構成する。
 
-Container ImageのBuild・実行に必要なConfigurationを構築または変更し、Orchestration Workloadが対応対象の場合は、対象EnvironmentへのDeploy・実行に必要なWorkload Configurationも併せて構築または変更する。
+Container Imageが対応対象の場合は、Build・実行に必要なContainer Configurationを構築または変更する。Orchestration Workloadが対応対象の場合は、対象EnvironmentへのDeploy・実行に必要なWorkload Configurationを構築または変更する。対応対象でない構成は変更せず、依存関係の確認に必要な範囲で参照する。
 
 構成後は、現時点で実行可能な最小構成を使用してBuild・Deploy・Runtime Verificationの一連の経路を成立させ、後続のImplementation Loopから継続的に利用可能な状態であること、およびSpecificationとの整合性を確認する。
 
@@ -109,8 +109,10 @@ docs/.steering/<current-train>/<module-name>/working/pending-information.md
 
 ### Step 0: Confirm Inputs
 - **Inputs** によって引き継がれた情報を改めて確認する。
-- **Task** を確認し、Orchestration Workloadの対応要否を特定する。
+- **Task** を確認し、Container ImageおよびOrchestration Workloadの対応要否を特定する。
+   - **Container Image**: [Setup Required / Change Required / No] のどれに該当するかを特定
    - **Orchestration Workload**: [Setup Required / Change Required / No] のどれに該当するかを特定
+   - Container ImageとOrchestration WorkloadがともにNoの場合は、本Skillの呼び出し条件を満たしていないとして、後続Stepを実施せず、本Work Skillを終了する。
 
 ### Step 1: Extract Runtime Environment Requirements
 **Guide** の該当プロセスに従い、Specification Sourcesから担当ModuleのRuntime Environmentの構築・変更に関係する要求、仕様および制約を抽出する。
@@ -125,7 +127,7 @@ docs/.steering/<current-train>/<module-name>/working/pending-information.md
 ### Step 3: Draft Runtime Environment Configuration
 **Guide** の該当プロセスに従い、前項までで抽出・把握した情報をもとに、後続の**Implementation Loop**で継続的にBuild・Deploy・Runtime Verificationを行うためのRuntime Environmentを具体化し、**Draft** に整理する。
 
-Orchestration Workloadが対応対象の場合は、ContainerとOrchestration Workloadの双方を対象とする。
+Container ImageおよびOrchestration Workloadについて、Step 0でSetup RequiredまたはChange Requiredと判定されたものだけを構築・変更対象とする。対応対象でない構成は、対象構成との依存関係や整合性を確認するための前提として扱い、変更対象へ追加しない。
 
 ### Step 4: Check Required Information
 **Guide** の該当プロセスに従い、**Draft** に基づいてRuntime Environmentの構築・実行に必要な情報の充足状況を確認する。
@@ -134,6 +136,8 @@ Orchestration Workloadが対応対象の場合は、ContainerとOrchestration Wo
 
 
 ### Step 5: Configure Container
+Container Imageが対応対象の場合に実施する。対応対象でない場合は本Stepをスキップする。
+
 **Guide** の該当プロセスに従い、**Draft** に基づいて後続のImplementation Loopで継続的にBuildおよびRuntime Verificationを行うためのContainerを構築または変更する。
 
 
@@ -144,7 +148,7 @@ Orchestration Workloadが対応対象の場合に実施する。対応対象で�
 
 
 ### Step 7: Build and Deploy Minimum Runtime
-**Guide** の該当プロセスに従い、前項までで構成したContainerおよび対応対象の場合はOrchestration Workloadを使用して、現時点で実行可能な最小構成のRuntimeをBuild・Deployする。
+**Guide** の該当プロセスに従い、ContainerおよびOrchestration Workloadのうち対応対象として前項までで構成したものを使用して、現時点で実行可能な最小構成のRuntimeをBuild・Deployする。
 
 
 ### Step 8: Verify Runtime Environment
@@ -152,4 +156,4 @@ Orchestration Workloadが対応対象の場合に実施する。対応対象で�
 
 
 ### Step 9: Check Consistency with Specifications
-**Guide** の該当プロセスに従い、構築・変更したRuntime Environmentを **Specification Sources** および **Runtime Environment Requirements** と照合し、要求された内容が適切に反映されていることを確認する。
+**Guide** の該当プロセスに従い、構築・変更したRuntime Environmentを **Specification Sources** および **Runtime Environment Requirements** と照合し、要求された内容が適切に反映されていることを確認する。また、対応対象でないContainer ImageまたはOrchestration Workloadへ不要な変更が加えられていないことを確認する。

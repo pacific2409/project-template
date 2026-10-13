@@ -25,6 +25,14 @@ Current TrainのRequirement Mode
 担当Moduleの構築において参照するSpecificationのパス
 複数指定可。
 
+### **Detected Issue**
+検知された問題についての情報
+- 問題が検知された工程
+- 発生状況
+- 期待結果
+- 実際の結果
+- 確認済みの事実
+- 関連するDraft／Evidence
 
 ## Executor Rules
 
@@ -76,11 +84,12 @@ docs/.steering/<current-train>/shared/work-requests/correction-request-<no>-from
 - Validate Inputs and Prepare Draft
 - Identify Issues
 - Identify Ownership
+- Resolve Specification Issues
 - Prepare External Correction Requests
 - Request External Corrections
 - Await External Correction Results
 - Plan Internal Corrections
-- Report Triage Results
+- Finalize Triage Results
 
 ### Step 0: Validate Inputs and Prepare Draft
 - **Inputs**における必須項目が全て情報として揃っていることを確認する。
@@ -109,7 +118,21 @@ docs/.steering/<current-train>/shared/work-requests/correction-request-<no>-from
 
 担当内外の問題は排他的に扱わず、該当するものをそれぞれ後続Stepの対象とする。
 
-### Step 3: Prepare External Correction Requests
+### Step 3: Resolve Specification Issues
+調査の結果、現行Specification自体に不足・矛盾・誤りが存在し、確認または訂正・変更が必要と判断された場合は、ユーザーを介してManagerへ対応を依頼する。
+
+1. Specificationに関する問題、その根拠、影響を受けるRequirement、ImplementationおよびVerificationの範囲をDraftに整理する。
+2. 問題の内容、確認事項および必要な対応をユーザーに提示し、Managerへの取り次ぎを依頼する。
+3. Managerによる確認・対応が完了した旨の報告をユーザーから受けるまで待機する。
+4. 対応結果および更新されたSpecificationを確認し、問題の解消状況とImplementationへの影響をDraftに反映する。
+
+Specificationの問題が存在しない場合は、本Stepをスキップする。
+
+本StepではExecutor自身によるSpecificationの訂正・変更は行わない。
+
+Specificationの更新によって問題の原因、影響範囲またはOwnershipが変化した場合は、必要に応じてIdentify IssuesおよびIdentify Ownershipの結果を再確認・更新する。
+
+### Step 4: Prepare External Correction Requests
 担当Module外に対応が必要と考えられる問題が存在する場合は、その内容および必要な対応を整理し、**Correction Requests** を作成する。
 
 1. 担当外の各問題について、発生状況、確認済みの原因、影響範囲および依頼する対応内容を **Draft** に整理する。
@@ -119,22 +142,22 @@ docs/.steering/<current-train>/shared/work-requests/correction-request-<no>-from
    - Domainも特定できない場合は、未分類として整理する。
    - 複数のDomain / Moduleが関係する可能性がある場合は、無理に単一の対応先へ分類せず、関連する候補を併記する。
 3. 分類したDomain / Moduleごとに問題および対応依頼を整理し、単一の対応依頼ファイルとして **Correction Requests** に作成・配置する。
-    - 作成する際は、テンプレート(`agents/resources/dev-procedure/correction-request-template.md`) の形式を踏襲し、リクエスト情報(Request Informationおよび各Request)を記載する。Response欄は依頼先の記述欄であるため、ここでは記載しない。
+    - 作成する際は、テンプレート(`.agents/resources/dev-procedure/correction-request-template.md`) の形式を踏襲し、リクエスト情報(Request Informationおよび各Request)を記載する。Response欄は依頼先の記述欄であるため、ここでは記載しない。
 
 対応先の特定は **Development Allocation Map** および確認済みの情報に基づいて行い、他Domain / Moduleの内部仕様や責務を推測によって確定しない。
 
 対応先のDomain / Moduleに分類された事項についても、実際の対応可否およびOwnershipは依頼を受けた側で確認・判断する。
 
-担当外の問題が存在しない場合は、本StepおよびStep 4～5をスキップし、Step 6へ進む。
+担当外の問題が存在しない場合は、本StepおよびStep 5～6をスキップし、Step 7へ進む。
 
-### Step 4: Request External Corrections
+### Step 5: Request External Corrections
 前Stepで作成した **Correction Requests** の内容および配置先をユーザーに提示し、対象Domain / Moduleへの取り次ぎを依頼する。
 
 対応先が未確定の事項については、必要に応じてユーザーを介してManagerによるOwnershipの識別・調整を依頼する。
 
 本Stepでは担当外ModuleのImplementationを直接変更しない。
 
-### Step 5: Await External Correction Results
+### Step 6: Await External Correction Results
 前Stepで依頼した事項について、対応先からの回答および対応結果を確認する。
 
 1. **Correction Requests** への外部対応(回答・対応結果の記録も含め)が完了した旨の報告をユーザーから受けるまで待機する。
@@ -146,7 +169,7 @@ docs/.steering/<current-train>/shared/work-requests/correction-request-<no>-from
 
 必要な回答および対応結果が揃ったことを確認して、次のStepへ進む。
 
-### Step 6: Plan Internal Corrections
+### Step 7: Plan Internal Corrections
 担当Module内に対応が必要な問題が存在する場合は、これまでの調査結果および担当外Moduleの対応結果を踏まえ、必要な修正方針およびImplementation Planをユーザーと協議・決定する。
 
 1. 担当Module内の各問題について、原因、影響範囲および必要な修正内容を確認する。
@@ -159,7 +182,7 @@ docs/.steering/<current-train>/shared/work-requests/correction-request-<no>-from
 
 本StepではImplementationを実施しない。
 
-### Step 7: Finalize Triage Results
+### Step 8: Finalize Triage Results
 これまでの調査、担当外Moduleへの対応依頼および担当Module内の修正計画の結果を整理し、後続のImplementationおよびVerificationに必要な情報を確定する。
 
 1. 検知された問題について、原因、影響範囲およびOwnershipの調査結果を確認する。
@@ -168,7 +191,7 @@ docs/.steering/<current-train>/shared/work-requests/correction-request-<no>-from
 4. 修正・変更によって影響を受ける可能性のあるImplementationおよびVerificationの範囲を整理する。
 5. 未解決事項、未確定情報およびBlockerが存在する場合は、その内容と後続作業への影響を明確にする。
 6. これまでの結果を踏まえ、以下の結論を**Triage Conclusion**として下記Formatに従い **Draft** に明記する。
-   - **External Corrections**: 担当外Moduleによる対応が発生したか、およびその対応結果。
+   - **External Corrections Performed**: 担当外Moduleによる対応が発生したか、およびその対応結果。
    - **Internal Corrections Required**: 担当Module内でImplementation Loopによる修正が必要か。
 7. **Draft** の内容を最終確認し、本Procedureを完了する。
 

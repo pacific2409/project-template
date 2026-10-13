@@ -20,9 +20,9 @@
 **Test Specification** を確認し、選択したTaskの確認に利用可能なTest Method、Verification MethodまたはEvidence取得方法が定義されている場合は、必要に応じて**Operational Verification**にも流用する。
 
 ### **Dependency Readiness**
-Implementation後の状態をもとに、計画したTest、Build、起動、Deploy・Deployおよび**Operational Verification**を実施するために必要なDependencyが十分に揃っていることを改めて確認する。
+Implementation後の状態をもとに、計画したTest、Build、起動、Deployおよび**Operational Verification**を実施するために必要なDependencyが十分に揃っていることを改めて確認する。
 
-不足するDependencyが確認された場合は、本Stepにおいて必要なDependencyを追加・調整し、後続のDeploy・DeployおよびVerificationを実施可能な状態にする。
+不足するDependencyが確認された場合は、本Stepにおいて必要なDependencyを追加・調整し、後続のDeployおよびVerificationを実施可能な状態にする。
 
 ### **Execution Responsibility**
 実行主体について、**Draft**、`working/` 配下の関連情報、`decisions.md` その他の既存情報から判断可能な場合は、その内容に従う。

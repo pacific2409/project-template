@@ -12,6 +12,10 @@
 
 本ファイルはTaskの進捗やIssueの詳細を管理するものではなく、Workflowの一時的な制御・復帰情報および臨時対応の履歴を管理するために使用する。
 
+Active ContextはWorkflowの再実施単位で作成する。複数のCorrection Requestについて、共通のTask再実施によって対応できる場合は、単一のContextにまとめて管理してよい。
+
+Active Contextは原則として1件ずつ処理し、指定されたRe-execution Scopeの完了後、Origin Taskへ復帰する。復帰時には、当該Contextに関連付けられたすべてのCorrection Requestについて回答・対応結果を最終化する。
+
 ## Active Context
 
 <!-- 進行中の臨時対応を記録する。存在しない場合は空欄とする。 -->
@@ -20,7 +24,7 @@
 
 - **Title**: [臨時対応の概要]
 - **Origin Task**: [Task No. / Task Name]
-- **Request Reference**: [Correction Request / Issue / Other Reference]
+- **Request Reference**: [関連するCorrection Request / Issue / Other Referenceを列挙]
 - **Re-entry Task**: [Task No. / Task Name]
 - **Re-execution Scope**: [再実施が必要なTaskおよび対象範囲]
 
@@ -32,7 +36,7 @@
 
 - **Title**: [臨時対応の概要]
 - **Origin Task**: [Task No. / Task Name]
-- **Request Reference**: [Correction Request / Issue / Other Reference]
+- **Request Reference**: [関連するCorrection Request / Issue / Other Referenceを列挙]
 - **Re-entry Task**: [Task No. / Task Name]
 - **Re-execution Scope**: [再実施したTaskおよび対象範囲]
 - **Result**: [対応結果の概要]

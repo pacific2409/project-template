@@ -20,7 +20,7 @@
 ## Prepare Release Procedure
 以下を確認し、Current Train全体のRelease Procedureを整理する。
 
-- `shared/release-info/<module-name>-release-instructions.md`
+- `docs/.steering/<current-train>/shared/release-info/<module-name>-release-instructions.md`
 - **Development Allocation Map**
 - 関連するSpecification
 - 必要に応じて各ModuleのDevelopment ReportおよびHandover
@@ -40,7 +40,7 @@
 
 
 ## Confirm Module Release Completion
-ユーザーから対象ModuleのReleaseおよびProduction Verificationの完了報告を受けた場合は、`shared/executor-reports/<module-name>-release-result-report.md` を確認する。
+ユーザーから対象ModuleのReleaseおよびProduction Verificationの完了報告を受けた場合は、`docs/.steering/<current-train>/shared/executor-reports/<module-name>-release-result-report.md` を確認する。
 
 Release Result Reportについて、以下を確認する。
 
@@ -60,7 +60,7 @@ Release Result Reportについて、以下を確認する。
 ### **Review Release Results**
 すべてのRelease対象Moduleについて、以下を横断して確認する。
 
-- `shared/executor-reports/<module-name>-release-result-report.md`
+- `docs/.steering/<current-train>/shared/executor-reports/<module-name>-release-result-report.md`
 - **Release Procedure**
 - 必要に応じて各Moduleの **Release Instructions**、Evidence、Monitoring結果その他の関連成果物
 

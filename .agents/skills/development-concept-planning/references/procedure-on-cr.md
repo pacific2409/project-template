@@ -44,7 +44,7 @@
 | 選択領域 | 参照文書 |
 |---|---|
 | プロダクト機能・体験 | `docs/persistent/product-requirements.md` |
-| 内部処理・振る舞い | `docs/persistent/functional-design.md` |
+| 内部処理・振る舞い | `docs/persistent/function-design.md` |
 | システムアーキテクチャ | `docs/persistent/system-architecture.md` |
 | データ管理・運用 | `docs/persistent/data-strategy.md` |
 | インフラ | `docs/persistent/infrastructure-architecture.md` |

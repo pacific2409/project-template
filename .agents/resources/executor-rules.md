@@ -74,16 +74,18 @@ Executorは、自身のSteering領域にある以下のファイルおよびデ�
 - Taskの遂行を妨げる問題や、解決するまで作業を進行できない事項を都度記録する。
 - 各Blockerには、そのBlockerが発生したTaskのTask No.を記録する。
 - Blockerの発生・解消に応じて内容および状態を更新する。
+- 更新の際には記入例を(`.agents/resources/steering-assets/blockers-example.md`)を参考にする。
 
 ### decisions.md
 - Executorによる作業の中で行った重要な判断と、その決定内容を都度記録する。
 - 各Decisionには、その判断を行ったTaskのTask No.を記録する。
 - 後続作業において判断の前提となる決定を記録する。
+- 更新の際には記入例を(`.agents/resources/steering-assets/decisions-example.md`)を参考にする。
 
 ### adhoc-workflow-context.md
 - 通常のWorkflow進行中に臨時の対応が発生し、別のTaskへの移行および元のTaskへの復帰が必要となる場合に、その制御情報を記録する。
 - 移行元のTask、対応対象となるRequestやIssue、再実施開始Taskおよび復帰先Taskを記録する。
-- 臨時対応の完了後は、必要な復帰処理が完了したことを確認し、使用したContextを削除する。
+- 臨時対応の完了後は、必要な復帰処理が完了したことを確認し、使用したContextをActive ContextからContext Historyへ移動する。
 
 ### relevant-specifications.md
 - 所定の工程において、抽出した担当Moduleに割り振られたTaskに関連するSpecificationが記録される。
@@ -99,6 +101,7 @@ Executorは、自身のSteering領域にある以下のファイルおよびデ�
 - 発生した時点で随時更新し、自身のSteering領域におけるHandover情報の正本とする。
 - 他担当への情報連携が必要となった場合は、`docs/.steering/<current-train>/shared/handover/handover-from-<module-name>.md` へ内容をコピーし(既存の場合は上書き)、共有用の情報として提供する。
 - Handoverには、情報の引き継ぎ先となるDomainまたはModuleと、引き継ぐ内容を明示する。
+- 更新の際にはテンプレート(`.agents/resources/steering-assets/handover-from-some-module-template.md`)を使用する。
 
 ### working/
 - 作業の遂行中に行う調査、分析、情報抽出、ユーザーとの確認・議論等において、作業上保持する必要がある中間的・補助的な情報を記録する。

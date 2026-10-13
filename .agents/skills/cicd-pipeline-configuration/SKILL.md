@@ -153,14 +153,14 @@ Specificationに明示されていないCI/CD Pipelineの構成、Job、Tool、�
 
 1. 担当Moduleの **Workspace** に既存のCI/CD Pipelineが存在する場合、そのPipeline Definition、Scriptその他の関連実装を確認し、現在の構成、Environment、Job、Trigger、依存関係その他のPipeline Configurationを把握する。
 2. 同Domainの他ModuleにCI/CD Pipelineの類似・参考実装が存在する場合は、**Executor Rules** に従ってRead-Onlyで確認し、担当Moduleでも参考となる構成・設定を把握する。
-3. `.steering/<current-train>/shared/examples/` にCI/CD Pipelineに関するExampleが存在する場合は、その内容を参考情報として確認する。
+3. `docs/.steering/<current-train>/shared/examples/` にCI/CD Pipelineに関するExampleが存在する場合は、その内容を参考情報として確認する。
 4. **Requirement Mode** が `CR` の場合は、担当Moduleの既存Pipelineを現在の実装状態として扱い、前項で抽出したCI/CD RequirementsおよびCurrent Trainの変更内容と照合し、維持する部分と変更を検討する必要がある部分を把握する。
 
 把握した内容のうち、後続のPipeline Configurationで参照する必要があるものは、**CI/CD Requirements** とは分離して、**Existing and Reference CI/CD Pipelines** に整理する。
 
 ### Step 3: Draft Pipeline Configuration
 
-前項までで抽出したCI/CD Requirements、把握した既存・参考Pipeline、および **Domain Guide** をもとに、担当Moduleで構築・変更するCI/CD Pipelineの全体構成と具体的なConfigurationを検討し、**Draft** に整理する。
+前項までで抽出したCI/CD Requirements、把握した既存・参考Pipeline、および **Guide** をもとに、担当Moduleで構築・変更するCI/CD Pipelineの全体構成と具体的なConfigurationを検討し、**Draft** に整理する。
 
 また、`test/test-specification.md`、`decisions.md`、および **External Information** に担当ModuleのCI/CD Pipelineに関連する情報が存在する場合は、それらも確認しながら検討する。
 

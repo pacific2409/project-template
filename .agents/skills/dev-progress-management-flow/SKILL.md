@@ -59,6 +59,7 @@ docs/.steering/<current-train>/manager/flow-status.md
 以下のルールに従って管理または更新する。
 - 各Taskの開始時に、当該Taskの行をStatus `IN_PROGRESS` として表の先頭に追加する。
 - 各Taskの完了時に、当該TaskのStatusを `COMPLETED` に更新する。
+- ただし、Development Progress ManagementおよびRelease Progress Managementでは、各Task内の指定に従って追加・更新を行う。
 - Workflowの再開時は、本ファイルの内容を確認の上、どのTaskから再開するかを判断し、ユーザーに確認する。
 
 ### Guide For The Skill (`references/guide.md`)
@@ -83,7 +84,7 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 ### **Load Project Rules**
 - Projectルートの `AGENTS.md` を全て読み、その内容を以降のすべての作業の前提とする。
 - `docs/persistent/product-requirement-definition.md`を読みプロジェクトの概要を把握する。
-- `docs/change-requirements/` 配下にファイルが存在する場合は、Current Trainにおける変更対応の内容を確認する。
+- `docs/change-requirements/` 配下に.gitkeep以外のファイルが存在する場合は、Current Trainにおける変更対応の内容を確認する。
 
 ### **Identify Workflow Position**
 **Workflowの再開時** には、**Flow Status**を確認し、本Workflowの実行状況と再開位置を特定し、ユーザーに確認の上、その位置からWorkflowを再開する。
@@ -100,7 +101,6 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 
 ## Workflow Overview
 ── Prepare Development Management ──
-
 - Prepare Project Environment
 - Task Allocation
 - Requirement Verification Allocation
@@ -155,9 +155,15 @@ Work Skill `$requirement-verification-allocation` を使用し、Product Require
 
 1. 対応するDomainのサブディレクトリ配下に、Module名のディレクトリを作成する。
 2. 作成したディレクトリをGit Repositoryとして初期化する。
-3. それぞれにて、`master` ブランチを作成し、チェックアウトする。リモート上に`main`ブランチが存在する場合は、削除する。その際、可能であればリモートリポジトリ上でデフォルトブランチとして設定する。
-4. **Development Guidelines** に従い、**Repository Info** に定義されたProvider上に対応するRemote Repositoryを作成する。
-5. Local RepositoryにRemote Repositoryを設定する。
+3. **Development Guidelines** に従い、**Repository Info** に定義されたProvider上に対応するRemote Repositoryを作成する。作成時は、可能な限りREADME等の初期ファイルを自動生成しない。
+4. Local RepositoryにRemote Repositoryを設定する。
+5. 各Local Repositoryについて、以下を実施する。
+   - `master` ブランチを作成してチェックアウトする。
+   - 初回Commitが存在しない場合は、空の `.gitkeep` を作成して初回Commitを行う。
+   - `master` ブランチをRemote RepositoryへPushする。
+   - Providerの仕様上可能な場合は、Remote RepositoryのDefault Branchを `master` に設定する。
+   - Remote Repositoryに `main` ブランチが存在する場合は削除する。
+6. 作成したリポジトリの情報について、`docs/repository-info.md` に記録する。
 
 > 本Taskでは、ModuleのWorkspaceおよびRepositoryの作成のみを行う。各々Module内のソースコード、Directory Structure、Dependency、Build設定、CI/CD、Container、Infrastructure等、Repository内部の構築・設定は行わない。
 
@@ -189,10 +195,11 @@ Work Skill `$requirement-verification-allocation` を使用し、Product Require
 本Taskでは、1つのModuleに対する構築・開発の進行管理を1回のTaskとして扱い、以下を実施する。
 
 1. 次に対応するModuleを **Development Allocation Map** から特定する。
-2. 対象Moduleの担当Executorによる構築・開発を開始するようユーザーへ対応を依頼する。
-3. ユーザーから対象Moduleの完了報告を受けたら、**Guide** の**Confirm Module Development Completion**に従って当該ModuleのDevelopment Completionを確認し、完了として扱える場合は進捗を完了として更新する。
-4. 未完了のModuleが存在する場合は本Taskを終了し、次のModuleについて新たに本Taskを開始する。
-5. すべてのModuleが完了している場合は、本Taskを終了して次のTaskへ進む。
+2. **Flow Status** に対象Moduleの進行状況を `Development Progress Management: <module-name>`の形式で新たなTaskとして記録する。
+3. 対象Moduleの担当Executorによる構築・開発を開始するようユーザーへ対応を依頼する。
+4. ユーザーから対象Moduleの完了報告を受けたら、**Guide** の**Confirm Module Development Completion**に従って当該ModuleのDevelopment Completionを確認し、完了として扱える場合は進捗を完了として**Flow Status**を更新する。
+5. 未完了のModuleが存在する場合は本Taskを終了し、次のModuleについて新たに本Taskを開始する。
+6. すべてのModuleが完了している場合は、本Taskを終了して次のTaskへ進む。
 
 Moduleの進行順序は **Development Allocation Map** に従い、先行するModuleの完了が必要な場合は、その完了を確認してから後続Moduleの対応を開始する。
 
@@ -204,7 +211,7 @@ Moduleの進行順序は **Development Allocation Map** に従い、先行する
 **Development Report** (`docs/.steering/<current-train>/shared/executor-reports/<module-name>-development-report.md`)
 
 1. 全Moduleの **Development Report** および各ModuleのWorkspaceにある `README.md`を横断して確認し、Current TrainにおけるDevelopment結果、対応内容、Verification結果、未解決事項および残存リスクを全体として確認する。
-2. 各Development Reportに記録されたRequirement Verificationの実施結果を **Requirement Verification Matrix** と照合し、完了が確認された項目の `Status` を `TODO` から `VERIFIED` へ更新する。
+2. 各Development Reportに記録されたRequirement Verificationの実施結果を **Requirement Verification Matrix** と照合し、完了が確認された項目の `Status` を `TODO` から `VERIFIED` へ更新する。複数Moduleが同じRequirementを担当する場合は、そのうちいずれかの担当Moduleで完了が確認された時点で `VERIFIED` へ更新する。
 3. **Development Allocation Map**、**Requirement Verification Matrix**、各ModuleのDevelopment Reportその他の関連成果物を確認し、Current TrainがRelease Phaseへ進行可能な状態であることを確認する。
 4. Releaseへの進行を妨げる未完了事項、不整合または未解決事項が存在する場合は、必要な対応を完了した上で本Taskを再確認する。
 5. Development Phaseの完了についてユーザーの承認を得て、次のTaskへ進む。
@@ -224,10 +231,11 @@ Current TrainでRelease対象となる各Moduleの **Release Instructions**、**
 本Taskでは、1つのModuleに対するReleaseおよびProduction Verificationの進行管理を1回のTaskとして扱い、以下を実施する。
 
 1. 次にReleaseするModuleを **Release Procedure** から特定する。
-2. 対象Moduleについて、ReleaseおよびProduction Verificationを実施するようユーザーへ対応を依頼する。
-3. ユーザーから対象ModuleのReleaseおよびProduction Verificationの完了報告を受けたら、**Guide** の **Confirm Module Release Completion** に従って当該ModuleのRelease結果を確認し、完了として扱える場合は進捗を完了として更新する。
-4. 未完了のModuleが存在する場合は本Taskを終了し、次のModuleについて新たに本Taskを開始する。
-5. すべてのModuleが完了している場合は、本Taskを終了して次のTaskへ進む。
+2. **Flow Status** に対象Moduleの進行状況を `Release Progress Management: <module-name>`の形式で新たなTaskとして記録する。
+3. 対象Moduleについて、ReleaseおよびProduction Verificationを実施するようユーザーへ対応を依頼する。
+4. ユーザーから対象ModuleのReleaseおよびProduction Verificationの完了報告を受けたら、**Guide** の **Confirm Module Release Completion** に従って当該ModuleのRelease結果を確認し、完了として扱える場合は進捗を完了として**Flow Status**を更新する。
+5. 未完了のModuleが存在する場合は本Taskを終了し、次のModuleについて新たに本Taskを開始する。
+6. すべてのModuleが完了している場合は、本Taskを終了して次のTaskへ進む。
 
 Moduleの進行順序は **Release Procedure** に従い、先行するModuleのReleaseおよびProduction Verificationが必要な場合は、その完了を確認してから後続Moduleの対応を開始する。
 
@@ -238,7 +246,7 @@ Moduleの進行順序は **Release Procedure** に従い、先行するModuleの
 
 各ModuleのRelease結果、Production Verification結果、未解決事項および残存リスクを確認し、Release Phase全体を完了として扱えることを確認する。
 
-Release Phaseの完了についてユーザーの承認を得た上で、Current Train全体のProduction VerificationおよびTrain Closeに関する後続Taskへ進む。
+Release Phaseの完了についてユーザーの承認を得た上で、Current TrainのTrain Closeに関する後続Taskへ進む。
 
 
 ### Last Step 1: Finalize Documentation
@@ -251,15 +259,20 @@ Release Phaseの完了についてユーザーの承認を得た上で、Current
    - `docs/persistent/` の内容を正とし、READMEに新たな仕様・設計を定義しない。
    - 既存のREADMEが存在する場合は、最新の状態に合わせて必要な箇所を更新する。
 
-2. `docs/change-requirements/` 配下にファイルが存在する場合は、そこからCurrent Trainにおける変更内容を一通り確認し、今回のRelease内容をまとめたRelease Noteを `docs/release-notes/<current-train>` として作成する。その際はテンプレート(`assets/release-note-template.md`) を参照する。
+2. `docs/change-requirements/` 配下に.gitkeep以外のファイルが存在する場合は、そこからCurrent Trainにおける変更内容を一通り確認し、今回のRelease内容をまとめたRelease Noteを `docs/release-notes/<current-train>.md` として作成する。その際はテンプレート(`assets/release-note-template.md`) を参照する。
    - Current Trainで実際にReleaseされた変更内容を記録する。
    - Release Noteに新たな仕様・設計を定義しない。
 
-3. `docs/change-requirements/` 配下にファイルが存在する場合は、Current TrainのSteering領域へ移動する。
+3. `docs/change-requirements/` 配下に.gitkeep以外のファイルが存在する場合は、Current TrainのManagerのSteering領域(`docs/.steering/<current-train>/manager/change-requirements/`)へ移動する。
 
-4. `docs/`リポジトリの現在チェックアウト中のCurrent Train用ブランチをmasterブランチへマージする。
+4. **Development Guidelines** に従い、`docs/` Repositoryの現在チェックアウト中のCurrent Train用Branchについて、以下の手順でmasterへ変更を統合する。
+   1. Current Train用Branchに残っている変更をCommitし、Remote RepositoryへPushする。
+   2. `master` ブランチへCheckoutする。
+   3. Remote Repositoryから最新の変更を取得し、`master` を最新化する。
+   4. Current Train用Branchを`master`へMergeする。
+   5. Merge結果を確認し、`master` をRemote RepositoryへPushする。
 
 ### Last Step 2: Close Train
-Current Trainの **Train Status** を `CLOSE` に更新する。
+Current Trainの **Train Status** を `CLOSED` に更新する。
 
 以上が完了したら、Current Trainを終了する。

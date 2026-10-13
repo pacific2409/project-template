@@ -19,7 +19,7 @@ Domain Infrastructureに属するModuleにおいては下記のGuidelineに従�
 - Terraformに対するTerragruntや、Kubernetes Manifestに対するKustomizeなど、各構築・適用方式を補助・拡張するToolやEcosystemについては、それ自体を理由としてPipelineを分離せず、対応する構築・適用方式のPipelineに含めることを基本とする。
 
 #### **Environment Lifecycle**
-`docs/persistent/infrastructure-design.md` および `docs/change-requirements/infrastructure-architecture.md` に **Environment Lifecycle and Dormancy Strategy** のセクションが存在する場合は、その内容を一通り確認し、CI/CD PipelineまたはInfrastructure Operationによって実現する必要があるLifecycle Actionを特定する。
+`docs/persistent/infrastructure-architecture.md` および `docs/change-requirements/infrastructure-architecture.md` に **Environment Lifecycle and Dormancy Strategy** のセクションが存在する場合は、その内容を一通り確認し、CI/CD PipelineまたはInfrastructure Operationによって実現する必要があるLifecycle Actionを特定する。
 
 - Environment / Resourceの停止、縮退、削除に必要な操作
 - State / Data / Artifactその他のPreservation

@@ -22,12 +22,12 @@ Function DesignおよびSystem Architectureに基づき、各テーブルの仕�
 docs/persistent/function-design.md
 docs/persistent/system-architecture.md
 docs/persistent/development-guidelines.md
-docs/ideas/infrastructure-to-application-dependencies.md
+docs/persistent/infrastructure-to-application-dependencies.md
 docs/persistent/details/database-definition.md
 ```
 
 ## 前提条件
-- **Sources** のファイルが作成されており、いずれの内容も空でないこと。
+- **Sources** のうち`database-definition.md`以外のファイルが作成されており、いずれの内容も空でないこと。
 
 
 ## Content Guide for the Skill (`references/guide.md`)
@@ -119,7 +119,7 @@ Agent `explorer` に、特定した既存のテーブル名と以下の上位設
 **Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。それによって、Table Definitionを作成・更新する。
 
 - `INITIAL`: **Initial Spec Establishment** (`.agents/resources/doc-procedure/initial-spec-establishment.md`)
-- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition-flow.md`)
+- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition.md`)
 
 Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 

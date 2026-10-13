@@ -2,7 +2,7 @@
 name: executor-delivery-flow
 description: >
   工程の順序と進行を管理するExecutor型 Flow Skill。
-  担当ModuleのImplementation Loop完了後、Specificationとの整合性確認、Code Review、Integration Test、Documentation、HandoffおよびRelease準備を行い、リリースと本番確認からModule完了報告までの工程を進行する。
+  担当ModuleのImplementation Loop完了後、Specificationとの整合性確認、Code Review、Integration Test、Documentation、handoverおよびRelease準備を行い、リリースと本番確認からModule完了報告までの工程を進行する。
   Use when: Executorとして担当ModuleのImplementation Loopが完了し、実装内容の全体レビューから、Integration Test、リリース、本番確認およびModule完了までの工程を進行するとき。
   Do not use for: 構想、要件定義、設計、Task Allocation、Train全体の進捗管理、通常の構築・開発工程。他Moduleの構築・開発。
 ---
@@ -13,7 +13,7 @@ description: >
 
 あなたの役割は、特定のModuleの構築・開発を担当するExecutorです。
 
-このSkillを用いて、**executor-development-flow** において完了した担当ModuleのImplementationを引き継ぎ、Specificationとの整合性確認、Code Review、Integration Test、DocumentationおよびHandoffを進行してください。
+このSkillを用いて、**executor-development-flow** において完了した担当ModuleのImplementationを引き継ぎ、Specificationとの整合性確認、Code Review、Integration Test、Documentationおよびhandoverを進行してください。
 
 その後、Release準備、リリースおよび本番確認を進行し、担当Moduleの対応結果を整理・報告して、Current Trainにおける担当Moduleの作業を完了させてください。
 
@@ -111,6 +111,8 @@ docs/.steering/<current-train>/<module-name>/working/pending-information.md
 docs/.steering/<current-train>/<module-name>/handover-from-<module-name>.md
 ```
 
+- 更新の際にはテンプレートを(`.agents/resources/steering-assets/handover-from-some-module-template.md`)を使用する。
+
 
 ## Goal
 Workflowに定義されたすべてのTaskが完了し、その完了についてユーザーの承認を得ること。
@@ -122,8 +124,9 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 ### **Load Project Rules and Context**
 - **Executor Rules**、`AGENTS.md`、 **Development Guidelines** を全て読み、その内容を以降のすべての作業の前提とする。
 - `docs/persistent/product-requirement-definition.md`を読みプロジェクトの概要を把握する。
-- `docs/change-requirements/` 配下にファイルが存在する場合は、Current Trainにおける変更対応の内容を確認する。
+- `docs/change-requirements/` 配下に.gitkeep以外のファイルが存在する場合は、Current Trainにおける変更対応の内容を確認する。
 - 担当Moduleの **Workspace** に `README.md` が存在する場合は、そこからプロジェクトの全体像のイメージを掴み、Moduleの概要、構成、利用方法および関連するSpecificationへの参照情報を把握する。
+- 担当Moduleの **Pending Information** および `blockers.md` が存在する場合は、その内容を確認し、後続のIntegration Test、Release準備その他のTaskへの影響を把握する。
 
 ### **Identify Workflow Position**
 **Workflowの再開時** には、**Flow Status**を確認し、本Workflowの実行状況と再開位置を特定し、ユーザーに確認の上、その位置からWorkflowを再開する。
@@ -139,7 +142,7 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 各Work Skillを実行する際は、ここで識別した **Requirement Mode** をInputとして引き継ぐ。
 
 ### **Identify Executor Context**
-自身に割り当てられた担当をもとに、以降のWorkflowで使用するおよび **Domain Guide** を特定し、その内容を確認する。
+自身に割り当てられた担当をもとに、以降のWorkflowで使用する担当Module、Steering領域および **Domain Guide** を特定し、その内容を確認する。
 
 1. 自身に割り当てられた担当から、担当DomainおよびModuleを特定する。
 2. **Executor Rules** に従い、担当Moduleに対応するSteering領域を特定し、その内容を確認する。
@@ -170,6 +173,7 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 - Review Release Results and Address Issues
 - Await Production Verification Completion
 - Post-Release Actions
+- Merge for Master Branch
 - Finalize Module in Current Train
 
 
@@ -220,10 +224,16 @@ Review結果の確定が報告された後、次のTaskへ進む。
 Review結果に対応が必要な指摘事項が存在せず、必要なReviewがすべて完了している場合は、本Taskを完了して次のTaskへ進む。
 
 ### Task 6: Merge for Integration Branch
-Pull Request / Merge RequestのReviewが完了し、必要な対応がすべて実施された後、担当Moduleの作業ブランチから統合ブランチへのマージを実施して、統合ブランチへチェックアウトする。
+Pull Request / Merge RequestのReviewが完了し、必要な対応がすべて実施された後、以下の手順に従って担当Moduleの作業ブランチを統合ブランチへMergeする。
 
+1. 前工程で作成したPull Request / Merge Requestを特定し、Merge元およびMerge先のBranchを確認する。
+2. Reviewの完了状況、Required Checkの結果およびMerge可能状態を確認する。
+3. Remoteが複数ある場合、複数Remote間のHEAD Commit SHAの一致確認
+4. ユーザーにPull Request / Merge RequestのMergeを依頼し、完了報告を待つ。
+5. Remote上でMergeが正常に完了し、対象のPull Request / Merge RequestがMerged状態になっていることを確認する。
+6. ローカルで統合ブランチへCheckoutし、Remoteの最新状態へ同期する。
 
-Merge完了後、統合ブランチの状態を確認し、次のTaskへ進む。
+Merge完了後、ローカルとRemoteの統合ブランチの状態を確認し、次のTaskへ進む。
 
 ### Task 7: Execute Integration Test
 `test/test-specification.md` が存在する場合、Work Skill `$test-execution` を使用し、担当ModuleのIntegration Testを実施する。
@@ -233,6 +243,8 @@ Merge完了後、統合ブランチの状態を確認し、次のTaskへ進む�
 `test/test-specification.md` が存在しない場合は、本Taskをスキップする。
 
 ### Task 8: Review Integration Test Results and Address Issues
+`test/test-specification.md` が存在しない場合は、本Taskをスキップする。
+
 Integration Testの実施結果を確認し、問題、不具合、期待結果との不一致および後続工程への進行を妨げる事項の有無を確認する。
 
 これらの事項が存在しない場合は、本Taskを完了したものとして次のTaskへ進む。
@@ -249,9 +261,9 @@ READMEには、ProjectおよびModuleの概要、主要なSpecificationへの参
 具体的な記載内容および構成は、**Common Guide** の該当プロセスに従う。
 
 ### Task 10: Prepare Release Branch
-**Domain Guide** の **Branch Policy** においてリリースブランチが `Required` とされている場合、かつリリースブランチが存在しない場合は、**Development Guidelines** に従ってリリースブランチを準備する。
+リリースブランチが存在しない場合は、**Development Guidelines** に従ってリリースブランチを準備する。
 
-  - ブランチ名は、`<prefix>/<current-train-name>` の形式とする。
+  - ブランチ名は、`<prefix>/<current-train-name>` の形式とする。prefixの命名規則については**Development Guidelines** に従う。
 
 ### Task 11: Prepare Release Instructions
 担当ModuleのImplementation、CI/CD PipelineおよびRuntime Environmentの構成を確認し、Releaseに必要な操作、実行順序、事前条件、Verificationおよび問題発生時の対応方法を整理したRelease Instructionsを**Common Guide** の該当プロセスに従って作成する。
@@ -270,16 +282,14 @@ READMEには、ProjectおよびModuleの概要、主要なSpecificationへの参
 待機中の相談・対応依頼については、**Common Guide** の **Handling Requests During Await** に従って対応する。
 
 ### Task 15: Merge for Release Branch
-Release準備が完了した旨の報告および進行指示をユーザーから受けた後、**Development Guidelines** に従い、担当Moduleの統合ブランチからリリースブランチへのマージを実施して、リリース用ブランチへチェックアウトする。
-
-Mergeにあたっては、対象BranchおよびCommit、未反映の変更、Merge Conflictの有無を確認し、Release対象となる変更が適切に反映されたことを確認する。
-
-Merge完了後、リリースブランチの状態を確認し、次のTaskへ進む。
+Release準備が完了した旨の報告および進行指示をユーザーから受けた後、**Common Guide** の該当プロセスに従い、担当Moduleの統合ブランチからリリースブランチへのマージ工程を実施して、リリース用ブランチへチェックアウトする。
 
 ### Task 16: Execute Release and Production Verification
 Work Skill `$release-execution` を使用し、担当ModuleのRelease Instructionsに従ってReleaseおよびProduction Verificationを実施する。
 
 **Default Inputs For Work Skill**をInputとして連携する。
+
+本Taskの再実施において、既存のReleaseが有効であり、Releaseの再実施が不要と判断された場合は、Releaseを省略し、必要なProduction Verificationのみを再実施する。
 
 ### Task 17: Review Release Results and Address Issues
 ReleaseまたはProduction Verificationの実施結果を確認し、問題、不具合、期待結果との不一致および後続工程への進行を妨げる事項の有無を確認する。
@@ -303,10 +313,12 @@ Current TrainについてProject全体のProduction Verificationが完了した�
 
 該当する定義が存在しない場合は、本Taskをスキップする。
 
-### Task 20: Finalize Module in Current Train
+### Task 20: Merge for Master Branch
+**Common Guide** の該当プロセスに従い、担当Moduleのリリース用ブランチからMasterブランチへのマージ工程を実施して、Masterブランチへチェックアウトする。
+
+### Task 21: Finalize Module in Current Train
 担当Moduleについて、Current Trainにおける必要な作業および関連する対応がすべて完了していることを確認し、Moduleの作業を終了する。
-1. **Development Guidelines** に従い、リリース用BranchのMaster Mergeおよび整理を行い、MasterブランチへCurrent Trainの変更が反映されていることを確認する。
-2. 担当Moduleの **Workspace** について、未コミットの変更や未追跡ファイルが残っていないことを確認する。
-3. `tasklist.md`、`blockers.md`、`pending-information.md` その他のSteering情報を確認し、未完了の作業や未解決事項について必要な対応・判断が完了していることを確認する。
-4. 担当ModuleのCurrent Trainにおける作業完了をユーザーに報告する。
+1. 担当Moduleの **Workspace** について、未コミットの変更や未追跡ファイルが残っていないことを確認する。
+2. `tasklist.md`、`blockers.md`、`pending-information.md` その他のSteering情報を確認し、未完了の作業や未解決事項について必要な対応・判断が完了していることを確認する。
+3. 担当ModuleのCurrent Trainにおける作業完了をユーザーに報告する。
 

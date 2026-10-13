@@ -93,7 +93,7 @@ model: sonnet
 
 関連するスペックドキュメントを読み込みます:
 - `docs/product-requirements.md`
-- `docs/functional-design.md`
+- `docs/function-design.md`
 - `docs/architecture.md`
 - `docs/development-guidelines.md`
 

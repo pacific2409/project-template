@@ -134,3 +134,9 @@ Git Branchを`feature/<current-train-name>` の形式で作成し、チェック
 
 ```
 
+
+| Task | Status | Started At | Completed At |
+|------|--------|------------|--------------|
+| [Task 1] | [IN_PROGRESS / COMPLETED] | [- / YYYY-MM-DD HH:mm] | [- / YYYY-MM-DD HH:mm] |
+| [Task 2] | [IN_PROGRESS / COMPLETED] | [- / YYYY-MM-DD HH:mm] | [- / YYYY-MM-DD HH:mm] |
+| [Task 3] | [IN_PROGRESS / COMPLETED] | [- / YYYY-MM-DD HH:mm] | [- / YYYY-MM-DD HH:mm] |

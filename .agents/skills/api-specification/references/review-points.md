@@ -30,8 +30,6 @@ docs/reviews/api-specification-review-report.md
 - Function Design / System Architecture等で確定した目的、Service Boundary、Interface Relationship、Business Rule、Architecture Decisionを前提とし、個別API仕様で再定義していないか確認する。
 - Field、Type、Validation、Data Access、Transaction Boundary、処理Logic、Error Contract等は本仕様で具体化する。一方、Table、Internal / External Service等の連携先自体の内部仕様、System全体のFlow、Logging等の横断的な実装Ruleを複製させない。
 - `error-codes.md`も参照資料だけでなくレビュー対象とする。既存の定義形式に従ってCodeの意味と関連仕様を確認し、このレビューのために新たな列構成を要求しない。共通定義と個別APIのContractに矛盾がある場合は推測で解決せず、関係箇所を明示する。
-- 共通化された処理は専用のCommon Logic Specificationを正とし、呼出元には参照、引数、結果の扱い等の必要仕様があるかを確認する。参照先が対象パターン外でも、呼出Contractの照合に必要な範囲で確認し、対象一覧とは区別する。参照先の全面レビューへ無断で範囲を広げない。
-- 対象にCommon Logic Specificationが含まれる場合は、guideに従ってRequestをArgument、ResponseをReturn Value、SamplesをArgument / Return Value Samplesへ読み替える。HTTP Method、Endpoint、HTTP Status等のAPI固有項目は要求せず、対応するInterface・Error仕様として評価する。
 - 実際のAPIに適用されるDependency、Data Access、連携等を確認し、参考例の技術や処理を一律に必須化しない。ただしTransactionを使用しない場合も、その旨の明示を確認する。
 - 仕様の正本となるSectionを明確にし、他Sectionは同じ定義を参照しているかを確認する。未記入枠、参考例、推測を決定済みの仕様として扱わない。
 
@@ -126,8 +124,6 @@ docs/reviews/api-specification-review-report.md
 - Request Validationから正常・異常のResponse返却まで、追加の設計判断なく実装できる粒度に具体化されているか。例示のStep構成を機械的に採用していないか。
 - Data Accessがある場合、Table・Column、検索条件、値の供給元、必要な更新内容、取得結果の扱いが明確で、5章とTable Definitionに整合しているか。例示の検索条件を並べるだけで実際の条件を曖昧にしていないか。
 - Internal / External Serviceを利用する場合、採用Interfaceに応じた呼出先・Method等、Request Mapping、利用するResponse情報、結果による分岐が具体的か。DependenciesのProperty参照と連携先Contractに一致しているか。
-- 共通化された処理はCommon Logic Specificationを参照し、引数・戻り値・Errorの扱い等、呼出元として必要な仕様が明確か。切出し済みのLogicを重複定義していないか。
-- 複数APIに類似する処理が存在することだけを理由にCommon Logicへの切出しを要求しない。共通化することが上位方針・既存設計・明確な再利用関係から判断できる場合に、専用Specificationとの分離・参照が適切かを確認する。
 - Response Mappingが4章のFieldへ対応し、Source / Valueと必要な条件を追跡できるか。Error Response MappingもCode・Message・Validation Message等の返却仕様に一致しているか。
 - Errorが発生する条件・判定Logic・遷移先が定義され、Step末尾のErrorが10章へ対応するか。記載するHTTP Statusは外部から受信した値ではなく、本APIがClientへ返却する値か。
 - Transactionと関係するStepが8章のTransactionまたはOutsideへ対応し、Commit / Rollback前後の処理が矛盾しないか。
@@ -169,7 +165,7 @@ docs/reviews/api-specification-review-report.md
 - Logic Flow、Sequence、Processing Detailsが同じ処理順序・分岐・連携を表し、TransactionのScope・Commit・RollbackとError経路も同時に成立するか。
 - Field・Property・Table・Step・Transaction・Code等の識別と意味が全Sectionで一致し、存在しない値・Stepや供給されない結果を参照していないか。
 - Error発生から公開Contract・Response Mapping・Sampleまでが整合し、外部Errorと本APIのErrorを混同していないか。共通Codeの照合結果は10章を参照する。
-- 仕様の正本がSectionごとに明確で、Sampleや共通処理の重複定義、未記入枠、例示の残存、連携先内部仕様の再定義がないか。
+- 仕様の正本がSectionごとに明確で、Sampleによる仕様の重複定義、未記入枠、例示の残存、連携先内部仕様の再定義がないか。
 - `error-codes.md`はAPIの内部構成ではなく共通エラーコード定義として、Codeの意味と関連仕様を矛盾なく参照できる文書になっているか。具体的な確認は10章の結果を使用する。
 
 ### 13. ファイル間を横断した一貫性
@@ -178,7 +174,6 @@ docs/reviews/api-specification-review-report.md
 - 対象API間の呼出しがある場合、呼出元のRequest Mapping・Response利用・Error変換が呼出先のContractに一致しているか。対象外の参照先は照合に必要な範囲で確認し、未確認と仕様上の誤りを区別しているか。
 - 共通の識別子・Field・Code・Property等について意味・型・必須性・制約に説明できない不一致がないか。API固有の目的や契約に基づく差異は認め、同名という理由だけで機械的な統一を求めない。
 - 同じTableを利用するAPIのData Access・検索条件・更新値が、Table Definitionと上位のBusiness Ruleに適合しているか。API単位のTransactionを、複数API全体の原子性を保証するものと誤認していないか。
-- 共通化された処理が専用Specificationへ分離され、複数の呼出元が同じ引数・戻り値・ErrorのContractを参照しているか。Common Logic内部の定義を呼出元へ複製し、差異を生じさせていないか。
 - 10章の照合が全対象APIに及び、同じ公開Codeの意味・Status・Message等が共通定義と整合しているか。外部Serviceから受け取るCode・Statusと、本API群が公開するものの違いを考慮しているか。
 - あるAPIや共通定義の変更によって、他APIの呼出し・Mapping・Sample・Error Contractに古い仕様が残っていないか。指摘は関係ファイルと該当箇所をすべて明示し、上位設計やContractを根拠に整合させる方向を示せるか。
 
@@ -190,7 +185,6 @@ docs/reviews/api-specification-review-report.md
 
 - `docs/persistent/details/api/create-order.md`で、Request、Data Access、更新Step、Transaction、正常・異常Responseまで追跡でき、追加の設計判断なく処理を実装できる。
 - `docs/persistent/details/api/create-order.md`の公開Errorが`docs/persistent/details/error-codes.md`に一致し、外部ServiceのErrorを本APIのCode・Statusへ変換する条件も明確である。
-- `docs/persistent/details/api/get-order.md`が共通処理の正本を参照し、呼出元に必要な引数・結果の扱いだけを定義している。
 
 ### 改善点の例
 

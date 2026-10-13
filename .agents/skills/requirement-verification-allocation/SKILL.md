@@ -49,6 +49,12 @@ Projectの要求を定義した文書。本Work Skillでは、Goals、Functional
 docs/persistent/product-requirements-definition.md
 ```
 
+## PRD Change Requirements
+Current TrainにおけるProduct Requirementsの変更内容を定義した文書。`CR`の場合に参照する。本Work Skillでは、Read Onlyとして参照する。
+```
+docs/change-requirements/product-requirements-definition.md
+```
+
 ## Artifact
 PRDから抽出した検証対象と、その検証を担当するModuleの対応関係を記録する成果物は以下に出力する。
 ```
@@ -64,14 +70,18 @@ docs/.steering/<current-train>/shared/information/requirement-verification-matri
 
 - Extract Verification Targets
 - Allocate Verification to Modules
-- Generate Requirement Verification Coverage Map
+- Generate Requirement Verification Matrix
 - Validate Verification Coverage
 - Move **Draft** to Steering for the Current Train
 
 ## Execution Steps
 ### Step 1: Extract Verification Targets
 
-**Product Requirements Definition** を確認し、以下の項目から検証対象となりうる要件・条件をすべて抽出する。
+**Requirement Mode** に応じて、以下の文書から検証対象となりうる要件・条件を抽出する。
+
+- `INITIAL`: **Product Requirements Definition** 全体を対象とする。
+- `CR`: **PRD Change Requirements** に定義された追加・変更内容を対象とする。必要に応じて **Product Requirements Definition** を参照し、変更後の要求・条件を確認する。
+
 
 - 目標・完了条件（Goals）
 - 機能要件（Functional Requirements）の各受け入れ条件
@@ -95,16 +105,16 @@ docs/.steering/<current-train>/shared/information/requirement-verification-matri
 - 各検証対象の具体的な検証方法およびテストケースは、本Skillでは定義せず、担当Moduleの構築・開発工程で決定する。
 - Goalsを含め、UI/UXに関する検証対象は、原則としてFrontend DomainのModuleへ割り当てる。
 
-### Step 3: Generate Requirement Verification Coverage Map
-**Draft** に記録された検証対象と担当Moduleの対応関係を整理し、**Requirement Verification Coverage Map** を作成する。
+### Step 3: Generate Requirement Verification Matrix
+**Draft** に記録された検証対象と担当Moduleの対応関係を整理し、**Artifact** を作成する。作成時は**Template** を使用する。
 
 各検証対象について、PRDの該当箇所、検証対象の内容、および担当Moduleを追跡できる形式で記録する。
 
 ### Step 4: Validate Verification Coverage
 
-作成した **Requirement Verification Coverage Map** を **Product Requirements Definition** および **Development Allocation Map** と照合し、以下を確認する。
+作成した **Artifact** を Step 1で抽出対象とした文書および **Development Allocation Map** と照合し、以下を確認する。
 
-1. PRDに定義されたすべての検証対象が、欠落なくMapに記録されていること。
+1. Step 1で定めた抽出対象の文書に含まれるすべての検証対象が、欠落なくMapに記録されていること。
 2. 各検証対象について、少なくとも1つのModuleが割り当てられていること。
 3. 各Moduleへの割当が、**Development Allocation Map**における担当内容と整合していること。
 

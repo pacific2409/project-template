@@ -15,7 +15,7 @@ allowed-tools: Read, Write
 ### 必須ドキュメント
 
 1. `docs/product-requirements.md` (PRD)
-2. `docs/functional-design.md` (機能設計書)
+2. `docs/function-design.md` (機能設計書)
 3. `docs/architecture.md` (アーキテクチャ設計書)
 
 リポジトリ構造は、アーキテクチャ設計で決定された技術スタックとシステム構成を反映した具体的なディレクトリ構造を定義します。

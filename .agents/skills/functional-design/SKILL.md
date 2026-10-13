@@ -70,7 +70,7 @@ Artifactsレビューを依頼する際に、レビュアーに提供する本�
 **Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。それによって、Function Designを作成・更新する。
 
 - `INITIAL`: **Initial Spec Establishment** (`.agents/resources/doc-procedure/initial-spec-establishment.md`)
-- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition-flow.md`)
+- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition.md`)
 
 Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 

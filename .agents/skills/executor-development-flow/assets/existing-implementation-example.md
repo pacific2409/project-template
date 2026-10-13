@@ -4,7 +4,7 @@
 調査によって把握した既存実装の内容とその理解に応じて、以降の構築・開発で参照しやすい適切な構成・形式で記録すること。
 -->
 
-## Relevant Implementation on in Own Module
+## Relevant Implementation in Own Module
 
 [担当Module自身の既存実装について把握した内容]
 

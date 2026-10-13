@@ -161,12 +161,8 @@ Procedure: Specification Comparison Review(`.agents/resources/doc-procedure/comp
 Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 
 - **Review Sources** : **Specification Sources**
-- **Artifact** : 前項までに作成した**Test Specification**
-- **Comparison Review Report** : `.steering/<current-train>/shared/review/test-design-on-specification.md`
+- **Artifacts** : 前項までに作成した**Test Specification**
+- **Comparison Review Report** : `docs/.steering/<current-train>/shared/reviews/test-design-on-specification-<module-name>.md`
+- **Destination for Reports after Review** : `docs/.steering/<current-train>/<module-name>/archive/`
 - **Scope** : **Task**の内容およびその範囲がこのテストの責任範囲である旨を連携
 - **Required Artifact Review** : `false`
-
-### Step 8: Move Review Report to Archive
-レビュー工程、もしくはその対応工程が完了したら、受け取ったレビューレポートを`.steering/<current-train>/<module-name>/archive/`下に移動させる。
-
-

@@ -3,13 +3,13 @@
 ## Specification Sources
 
 ### **Overall Design Specifications**
-- `docs/persistent/functional-design.md`
+- `docs/persistent/function-design.md`
 - `docs/persistent/system-architecture.md`
-- `docs/change-requirements/functional-design.md`
+- `docs/change-requirements/function-design.md`
 - `docs/change-requirements/system-architecture.md`
 
 ### **Detailed Design Specifications**
-- `docs/persistent/details/error-code.md`
+- `docs/persistent/details/error-codes.md`
 - `docs/persistent/details/database-definition.md`
 - `docs/persistent/details/table/*.md`
 - `docs/persistent/details/api/*.md`

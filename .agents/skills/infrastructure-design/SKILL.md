@@ -100,7 +100,7 @@ docs/persistent/infrastructure-architecture.png
 **Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。それによって、Infrastructure Architectureを作成・更新する。
 
 - `INITIAL`: **Initial Spec Establishment** (`.agents/resources/doc-procedure/initial-spec-establishment.md`)
-- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition-flow.md`)
+- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition.md`)
 
 Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 
@@ -160,11 +160,13 @@ CIDR、IAM Policy、Security Group Rule、Resource Size等の詳細設定を網�
 
 
 ### Post Step 4: Extract Infrastructure-to-Application Dependencies
-
 **Requirement Mode** に応じて、Agent `explorer` に以下の調査を依頼する。
 
 #### `INITIAL`
 **Sources** および **Artifacts** のパスを連携し、以下を依頼する。
+
+依頼時には、`docs/persistent/infrastructure-to-application-dependencies.md`を確認結果の出力先として連携する。
+
 
 ```
  **Sources**をApplication設計上の前提として理解したうえで、**Artifacts**全体を確認し、Application Detail Design（API、Batch、UI等）の設計・実装に影響する事項を抽出する。
@@ -174,6 +176,8 @@ CIDR、IAM Policy、Security Group Rule、Resource Size等の詳細設定を網�
 
 #### `CR`
 **Sources** および **Change Requirements** のパスを連携し、以下を依頼する。
+
+依頼時には、`docs/change-requirements/infrastructure-to-application-dependencies.md`を確認結果の出力先として連携する。
 
 ```
  **Sources**をApplication設計上の前提として理解したうえで、**Change Requirements**を確認し、今回のInfrastructure Architectureの追加・変更によって、Application Detail Design（API、Batch、UI等）側に新たに考慮・対応が必要となる事項を抽出する。
@@ -196,4 +200,5 @@ Procedureの実行にあたっては、以下を本Skillの定義から特定し
 - **Artifacts**
 - **Comparison Review Report** : 呼び出し元から指定
 - **Specific Review Points Sheet**
+- **Destination for Reports after Review** : `docs/.steering/<current-train>/manager/reviews/`
 - **Scope** *(Optional: Inputとして指定されている場合)*

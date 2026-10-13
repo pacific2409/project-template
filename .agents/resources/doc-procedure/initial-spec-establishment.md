@@ -21,9 +21,6 @@ Artifactsに定義する内容、その検討観点および記述内容の指�
 ### **Template**
 各Artifactの作成に使用するTemplateのパス。
 
-### **Comparison Review Report**
-`spec-comparator`が作成・更新する比較レビューレポートの出力先のパス。
-
 ### **Specific Review Points Sheet**
 `document-reviewer`によるArtifact Reviewで使用する、Artifact固有のレビュー観点表のパス。
 
@@ -139,5 +136,5 @@ Agent `document-reviewer` に **Artifacts** のレビューを依頼する。
 ## Action after Review
 Request Reviewを行う工程で結果を受け取った後の対応については、以下に規定する。
 ```
-.agents/resources/actions-after-review.md
+.agents/resources/action-after-review.md
 ```

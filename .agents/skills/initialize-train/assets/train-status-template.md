@@ -25,7 +25,6 @@
 
 ### **[Project名]**
 
-## **Train Status**
 
 ## **Train Status**
 

@@ -5,7 +5,7 @@
 
 ### Extract Runtime Environment Requirements
 
-Agent `explorer` に **Specification Sources** のパスを連携し、担当ModuleのRuntime Environmentの構築・変更において考慮すべき要求、仕様および制約を抽出させる。
+Agent `explorer` に **Specification Sources** のパス、**Container Image**の対応要否、**Orchestration Workload**の対応要否を連携し、担当ModuleのRuntime Environmentの構築・変更において考慮すべき要求、仕様および制約を抽出させる。
 
 依頼時には、以下を抽出結果の出力先として連携する。 (変数<>となっている部分は適切に置き換えた上で連携する)
 
@@ -32,7 +32,9 @@ Agent `explorer` に **Specification Sources** のパスを連携し、担当Mod
 
 各事項について、その根拠となるSpecificationのFile、Section、Subsectionを併せて記録する。
 
-Orchestration Workloadが対応対象でない場合でも、Specification上のRuntime Environmentを理解する上で関連する記述は抽出対象とする。ただし、Workload自体のConfigurationを独自に追加しない。
+Container ImageあるいはOrchestration Workloadが対応対象でない場合でも、Specification上のRuntime Environmentを理解する上で関連する記述は抽出対象とする。ただし、対応対象でないもののConfigurationを独自に追加しない。
+
+Container ImageやOrchestration Workloadの対応要否について、対応対象外の構成に関する記述は、依存関係および整合性を確認するための前提情報として区別して記録する。
 
 Specificationに明示されていないContainerまたはOrchestration Workloadの構成、Tool、実装方式等を独自に設計・補完しない。
 ```
@@ -74,6 +76,7 @@ Specificationに明示されていないContainerまたはOrchestration Workload
 - Environmentごとの差異が存在する場合は、その関係を整理する。
 
 #### **2. Container Configuration**
+Container Imageが対応対象の場合に実施する。
 
 - Container ImageのBuildおよびRuntimeに必要となるConfigurationを具体化する。
 - Base Image、Runtime、Build Context、Build手順、起動Command、Port、Environment Variableその他、ContainerのBuild・起動に必要な事項を整理する。
@@ -81,10 +84,10 @@ Specificationに明示されていないContainerまたはOrchestration Workload
 - 既存・参考実装が存在する場合は、その構成との整合性を考慮する。
 
 #### **3. Orchestration Workload Configuration**
-
 Orchestration Workloadが対応対象の場合に実施する。
 
 - Containerを対象Environmentで実行するために必要なWorkload Configurationを具体化する。
+- Container Imageが対応対象でない場合は、既存Imageの名称、Tag、Digest、Registryその他の参照情報を確認し、そのImageを使用するWorkload Configurationのみを具体化する。
 - Deploy対象、Namespace、Container Imageの参照、Port、Configuration、Secret、Health Check、Resourceその他、Workloadの実行に必要な事項を整理する。
 - Infrastructure担当から共有されたEnvironmentやResourceに関する情報が存在する場合は、その内容を前提として構成する。
 - `Setup Required` の場合は必要な初期構成を整理し、`Change Required` の場合は既存構成を維持しながらCurrent Trainで必要となる変更を整理する。
@@ -92,8 +95,8 @@ Orchestration Workloadが対応対象の場合に実施する。
 #### **4. Build / Deploy / Runtime Verification Plan**
 
 - 後続のImplementation Loopで反復して利用できるBuild、DeployおよびRuntime Verificationの方法を整理する。
-- Container ImageをどのようにBuildし、どのRuntimeへDeployし、どのように起動状態を確認するかを明確化する。
-- Orchestration Workloadが対応対象でない場合は、Container単体でRuntime Verificationを行う方法を整理する。
+- Container Imageが対応対象の場合は、Container ImageをどのようにBuildし、どのRuntimeへDeployし、どのように起動状態を確認するかを明確化する。
+- Container Imageが対応対象で、かつ、Orchestration Workloadが対応対象でない場合は、Container単体でRuntime Verificationを行う方法を整理する。
 - Orchestration Workloadが対応対象の場合は、実際のWorkloadへのDeployおよび起動確認までを対象とする。
 - 本Skillで最初に実施する最小構成でのBuild・Deploy・Runtime Verificationと、後続のImplementation Loopで反復する方法が可能な限り同じ手順となるよう考慮する。
 
@@ -103,15 +106,15 @@ Orchestration Workloadが対応対象の場合に実施する。
 - **External Information** にInfrastructureその他の担当からのHandoffが存在する場合は、その内容を確認して必要な情報を特定する。
 - 必要な情報のうち未確定または未提供のものを明確化する。
 
-上記の検討結果を、後続StepでContainerおよび必要に応じてOrchestration Workloadを構築・変更できる具体性まで **Draft** に整理する。
+上記の検討結果を、後続Stepで、対応対象となるContainer Imageおよび／またはOrchestration Workloadを構築・変更できる具体性まで**Draft**に整理する。
 
 整理が完了したら、概要をユーザーに説明する。
 
 
 ### Check Required Information
-**Draft** を確認し、Containerおよび対応対象の場合はOrchestration Workloadの構築・実行に必要となる情報が揃っているかを確認する。
+**Draft** を確認し、対応対象となるContainer Imageおよび／またはOrchestration Workloadの構築・実行に必要となる情報が揃っているかを確認する。
 
-1. ContainerのBuild、Imageの管理、起動およびRuntime Verificationに必要となる情報を確認する。
+1. Container Imageが対応対象の場合は、Build、Imageの管理、起動およびRuntime Verificationに必要な情報を確認する。Container Imageが対応対象でなく、Orchestration Workloadが対応対象の場合は、Workloadが使用する既存Imageの識別情報および利用可能性を確認する。
 2. Orchestration Workloadが対応対象の場合は、DeployおよびRuntime Verificationに必要となるEnvironment、Registry、Cluster、Namespace、Endpoint、Credentialその他の情報を確認する。
 3. **External Information** に関連するHandoff等が存在する場合は、その内容を確認する。
 4. 必要な情報のうち未確定または未提供のものが存在する場合は、その内容、必要となる箇所および用途を **Pending Information** に整理する。
@@ -120,6 +123,8 @@ Orchestration Workloadが対応対象の場合に実施する。
 未確定情報が存在する場合でも、それを必要としない作業については継続する。
 
 ### Configure Container
+Container Imageが対応対象の場合に実施する。対応対象でない場合は既存Container Configurationを変更せず、本プロセスをスキップする。
+
 **Draft** に基づき、担当ModuleのContainer ImageをBuild・実行するために必要なConfigurationを **Workspace** に構築または変更する。
 
 1. **Requirement Mode**、既存実装および **Draft** を確認し、新規構築または変更するContainer Configurationの範囲を特定する。
@@ -146,30 +151,37 @@ Orchestration Workloadが対応対象の場合、**Draft** に基づき、担当
 ### Build and Deploy Minimum Runtime
 前項までで構築・変更したConfigurationを使用し、後続のImplementation Loopで使用する経路に沿って、現時点で実行可能な最小構成のRuntimeをBuild・Deployする。
 
-1. **Draft** に定義したBuild / Deploy / Runtime Verification Planを確認し、現時点で実行可能な範囲を特定する。
-2. 担当ModuleのContainer ImageをBuildする。
-3. BuildしたContainer Imageについて、後続のRuntimeで利用するために必要なImage Name、Tagその他の情報を確定する。
-4. Orchestration Workloadが対応対象でない場合は、BuildしたContainer Imageを実行し、Runtime Verificationを実施できる状態にする。
-5. Orchestration Workloadが対応対象の場合は、BuildしたContainer Imageを必要なRegistry等へ配置し、構成したWorkloadを対象EnvironmentへDeployする。
-6. Applicationの実装が未完了であること等により本来のRuntimeを構成できない場合は、必要に応じて最小限のDummyまたは暫定的な実装を使用し、BuildからDeployまでの経路を成立させる。
+1. **Draft** に定義したBuild / Deploy / Runtime Verification Planを確認し、現時点で実行可能な範囲と、Container ImageおよびOrchestration Workloadの対応要否を特定する。
+2. Container Imageが対応対象の場合は、担当ModuleのContainer ImageをBuildし、後続のRuntimeで利用するために必要なImage Name、Tagその他の情報を確定する。
+3. Container Imageが対応対象ではなく、Orchestration Workloadのみが対応対象の場合は、既存Imageが利用可能であることと、その参照情報を確認する。
+4. Orchestration Workloadが対応対象の場合は、対象Imageが必要なRegistry等に配置されていることを確認し、構成したWorkloadを対象EnvironmentへDeployする。
+5. Orchestration Workloadが対応対象でない場合は、Container Imageが対応対象であればBuildしたImageを単体で起動し、Runtime Verificationを実施できる状態にする。
+6. Container Imageが対応対象であり、Applicationの実装が未完了であること等により本来のRuntimeを構成できない場合は、必要に応じて最小限のDummyまたは暫定的な実装を使用する。
 7. 実施したBuild・Deployの方法が、後続のImplementation Loopから継続的に再実行可能であることを確認する。
 
 本Stepでは、Applicationとしての機能完成を目的とせず、後続のImplementation Loopで継続的に利用するBuild・Deploy経路を成立させることを目的とする。
 
+
 ### Verify Runtime Environment
 Build・DeployしたRuntime Environmentについて、後続のImplementation Loopで継続的にRuntime Verificationを行える状態であることを確認する。
 
-1. Containerが期待する方法で起動し、異常終了していないことを確認する。
-2. Orchestration Workloadが対応対象の場合は、DeployしたWorkloadが対象Environment上で期待する起動状態となっていることを確認する。
-3. Port、Health Check、Network、Configurationその他、現時点で確認可能なRuntime Configurationが期待どおり機能していることを確認する。
-4. **Draft** に定義したRuntime Verification方法を実行し、後続のImplementation Loopでも同じ方法によってRuntimeの状態を確認できることを確認する。
+1. **Draft** に定義したRuntime Verification Planおよび今回の対応対象を確認し、以下の区分に従ってVerificationを実施する。
+   - **Container Imageが対応対象の場合**：ImageのBuild、Container単体起動、起動Command、Port、Health Check等が期待どおり機能することを確認する。
+   - **Orchestration Workloadが対応対象の場合**：Deploy、Image参照、Pod / Task等の起動状態、Network、Configuration等が期待どおり機能することを確認する。
+   - **両方が対応対象の場合**：Container ImageのBuildからOrchestration WorkloadへのDeployまで、一連の経路が正常に機能することを確認する。
+2. ContainerまたはOrchestration Workloadが、対象Environmentにおいて期待する起動状態を維持し、異常終了していないことを確認する。
+3. **Draft** に定義したRuntime Verification方法を実行し、後続のImplementation Loopでも同じ方法によってRuntimeの状態を確認できることを確認する。
+4. 関連するSpecificationおよび今回の対応範囲と照合し、以下の両面から整合性を確認する。
+   - 対応対象に必要な構築・変更が適切に反映されていること。
+   - 対応対象外の構成に対して、不必要な変更が行われていないこと。
 5. Applicationの実装が未完了であること等により確認できない内容については、その理由と後続のImplementation Loopで必要となる確認を整理する。
-6. 問題が確認された場合は、ContainerまたはOrchestration WorkloadのConfigurationを必要な範囲で修正し、Build・DeployおよびRuntime Verificationを再実施する。
+6. 問題が確認された場合は、必要な範囲でContainerまたはOrchestration WorkloadのConfigurationを修正し、Build・DeployおよびRuntime Verificationを再実施する。
+
 
 ### Check Consistency with Specifications
 構築・変更したRuntime Environmentについて、**Specification Sources** および **Runtime Environment Requirements** と照合し、要求された内容が欠落なく適切に反映されていることを確認する。
 
-1. **Runtime Environment Requirements** に抽出された各要求、仕様および制約が、ContainerまたはOrchestration WorkloadのConfigurationに適切に反映されていることを確認する。
+1. **Runtime Environment Requirements** のうち、今回の対応対象に関する要求、仕様および制約が、対象のConfigurationへ適切に反映されていることを確認する。対応対象外として記録された情報については、依存関係および整合性の前提として満たされており、不要な変更が加えられていないことを確認する。
 2. 必要に応じて元の **Specification Sources** を改めて確認し、抽出結果のみに依存せず、構築・変更した内容との不整合や欠落がないことを確認する。
 3. **External Information**、既存・参考実装その他、Runtime Environment Configurationの前提として使用した情報についても、必要な内容が適切に反映されていることを確認する。
 4. 不整合または欠落が確認された場合は必要な修正を行い、Build・Deploy、Runtime Verificationおよび本Stepの確認を再度実施する。

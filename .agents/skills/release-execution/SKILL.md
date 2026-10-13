@@ -2,7 +2,7 @@
 name: release-execution
 description: >
   特定の具体的な作業を実施するWork型 Skill。
-  担当ModuleのRelease Instructionsに基づき、Production EnvironmentへのReleaseおよびProduction Verificationを実施する。問題発生時には必要な保全措置を検討・実施し、Issue Resolutionへの引き継ぎとRelease結果の記録・報告までを行う。
+  担当ModuleのRelease Instructionsに基づき、Production EnvironmentへのReleaseおよびProduction Verificationを実施する。問題発生時には必要な保全措置を検討・実施し、System Issue Triageへの引き継ぎとRelease結果の記録・報告までを行う。
   Use when: Executorとして担当ModuleのRelease準備が整い、ReleaseおよびProduction Verificationを実施するとき。
   Do not use for: Release Instructionsの作成、通常の構築・開発、Integration Test、他ModuleのRelease、Current Train全体のRelease管理。
 ---
@@ -12,7 +12,7 @@ description: >
 ## Summary
 担当Moduleの **Release Instructions** に基づき、Release対象、実施手順、前提条件およびProduction Environmentの状態を確認した上で、ユーザーと協力してReleaseおよびProduction Verificationを実施する。
 
-Release時およびRelease後は、対象ResourceやApplicationの状態・動作、Log、Metricその他のMonitoring情報を確認する。問題が検知された場合は、Production Environmentへの影響と保全措置の効果・リスクを整理し、ユーザーと協議の上で必要な措置を実施する。その後、必要に応じて共通の **Issue Resolution Flow** へ対応を引き継ぐ。
+Release時およびRelease後は、対象ResourceやApplicationの状態・動作、Log、Metricその他のMonitoring情報を確認する。問題が検知された場合は、Production Environmentへの影響と保全措置の効果・リスクを整理し、ユーザーと協議の上で必要な措置を実施する。その後、必要に応じて共通の **System Issue Triage Flow** へ対応を引き継ぐ。
 
 最後に、ReleaseおよびProduction Verificationの実施結果、対応した問題、未解決事項その他の関連情報を **Release Results Report** に整理し、担当ModuleのRelease結果を確定・報告する。
 
@@ -41,14 +41,21 @@ Current TrainのRequirement Mode
 .agents/resources/executor-rules.md
 ```
 
-## 前提条件
-- 
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
 - 各Stepは**Execution Steps**に記載された順序で実行する。
 - 各Stepの完了条件を満たすまで次のStepへ進まない。
 - ユーザーとの対話が必要なStepでは、合意した内容を以降のStepの前提とする。
 - 各Stepの完了、および次のStepへの進行にはユーザーの承認を得る。
+
+### Workflow Re-execution
+本Work Skillの初回実行時は、定義されたStepを順序どおり実施する。
+
+呼び出し元Workflowにおける再実施の場合は、既存のReleaseおよびVerificationの結果と、再実施が必要な範囲を確認する。
+
+既存のRelease内容および適用状態が今回のVerificationに対して有効であり、Releaseの再実施が不要と判断された場合は、Releaseに関するStepを省略し、必要なProduction VerificationのStepから再実施してよい。
+
+再実施する範囲内では、定義されたStepの順序および完了条件に従う。
 
 
 ## Task
@@ -58,6 +65,7 @@ docs/.steering/<current-train>/<module-name>/tasklist.md
 ```
 
 ## Draft
+リリースに関する情報の整理を行う際は以下に記録する。
 ```
 docs/.steering/<current-train>/<module-name>/working/release-memo.md
 ```
@@ -174,7 +182,7 @@ ReleaseまたはProduction Verificationにおいて問題、不具合または�
 
 
 ### Step 7: Confirm Completion
-担当ModuleのReleaseおよびProduction Verificationについて、実施状況、結果および未解決事項を確認し、所定のTemplate(`assets/release-results-report-template.md`)に基づいて **Release Results Report** (`<module-name>-release-results-report.md`) を作成・更新する。
+担当ModuleのReleaseおよびProduction Verificationについて、実施状況、結果および未解決事項を確認し、所定のTemplate(`assets/release-result-report-template.md`)に基づいて Current Trainにおける担当Moduleの**Steering** の`working/<module-name>-release-result-report.md` に **Release Results Report** を作成・更新する。
 
 再Releaseの場合は、既存の **Release Results Report** に過去の実施履歴を保持したまま、今回のReleaseおよびProduction Verificationの結果を追加・反映する。
 
@@ -183,7 +191,7 @@ ReleaseまたはProduction Verificationにおいて問題、不具合または�
 3. Release時およびRelease後に確認したLog、Metricその他のMonitoring情報について、主要な確認結果および特記事項を整理する。
 4. 問題または未解決事項が存在する場合は、その内容、対応状況、残存リスクおよびユーザーの判断を記録する。
 5. ReleaseおよびProduction Verificationの結果を **Release Results Report** に整理する。再Releaseの場合は、過去の実施結果との対応関係を維持しながら今回の結果を反映し、ユーザーに報告する。
-6. **Release Results Report** を **Steering** の `shared/executor-reports/` 配下にコピーする。
+6. **Release Results Report** を Current Trainにおける **Steering** の `shared/executor-reports/` 配下にコピーする。
 7. ReleaseおよびProduction Verificationの実施結果、検知された問題および残存する影響が適切に記録されていることを確認し、本Work Skillを完了する。
 
 本Work Skillの完了は、ReleaseおよびProduction Verificationが正常に完了したことを意味しない。検知された問題への対応および必要な再Release・再Verificationは、後続の別工程で管理する。

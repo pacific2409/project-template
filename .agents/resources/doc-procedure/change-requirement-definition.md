@@ -26,9 +26,6 @@ Artifactsに定義する内容、その検討観点および記述内容の指�
 ### **Template**
 各Artifactの作成に使用するTemplateのパス。
 
-### **Comparison Review Report**
-`spec-comparator`が作成・更新する比較レビューレポートの出力先のパス。
-
 ### **Specific Review Points Sheet**
 `document-reviewer`によるArtifact Reviewで使用する、Artifact固有のレビュー観点表のパス。
 
@@ -52,8 +49,13 @@ Optional項目。指定は任意とする。本Flowにおける作業対象お�
 - `docs/change-requirements/` 配下に、**Sources** と同名のファイルが存在する場合、そのファイル(これについては**Sources**側のファイルの存在の有無は問わない)
 
 ### **Change Requirements**
+**Change Scope Identification** によって対応対象となった各 **Artifact** について、`docs/persistent/` からの相対パスを維持したまま、配置先を `docs/change-requirements/` に置き換えたパスに **Change Requirements** を作成する。
 
-Procedure Stepsのうち**Change Scope Identification**の工程 によって対応対象となった各 **Artifact** について、`docs/change-requirements/` 配下の同名ファイルを **Change Requirements** として作成する。
+**Example:**
+- `docs/persistent/function-design.md`
+  → `docs/change-requirements/function-design.md`
+- `docs/persistent/details/table/user-table-spec.md`
+  → `docs/change-requirements/details/table/user-table-spec.md`
 
 ## Glossary
 ### **Change Requirement Type**
@@ -296,5 +298,5 @@ Agent `document-reviewer` に **Artifacts** のレビューを依頼する。
 ## Action after Review
 Request Reviewを行う工程で結果を受け取った後の対応については、以下に規定する。
 ```
-.agents/resources/actions-after-review.md
+.agents/resources/action-after-review.md
 ```

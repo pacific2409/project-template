@@ -1,6 +1,6 @@
 # review points
 
-`docs/persistent/infrastructure-design.md` を以下の観点でレビューする。
+`docs/persistent/infrastructure-architecture.md` を以下の観点でレビューする。
 
 ## Review Report Path
 

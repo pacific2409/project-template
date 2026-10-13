@@ -27,6 +27,8 @@
 ## Process for each Task
 
 ### Clarify Assigned Tasks
+`tasklist.md` への更新は、所定のテンプレート(`assets/tasklist-template.md`)を使用する。
+
 1. **Development Allocation Map**から自身のModuleに該当する範囲を特定する。
 2. 該当範囲を `tasklist.md` の **Development Allocation** にそのまま転記する。
 3. **Development Allocation**の内容をもとに、実行・進捗管理するTaskを特定し、`tasklist.md` の**Task Table**へ記録する。

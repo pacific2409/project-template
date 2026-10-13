@@ -30,8 +30,6 @@ docs/reviews/batch-specification-review-report.md
 - Function Design / System Architecture等で確定した目的、Service Boundary、Interface Relationship、Business Rule、Architecture Decisionを前提とし、個別Batch仕様で再定義していないか確認する。
 - Input / Output、Data Access、Execution Control、Transaction Boundary、処理Logic、Error等は本仕様で具体化する。一方、Tableや連携先Service自体の内部仕様、System全体のFlow、Logging等の横断的な実装Ruleを複製させない。
 - `error-codes.md`も参照資料だけでなくレビュー対象とする。既存の定義形式に従ってCodeの意味と関連仕様を確認し、このレビューのために新たな列構成を要求しない。共通定義と個別Batchの仕様に矛盾がある場合は推測で解決せず、関係箇所を明示する。
-- 共通化された処理は専用のCommon Logic Specificationを正とし、呼出元には参照、引数、結果の扱い等の必要仕様があるかを確認する。参照先が対象パターン外でも、呼出Contractの照合に必要な範囲で確認し、対象一覧とは区別する。参照先の全面レビューへ無断で範囲を広げない。
-- 対象にCommon Logic Specificationが含まれる場合は、InputをArgument、OutputをReturn Valueへ読み替え、章番号ではなくSectionの役割に対応させて評価する。Trigger、Execution Mode、Execution Control、Job / Step Structure、前後続Batch等の呼出元Batchに属する項目は要求しない。
 - 実際のBatchに適用されるInput / Output、Dependency、Data Access、連携等を確認し、参考例の技術や処理を一律に必須化しない。ただしTransactionを使用しない場合も、その旨の明示を確認する。HTTP StatusやClient Response等のAPI固有項目をBatch共通の必須項目としない。
 - 仕様の正本となるSectionを明確にし、他Sectionは同じ定義を参照しているかを確認する。未記入枠、参考例、推測を決定済みの仕様として扱わない。
 
@@ -145,7 +143,6 @@ docs/reviews/batch-specification-review-report.md
 - Inputや取得Dataから判定・計算に必要な値を追え、抽出・更新のTable、Column、Condition、Value等が具体的か。Batchの入力元を曖昧なRequest等で代用していないか。
 - 対象Dataがない場合や任意Inputがない場合等、定義された入力・取得結果の範囲に対応した処理があり、後続Stepが未取得の値を使用していないか。
 - 外部連携を行う場合、採用方式に応じた接続先・操作、送信値のMapping、必要な返却値、結果判定と後続処理が明確か。RESTやgRPC等の参考例を一律に必須化しない。
-- Common Logicを呼ぶ場合、参照先、Argument、Return Value、失敗時の扱いが明確で、共通処理の内部仕様を呼出元に複製していないか。
 - Job / Stepの実行単位と内部の処理Stepが対応し、Retry / Skip / Continue / Abortの適用点・遷移先がExecution Controlの方針に従っているか。Retryの上限到達後も処理を追えるか。
 - 結果の集約、Outputの生成・送信、必要な後続Batchへの引継ぎ、正常・異常終了の判定がOutput DefinitionとExecution Controlに従っているか。
 - Errorが起こり得るStepでは発生条件とError Codeへの対応が明確で、共通のError Handlingへ渡す場合も発生元のCodeや必要な情報が失われていないか。
@@ -177,7 +174,7 @@ docs/reviews/batch-specification-review-report.md
 - 同時実行、途中失敗、Retry、再実行、部分的なCommit・外部送信を組み合わせたときも、定義した実行方針と結果が両立するか。単独の項目では見えない二重処理・処理漏れ・終了判定の矛盾がないか。
 - 用語・識別子・Property・Table・Step・Transactionの参照が一致し、正本Sectionと補足・図の間に重複定義や食い違いがないか。
 - 上位設計や連携先の責務を侵食せず、未決事項・適用外・参照先を区別できるか。必須判断が未記入や参考例のまま残り、実装者に新たな設計判断を委ねていないか。
-- Common Logic Specificationや`error-codes.md`には、それぞれの成果物の目的・性質に沿って全体の妥当性と一貫性を確認し、Batch固有の章や実行制御を要求しない。
+- `error-codes.md`には、その成果物の目的・性質に沿って全体の妥当性と一貫性を確認し、Batch固有の章や実行制御を要求しない。
 
 ### 13. ファイル間を横断した一貫性
 
@@ -185,10 +182,9 @@ docs/reviews/batch-specification-review-report.md
 - 前後続関係があるBatch同士で、起動条件・完了条件・引継ぎ先が一致しているか。片方の異常終了や部分成功をもう片方が正常完了として扱う等の食い違いがないか。
 - 受け渡すFile / Object / Message等がある場合、出力側の形式・生成条件・出力先と入力側の形式・必須条件・取得元が対応し、処理対象や必要なDataを引き継げるか。
 - 同じTableや出力先を扱い実行が重なり得るBatch同士で、対象範囲、更新の役割、Concurrent Execution・Restart等の前提が衝突していないか。関連のないBatchに同一制御方式を要求しない。
-- 共通Dependency、共通Logic等を参照する複数ファイルで、同じ識別子が異なる意味を持たず、呼出Contract・結果の解釈が一致しているか。意図した差異は適用条件から説明できるか。
+- 共通Dependencyを参照する複数ファイルで、同じ識別子が異なる意味を持たず、参照方法・結果の解釈が一致しているか。意図した差異は適用条件から説明できるか。
 - Error Definitionで行った共通Codeとの照合結果を踏まえ、複数Batchが同じCodeを相反する意味で使用していないか。共通Codeでも、明示された個別事情に基づくRetry等の差異まで不整合としない。
 - 不整合は関係するすべてのファイルのパスと該当箇所を示し、個別確認の指摘と統合する。関係先を確認できない場合は未確認範囲を明記し、推測で整合済みとしない。
-- 複数Batchに類似する処理が存在することだけを理由にCommon Logicへの切出しを要求しない。共通化することが上位方針・既存設計・明確な再利用関係から判断できる場合に、専用Specificationとの分離・参照が適切かを確認する。
 
 ## 特有のレビュー観点についてのレビュー例
 

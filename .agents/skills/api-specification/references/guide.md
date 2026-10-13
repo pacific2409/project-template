@@ -18,14 +18,6 @@
 - Request / Response SamplesはDefinitionで確定した仕様の具体例として扱い、Sampleによって新たな仕様を追加・変更しない。
 - 各Sectionは原則としてTableで構造化し、処理順序・条件分岐・Interaction・Payload等については、情報の性質に応じてMermaid、疑似Code、Code Block等を使用する。
 
-### **Common Logic Separation**
-
-- 処理を共通化する場合、または同一の処理が複数の処理から参照されるようになった場合は、その処理を専用のCommon Logic Specificationとして切り出す。
-- Common Logic Specificationへ切り出した処理については、元のSpecificationで処理内容を重複して定義せず、Common Logic Specificationへの参照を記載する。
-- 元のSpecificationには、Common Logicを呼び出すこと、およびその結果を元の処理でどのように扱うかなど、呼出元として必要な仕様のみを残す。
-- Common Logic Specificationは、本Guideの`Request Definition`を`Argument Definition`、`Response Definition`を`Return Value Definition`、`Request / Response Samples`を`Argument / Return Value Samples`として読み替え、本Guideの定義方針および記載方法に従って作成する。
-- API固有のHTTP Method、Endpoint、HTTP Status等はCommon Logic Specificationには適用せず、Common Logicとして対応するInterface、Errorおよび処理仕様へ読み替える。
-
 ## **Overview**
 - Change History
 - Summary
@@ -455,9 +447,6 @@ else:
 | `status` | Step 2で取得したUser.`status` |
 
 **3.2.** External ServiceへRequestを送信する。
-
-<!-- 処理を共通化する場合、または処理が複数から参照されるようになった場合、下記のように該当Specificationへの参照を渡す。-->
-**Reference**: `Common Logic: External Service Client`
 
 **External Response Information**
 

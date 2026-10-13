@@ -2,16 +2,19 @@
 name: test-execution
 description: >
   特定の具体的な作業を実施するWork型 Skill。
-  担当ModuleのTask、SpecificationおよびRequirement Verification Matrixに基づき、構築・開発結果を検証するためのTest Specificationを作成する。
-  Use when: Executorが担当Moduleの構築・開発に先立ってTest Specificationを作成するとき。
-  Do not use for: Testの実行、構築・開発・実装そのもの、RequirementやSpecificationの定義・変更。
+  担当ModuleのTest Specificationに基づき、Integration Testの実行、結果の検証、Evidenceの取得・記録を行い、検知された問題および未実施事項を整理する。
+  Use when: Executorとして担当ModuleのIntegration Testを実施し、その結果を確認・記録するとき。
+  Do not use for: Test Specificationの新規設計、構築・開発・実装そのもの、問題の原因調査・修正、RequirementやSpecificationの定義・変更。
 ---
+
 # Work Skill: test-execution
 
 ## Summary
-担当ModuleのTask、SpecificationおよびRequirement Verification Matrixから必要な検証事項を特定し、それらを網羅するTestを設計する。
+担当Moduleの **Test Specification** に基づき、Integration Testの実施内容、実行順序、必要なEnvironmentおよび実施主体を確認し、ユーザーと協力してTest Environmentの準備、Testの実行およびEvidenceの取得を進める。
 
-各Testについて、検証内容、Expected Result、Test Method、Evidence Methodおよび保持するEvidenceを定義し、後続のTest実行に使用するTest Specificationを作成する。Evidenceは可能な限り再実行可能かつ機械的に取得・判定できる方法を採用し、Testの自動化およびCI/CD Pipelineへの組み込みを考慮する。
+各Testの実施結果をExpected Resultと照合し、**Test Specification** のTest Checklistを更新するとともに、必要なEvidenceを記録・管理する。
+
+検知された問題および未実施事項を整理し、Testの実施結果を確定する。
 
 ## Input
 ### **Domain**
@@ -37,8 +40,6 @@ Current TrainのRequirement Mode
 .agents/resources/executor-rules.md
 ```
 
-## 前提条件
-- 
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
 - 各Stepは**Execution Steps**に記載された順序で実行する。
@@ -55,8 +56,9 @@ docs/.steering/<current-train>/<module-name>/tasklist.md
 ```
 
 ## Draft
+テストに関する情報の整理を行う際は以下に記録する。
 ```
-docs/.steering/<current-train>/<module-name>/working/test-design.md
+docs/.steering/<current-train>/<module-name>/working/test-execution-memo.md
 ```
 
 ## Test Specification
@@ -83,7 +85,7 @@ docs/.steering/<current-train>/<module-name>/test/test-specification.md
 - **Inputs** によって引き継がれた情報を改めて確認する。
 
 ### Step 1: Plan Test Execution
-**Test Specification** を確認し、担当ModuleのIntegration Testについて、実施対象、実行順序、必要な操作およびEvidence取得方法を整理する。
+**Test Specification** を確認し、担当ModuleのIntegration Testについて、実施対象、実行順序、必要な操作およびEvidence取得方法を、**Draft**を作成の上整理する。
 
 - 各TestのTest Method、Expected Result、Evidence MethodおよびEvidence to Retainを確認する。
 - Test間の依存関係を確認し、実行順序を整理する。
@@ -144,7 +146,7 @@ Test Statusは、原則として以下を使用する。
 
 ### Step 5: Review Outstanding Tests and Issues
 
-Integration Testの実施結果を確認し、検知された問題および未実施・未再実施のTestについて、後続の対応に必要な情報を整理する。
+Integration Testの実施結果を確認し、検知された問題および未実施・未再実施のTestについて、後続の対応に必要な情報を**Draft**に整理する。
 
 1. Integration Testで検知された問題、不具合または期待結果との不一致について、発生状況、期待結果と実際の結果、および確認済みの関連情報を整理する。
 2. 未実施または未再実施のTestが存在する場合は、その理由、影響および残存するリスクを整理し、実施・再実施の要否をユーザーと協議・決定する。

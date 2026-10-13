@@ -30,10 +30,10 @@ Task Allocationの対象となるDomainについてその処理順等を定義�
 
 | No. | Domain | Primary Resources | Supporting Resources | Required Logic Units |
 |---:|---|---|---|:---:|
-| 1 | Infrastructure | `infrastructure-design.md` | — | No |
-| 2 | Database | `table-definitions/*.md` <br> `data-strategy.md` | — | No |
-| 3 | Backend | `api-specifications/*.md` <br> `batch-specifications/*.md` | `system-architecture-design.md` | Yes |
-| 4 | Frontend | `ui-specifications/*.md` | `system-architecture-design.md` | Yes |
+| 1 | Infrastructure | `infrastructure-architecture.md` | — | No |
+| 2 | Database | `details/table/*.md` | — | No |
+| 3 | Backend | `details/api/*.md` <br> `details/batch/*.md` | `system-architecture.md` | Yes |
+| 4 | Frontend | `details/view/*.md` | `system-architecture.md` | Yes |
 
 ## Draft
 各Domainにおける構築・開発・変更対象の抽出、Moduleへの割当、依存関係および実施順序など、Task Allocationの過程で確定した内容を以下にて、段階的に整理・記録する。

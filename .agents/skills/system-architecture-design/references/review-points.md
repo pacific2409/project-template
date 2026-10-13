@@ -1,6 +1,6 @@
 # review points
 
-`docs/persistent/system-architecture-design.md` を以下の観点でレビューする。
+`docs/persistent/system-architecture.md` を以下の観点でレビューする。
 
 ## Review Report Path
 

@@ -163,7 +163,7 @@ Work Skill `$infrastructure-design` を使用し、Infrastructure Architecture�
 - 後続のApplication Detail Designへの影響事項の抽出
 
 ### Task 8: Prepare for Application Detail Design
-1. `docs/persistent/details/`および、``docs/change-requirements/details/`について、それぞれ存在しなければディレクトリを作成する。
+1. `docs/persistent/details/`および、`docs/change-requirements/details/`について、それぞれ存在しなければディレクトリを作成する。
 2. `docs/persistent/details/error-codes.md`にファイルが存在しない場合は、Application Detail Designで共通して参照するError Code定義として、`assets/error-code-list-template.md`を使用して同ファイルを作成する。
 
 ### Task 9: Application Detail Design: Table Definition
@@ -210,11 +210,10 @@ Agentには以下の形式・内容で報告してもらう。
 Work Skill `$infrastructure-design` の**On-Demand Execution** : **Request Specification Comparison Review** を **Execution Parameters**とともに実行し、Application Detail Designを実装する上でInfrastructure Architectureが十分であることを確認する。
 
 - Specification Comparison Reviewの結果、対応・修正が発生しない場合は、後続のArtifact Reviewを実行しない。
-- **Review工程**より前および後の工程は、本Taskでは実行しない。
 
 #### **Execution Parameters**
 
-- **Sources**
+- **Review Sources**
   - Skillで定義された既存の**Sources**
   - `docs/persistent/details/`およびそのサブディレクトリ下に作成されたすべての定義書・仕様書
 
@@ -226,8 +225,8 @@ Work Skill `$infrastructure-design` の**On-Demand Execution** : **Request Speci
   - **For Artifact Review**
     - Specification Comparison Reviewの結果、Infrastructure Architectureへの対応・修正が発生した場合、その変更箇所および変更内容。
 
-### Task 15: Move Ideas and Change Requirements to Steering for the Current Train
-前項までの全ての工程が完了したとき、docs/ideas/配下の全てのファイルおよびdocs/change-requirements/配下の全てのファイルを、Current TrainのSteering領域にあるManagerディレクトリ下の対応する場所に移動する。
+### Task 15: Move Ideas to Steering for the Current Train
+前項までの全ての工程が完了したとき、docs/ideas/配下の全てのファイルを、Current TrainのSteering領域にあるManagerディレクトリ下の対応する場所に移動する。
 
 ### Task 16 : Guide to Development Management Flow
 本Workflowに定義された設計工程がすべて完了したことをユーザーに報告し、次の行程として `$dev-progress-management-flow` をユーザーに案内する。

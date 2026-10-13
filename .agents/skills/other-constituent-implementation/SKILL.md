@@ -16,6 +16,9 @@ description: >
 Implementation後は、必要なEnvironmentへの適用・実行方法およびその結果の確認方法を整理し、一連の作業として実施する。Taskが完了したら `tasklist.md` を更新し、未完了のTaskが存在する場合は次のTaskの **Implementation Loop** へ進む。
 
 ## Input
+### **Domain**
+担当するModuleの所属するDomain
+
 ### **Module**
 担当するModule。
 
@@ -37,8 +40,6 @@ Current TrainのRequirement Mode。
 ```
 
 
-## 前提条件
-- 
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
 - 各Stepは**Execution Steps**に記載された順序で実行する。
@@ -85,6 +86,13 @@ docs/.steering/<current-train>/<module-name>/working/pending-information.md
 docs/.steering/<current-train>/<module-name>/test/test-specification.md
 ```
 
+## Outgoing Handover Information
+自身の担当Moduleから他Domain / Moduleへ引き継ぐ必要がある情報を整理・管理する。
+```
+docs/.steering/<current-train>/<module-name>/handover-from-<module-name>.md
+```
+
+- 更新の際にはテンプレートを(`.agents/resources/steering-assets/handover-from-some-module-template.md`)を使用する。
 
 ## Goal
 - **Execution Steps**に定義されたすべてのStepが完了していること。
@@ -104,7 +112,7 @@ docs/.steering/<current-train>/<module-name>/test/test-specification.md
 - Check Specification Consistency
 
 ── Part C: Apply/Execution ──
-- Plan Operational Verification
+- Plan Apply/Execution
 - Resolve Pending Information
 - Apply/Execute
 - Handle Issues if Detected
@@ -204,18 +212,33 @@ Environmentへの適用・実行の結果によって **Pending Information** �
 適用・実行結果を **Draft** に記録する。問題または期待結果との不一致が確認された場合は、その現象および確認できた事実を記録し、本Step内では原因調査・修正を行わず、次のStep にて対応を実施する。
 
 ### Step 11: Handle Issues if Detected
-本 **Implementation Loop** におけるDeployや各Verificationで、問題、不具合または期待結果との不一致が検知された場合は、共通Procedure **System Issue Triage** (`.agents/resources/system-issue-triage.md`) に従い、問題の調査、Ownershipの識別および必要な対応の整理を行う。
+本 **Implementation Loop** における適用・実行および結果確認で、問題、不具合または期待結果との不一致が検知された場合は、共通Procedure **System Issue Triage** (`.agents/resources/dev-procedure/system-issue-triage.md`) に従い、問題の調査、Ownershipの識別および必要な対応の整理を行う。
 
-Procedure実施の際は、**Domain**、**Module**、**Requirement Mode**、**Specification Sources**をInputとして連携する。
+Procedure実施の際は、**Domain**、**Module**、**Requirement Mode**、**Specification Sources**および**Detected Issue**をInputとして連携する。
+
+**Detected Issue**
+- 問題が検知された工程
+- 発生状況
+- 期待結果
+- 実際の結果
+- 確認済みの事実
+- 関連するDraft／Evidence
 
 問題が検知されていない場合は、本Stepをスキップして次のStepへ進む。
 
 1. 検知した問題、その発生状況、期待結果と実際の結果、および確認済みの関連情報を整理する。
 2. **System Issue Triage** を実施し、担当外Moduleの対応結果および担当Module内の修正要否・修正計画を確認する。
-3. **Triage Conclusion** に基づき、以下のように対応する。
-   - **Internal Corrections Required** が `Yes` の場合は、決定した修正計画および影響範囲を踏まえ、必要なStepまで戻って再度順にStepを実施する。
-   - **Internal Corrections Required** が `No` の場合は、担当外Moduleの対応結果および問題の影響範囲を踏まえ、必要なVerificationのStepから再実施する。
-4. 再実施したStepの結果を確認し、問題が解消されたことを確認する。
+3. **Triage Conclusion** の **Outstanding Blockers** を確認する。
+   - Blockerが存在する場合は、その内容および影響範囲を `blockers.md` に反映し、解消に必要な対応をユーザーと確認する。
+   - Blockerによって実施できないStepについては、解消されるまで再実施を保留・待機する。
+   - Blockerが解消された場合は、その結果を確認し、`blockers.md` を更新する。
+4. **Triage Conclusion** の **Internal Corrections Required** およびBlockerの解消状況に基づき、以下のように対応する。
+   - `Yes` の場合は、決定した修正計画および影響範囲を踏まえ、必要なStepまで戻って再度順にStepを実施する。
+   - `No` の場合は、担当外Moduleの対応結果および問題の影響範囲を踏まえ、必要なStepから再実施する。原則として問題が発生したDeployまたはVerificationから再実施するが、それ以前の工程に影響する場合は該当Stepまで戻る。
+
+5. 再実施したStepの結果を確認し、問題が解消されたことを確認する。
+
+未解消のBlockerが存在する場合は、本Implementation Loopを完了しない。
 
 再実施によって新たな問題または期待結果との不一致が検知された場合は、再び本Stepに従って対応する。
 
@@ -228,7 +251,7 @@ Procedure実施の際は、**Domain**、**Module**、**Requirement Mode**、**Sp
 
 
 ### Step 12: Update Outgoing Handover Information
-選択したTaskのImplementation、EnvironmentへのDeployおよびOperational Verificationを通じて確定した情報のうち、後続Moduleへの引き継ぎに必要となる内容を **Outgoing Handover Information** に記録・更新する。
+選択したTaskのImplementation、Environmentへの適用・実行および結果確認を通じて確定した情報のうち、後続Moduleへの引き継ぎに必要となる内容を **Outgoing Handover Information** に記録・更新する。
 
 - **Guide** の **Module Handover Policy** に定義された項目のうち、選択したTaskの対応内容に該当するものを確認する。
 - Environmentごとに情報が異なる場合は、その対応関係を明確にする。
@@ -240,5 +263,6 @@ Procedure実施の際は、**Domain**、**Module**、**Requirement Mode**、**Sp
 
 1. 選択したTaskについて、本Work Skillの各Stepが必要な範囲で完了していることを確認する。
 2. `tasklist.md` の対象Taskを完了状態へ更新し、必要に応じてProgressを更新する。
-3. `tasklist.md` に未完了のTaskが存在する場合は、次のTaskを対象として **Step 1** からImplementation Loopを継続する。
-4. すべてのTaskが完了している場合は、本Work SkillおよびImplementation Loopを終了する。
+3. ここまでの作業内容をコミット・プッシュする。
+4. `tasklist.md` に未完了のTaskが存在する場合は、次のTaskを対象として **Step 1** からImplementation Loopを継続する。
+5. すべてのTaskが完了している場合は、本Work SkillおよびImplementation Loopを終了する。

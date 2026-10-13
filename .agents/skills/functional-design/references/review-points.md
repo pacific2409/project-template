@@ -1,6 +1,6 @@
 # review points
 
-`docs/persistent/functional-design.md` を以下の観点でレビューする。
+`docs/persistent/function-design.md` を以下の観点でレビューする。
 
 ## Review Report Path
 

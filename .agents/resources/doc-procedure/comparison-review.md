@@ -19,10 +19,13 @@ Artifactの作成において前提情報として使用する文書のパス。
 Optional項目。ただし、**Required Artifact Review** の指定がない、もしくはその値が `true` の場合は必須。
 `document-reviewer`によるArtifact Reviewで使用する、Artifact固有のレビュー観点表のパス。
 
-Required Artifact Review true　の場合必ず受け取る
+Required Artifact Review = `true` の場合必ず受け取る
 
 ### **Required Artifact Review**
 Optional項目。指定は任意とする。比較レビュー後にArtifact自体の詳細レビューを依頼するか。
+
+### **Destination for Reports after Review**
+レビュー完了後のレポートの移動先のパス。
 
 ### **Scope**
 Optional項目。指定は任意とする。本Flowにおける作業対象および変更対象の範囲。
@@ -39,35 +42,42 @@ Optional項目。指定は任意とする。本Flowにおける作業対象お�
 ## Action after Review
 Request Reviewを行う工程で結果を受け取った後の対応については、以下に規定する。
 ```
-.agents/resources/actions-after-review.md
+.agents/resources/action-after-review.md
 ```
 
 ## List of Step
+- Select the Evaluation Mode for the following Artifacts Review
 - Request Specification Comparison Review
 - Request Artifacts Review
-- Move **Draft** and Review Report to Steering for the Current Train
+- Move Review Report to Steering for the Current Train
 
 ## Procedure Steps
-### Step 1: Request Specification Comparison Review
-Agent `spec-comparator` に **Sources**と**Artifacts** の比較レビューを依頼する。
+### Step 1: Select the Evaluation Mode for the following Artifacts Review
+ユーザーに後述のReview工程におけるレビュー強度(**Evaluation Mode**)をEasy/Medium/Proの中から選択させる。
+
+
+### Step 2: Request Specification Comparison Review
+Agent `spec-comparator` に **Review Sources**と**Artifacts** の比較レビューを依頼する。
 
 依頼時には、以下の情報を明示する。
  - レビュー対象となる **Artifacts** のパス
- - 比較対象として、 **Sources** のパス
+ - 比較対象として、 **Review Sources** のパス
  - 比較レビューレポートの出力先 **Comparison Review Report**のパス
  - 前項で選択された**Evaluation Mode**
  - **Review Scope** *(Optional)*: **Input**で指定された**Scope**がある場合、その内容
 
 レビュー結果を受領した後の対応については、後述の**Action after Review** の規定に従う。
 
-### Step 2: Request Artifacts Review
+初回レビューにおいて指摘対応が発生しなかった場合は、Step:3 Request Artifacts Review をスキップし、Step 4: Move Review Report to Steering for the Current Train へ進む。
+
+### Step 3: Request Artifacts Review
 Input で **Required Artifact Review** の指定が連携されており、かつその値が `false` の場合は、本Stepは行わずskipし、次のStepへ進む。
 
 Agent `document-reviewer` に **Artifacts** のレビューを依頼する。
 
 依頼時には、以下の情報を明示する。
  - レビュー対象となる **Artifacts** のパス
- - 比較対象として、 **Sources** のパス
+ - 比較対象として、 **Review Sources** のパス
  - **Specific Review Points Sheet**のパス
  - 前項で選択された**Evaluation Mode**
  - **Review Scope** *(Optional)*: **Input**で指定された**Scope**がある場合、その内容を連携する。
@@ -76,7 +86,7 @@ Agent `document-reviewer` に **Artifacts** のレビューを依頼する。
 
 レビューレポートの出力先については**Specific Review Points Sheet**から確認すること。
 
-### Step 3: Move **Draft** and Review Report to Steering for the Current Train
-前項までの全ての工程が完了したとき、今回の工程にて作成または受け取った **Draft** およびReview Reportsを、Current TrainのSteering領域にあるManagerディレクトリ下のそれぞれ対応する場所に移動する。
+### Step 4: Move Review Report to Steering for the Current Train
+前項までの全ての工程が完了したとき、今回の工程にて受け取ったReview Reportsを、**Destination for Reports after Review**に移動する。
 
 - **Scope**が指定されている場合は、移動対象の各ファイルについて、Scopeの対象を簡潔に識別できるkebab-caseの名称を導出し、ファイル名の拡張子直前に`-scope-<scope-name>`を付与してから移動する。

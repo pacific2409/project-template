@@ -15,7 +15,7 @@ allowed-tools: Read, Write
 ### 推奨ドキュメント
 
 1. **docs/product-requirements.md** (PRD)
-2. **docs/functional-design.md** (機能設計書)
+2. **docs/function-design.md** (機能設計書)
 3. **docs/architecture.md** (アーキテクチャ設計書)
 4. **docs/repository-structure.md** (リポジトリ構造)
 5. **docs/development-guidelines.md** (開発ガイドライン)

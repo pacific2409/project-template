@@ -12,13 +12,13 @@
 [担当Moduleで実施した構築・開発・変更内容の概要]
 
 ## Requirement Verification Results
-
+<!-- Test Specificationが存在しない場合、本Sectionは削除する -->
 | Requirement / Verification ID | Verification Item | Test No. | Result | Evidence / Reference |
 |---|---|---|---|---|
 | [ID] | [Item] | [Test No.] | [Result] | [Reference] |
 
 ## Integration Test Results
-
+<!-- Test Specificationが存在しない場合、本Sectionは削除する -->
 - **Total Tests**: [Count]
 - **Passed**: [Count]
 - **Failed**: [Count]

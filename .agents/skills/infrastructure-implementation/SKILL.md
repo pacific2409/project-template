@@ -16,6 +16,9 @@ Infrastructure Domainの担当Moduleについて、`tasklist.md` に割り当て
 Implementation後は、Environmentへの適用およびOperational Verificationの方法を事前に整理し、実際のEnvironmentへ適用した上で期待する構成・状態・動作となっていることを確認する。確認結果に問題がある場合は必要なStepまで戻って再度順に実施し、Taskが完了したら `tasklist.md` を更新して次のTaskのImplementation Loopへ進む。
 
 ## Input
+### **Domain**
+担当するModuleの所属するDomain
+
 ### **Module**
 担当するModule。
 
@@ -37,8 +40,6 @@ Current TrainのRequirement Mode。
 ```
 
 
-## 前提条件
-- 
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
 - 各Stepは**Execution Steps**に記載された順序で実行する。
@@ -60,7 +61,7 @@ docs/.steering/<current-train>/<module-name>/working/implementation/task-<task-n
 
 
 ## **Environment Lifecycle and Dormancy Strategy**
-`docs/persistent/infrastructure-design.md` や `docs/change-requirements/infrastructure-design.md` に定義されるセクション。リソースや環境の停止、縮退、削除、再生成、復元等のLifecycle Strategyが記載されている。
+`docs/persistent/infrastructure-architecture.md` や `docs/change-requirements/infrastructure-architecture.md` に定義されるセクション。リソースや環境の停止、縮退、削除、再生成、復元等のLifecycle Strategyが記載されている。
 
 ## Task Table
 以下にてTask Tableとその進捗が管理されている。
@@ -93,6 +94,8 @@ docs/.steering/<current-train>/<module-name>/test/test-specification.md
 ```
 docs/.steering/<current-train>/<module-name>/handover-from-<module-name>.md
 ```
+
+- 更新の際にはテンプレートを(`.agents/resources/steering-assets/handover-from-some-module-template.md`)を使用する。
 
 
 ## Goal
@@ -220,7 +223,7 @@ TerraformまたはTerragruntのModuleを使用する場合は、取得したModu
 
 
 ### Step 10: Plan Operational Verification
-**Guide** の **Plan Operational Verification** に従い、選択したTaskのImplementationについて、Environmentへの適用および**Operational Verification**の方法と手順を整理する。
+**Guide** の **Operational Verification Guideline** に従い、選択したTaskのImplementationについて、Environmentへの適用および**Operational Verification**の方法と手順を整理する。
 
 ### Step 11: Resolve Pending Information
 **Pending Information** を確認し、選択したTaskのImplementation、Environmentへの適用またはVerificationによって解決・確定できる可能性のある情報・項目を特定する。
@@ -290,5 +293,6 @@ Agentが実施主体となる操作はProjectの実行ルールに従って実�
 
 1. 選択したTaskについて、本Work Skillの各Stepが必要な範囲で完了していることを確認する。
 2. `tasklist.md` の対象Taskを完了状態へ更新し、必要に応じてProgressを更新する。
-3. `tasklist.md` に未完了のTaskが存在する場合は、次のTaskを対象として **Step 1** からImplementation Loopを継続する。
-4. すべてのTaskが完了している場合は、本Work SkillおよびImplementation Loopを終了する。
+3. ここまでの作業内容をコミット・プッシュする。
+4. `tasklist.md` に未完了のTaskが存在する場合は、次のTaskを対象として **Step 1** からImplementation Loopを継続する。
+5. すべてのTaskが完了している場合は、本Work SkillおよびImplementation Loopを終了する。

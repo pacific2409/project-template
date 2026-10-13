@@ -166,7 +166,7 @@ Frontend
 2. [Create] Validate Category
 3. [Create] Create Project Candidate
 4. [Create] Persist Project Candidate
-5. Build Response
+5. [Create] Build Response
 
 
 #### Functional Unit: Search Project Candidates API
@@ -185,6 +185,7 @@ Frontend
 
 ### Module: recommendation-service
 
+- **Action**: Create
 - **Dependencies**:
   - project-candidate-service
 - **Execution Order**: 2
@@ -209,6 +210,7 @@ Frontend
 
 ### Module: batch-service
 
+- **Action**: Create
 - **Dependencies**:
   - project-candidate-service
   - recommendation-service

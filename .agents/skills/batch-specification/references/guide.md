@@ -14,13 +14,6 @@
 - 各Sectionは原則としてTableで構造化し、処理順序、条件分岐、Interaction、Input / Output等については、情報の性質に応じてMermaid、疑似Code、Code Block等を使用する。
 - Format and Exampleは記載粒度および構造の基準として扱い、実際のBatchの特性に応じて不要な要素の省略および必要な構造の追加・調整を行う。
 
-### **Common Logic Separation**
-- 処理を共通化する場合、または同一の処理が複数の処理から参照されるようになった場合は、その処理を専用のCommon Logic Specificationとして切り出す。
-- Common Logic Specificationへ切り出した処理については、元のSpecificationで処理内容を重複して定義せず、Common Logic Specificationへの参照を記載する。
-- 元のSpecificationには、Common Logicを呼び出すこと、およびその結果を元の処理でどのように扱うかなど、呼出元として必要な仕様のみを残す。
-- Common Logic Specificationは、本Guideの`Input Definition`を`Argument Definition`、`Output Definition`を`Return Value Definition`として読み替え、本Guideの定義方針および記載方法に従って作成する。
-- `Execution Control`、Batchの起動条件・実行方式・Job / Step Structure・前後Batchとの関係等のBatch固有の実行制御はCommon Logic Specificationには適用せず、呼出元となるBatch Specificationで定義する。
-
 ## **Overview**
 - Change History
 - Summary
@@ -465,9 +458,6 @@ else:
 | `status` | Step 2で取得したUser.`status` |
 
 **3.2.** External ServiceへRequestを送信する。
-
-<!-- 処理を共通化する場合、または処理が複数から参照されるようになった場合、下記のように該当Specificationへの参照を渡す。-->
-**Reference**: `Common Logic: External Service Client`
 
 **External Response Information**
 

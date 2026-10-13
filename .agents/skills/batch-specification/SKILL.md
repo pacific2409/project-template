@@ -25,7 +25,7 @@ docs/persistent/development-guidelines.md
 docs/persistent/details/error-codes.md
 docs/persistent/details/database-definition.md
 docs/persistent/details/table/*.md
-docs/ideas/infrastructure-to-application-dependencies.md
+docs/persistent/infrastructure-to-application-dependencies.md
 ```
 
 ## 前提条件
@@ -101,7 +101,7 @@ Agent `explorer` に、特定した既存のBatch名と以下の上位設計を�
 **Requirement Mode** に応じて、以下から該当するProcedureを一つ選択し、その内容を実行する。それによって、Batch Specificationを作成・更新する。
 
 - `INITIAL`: **Initial Spec Establishment** (`.agents/resources/doc-procedure/initial-spec-establishment.md`)
-- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition-flow.md`)
+- `CR`: **Change Requirement Definition** (`.agents/resources/doc-procedure/change-requirement-definition.md`)
 
 Procedureの実行にあたっては、以下を本Skillの定義から特定してInputとして使用する。
 
