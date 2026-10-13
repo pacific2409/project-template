@@ -1,8 +1,10 @@
 .idea/
 /docs/*
-/workspace/application/backend/*
-!/workspace/application/backend/.gitkeep
-/workspace/application/frontend/*
-!/workspace/application/frontend/.gitkeep
-/workspace/infra/*
-!/workspace/infra/.gitkeep
+/workspace/backend/*
+!/workspace/backend/.gitkeep
+/workspace/frontend/*
+!/workspace/frontend/.gitkeep
+/workspace/infrastructure/*
+!/workspace/infrastructure/.gitkeep
+/workspace/database/*
+!/workspace/database/.gitkeep
