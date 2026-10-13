@@ -18,12 +18,15 @@ docs/
 ├── persistent/
 ├── release-notes/
 ├── reviews/
+├── local/
 └── .steering/
 ```
 
 - その後、`docs/` がGit Repositoryとして初期化されているか確認する。
 - 初期化されていない場合のみ、`docs/` にて `git init` を実行する。
 - また、末端の各ディレクトリには、.gitkeep ファイルを作成する。
+- `docs/.gitignore` に、`docs/local`配下の.gitkeep を除くファイルおよびディレクトリをGit管理対象外とする設定を追加する。
+   - 既存の .gitignore が存在する場合は、その内容を維持し、必要な設定のみ追加・修正する。
 
 ### Step 2: Setup Development Guidelines
 - **Development Guidelines** が存在しない場合、`.agents/resources/` 下から同名のファイルをコピーして作成する。
