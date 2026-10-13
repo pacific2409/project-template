@@ -23,9 +23,7 @@
 
 ## **Project Name**
 
-### **[Project名]**
-
-## **Train Status**
+### **Dev Menu**
 
 ## **Train Status**
 
