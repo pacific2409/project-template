@@ -129,6 +129,7 @@ master (本番環境)
 #### エラーレスポンス
 - 各Custom Exceptionに対応するException Mapperを用意し、対応するHTTP Statusへ変換する。
 - エラーレスポンスは、エラーコードとエラーメッセージを含む共通形式で返却する。
+- エラーメッセージは英語で定義する。
 
 ### Testability and Observability
 
