@@ -59,6 +59,12 @@ Artifactsレビューを依頼する際に、レビュアーに提供する本�
 docs/change-requirements/infrastructure-architecture.md
 ```
 
+## Cloud Architecture Diagram Source
+Cloud Infrastructureの構成図のSourceとなるdraw.ioファイルは以下に保存される。
+```
+docs/persistent/infrastructure-architecture.drawio
+```
+
 ## Cloud Architecture Image
 
 Cloud Infrastructureの構成図イメージは以下に保存される。
@@ -87,7 +93,8 @@ docs/persistent/infrastructure-architecture.png
 ── Post Steps ──
 
 - Determine Impact on Cloud Architecture Diagram
-- Request Cloud Architecture Diagram
+- Generate Cloud Architecture Diagram
+- Request to Export Cloud Architecture Image
 - Review Cloud Architecture Diagram
 - Extract Infrastructure-to-Application Dependencies
 
@@ -118,13 +125,16 @@ Procedureの実行にあたっては、以下を本Skillの定義から特定し
 ### Post Step 1: Determine Impact on Cloud Architecture Diagram
 **Requirement Mode**=`CR`の場合にのみ、以下の手順を実行する。Otherwise, this Step is skipped.
 
-**Artifacts**に対する**Change Requirements**の内容から、**Cloud Architecture Image**に修正が必要かを確認し、`Yes/No`で判断する。
+**Artifacts**に対する**Change Requirements**の内容から、**Cloud Architecture Image**およびそのSourceとなる**Cloud Architecture Diagram Source**に修正が必要かを確認し、`Yes/No`で判断する。
   - `No`の場合は、本Skillにおける以降のPost Step 2 ~ 3をskipし、Post Step 4に進む。
 
-### Post Step 2: Request Cloud Architecture Diagram
-**Requirement Mode**次第で、下記のいずれかに従って、Cloud Infrastructureの正式構成図をPNG形式で**Cloud Architecture Image**パスへ配置するようユーザーに依頼する。
-- `INITIAL`: **Artifacts** に基づいて作成
-- `CR`: **Change Requirements**に基づいて、既存修正する形で再作成
+### Post Step 2: Generate Cloud Architecture Diagram
+**Requirement Mode**に応じて、以下のいずれかに従い、draw.io形式のCloud Infrastructure構成図 **Cloud Architecture Diagram Source** を$drawio Skillを使用して生成・更新する。
+
+- `INITIAL`：**Artifacts**に基づいて新規作成する。
+- `CR`: **Change Requirements**に基づいて、既存修正する形で再作成	- `CR`：**Artifacts**および**Change Requirements**に基づき、**Cloud Architecture Diagram Source**を更新する。
+
+AWS等で公式アイコンが存在する場合は、必ずそれを使用し、その中でカラー付きのアイコンがある場合は、やはりこれも必ず使用して構成図を作成する。
 
 構成図は、利用するCloud Provider（AWS / Google Cloud / Azure等）に応じたCloud Architecture Diagramとして作成し、少なくとも **Artifacts** で定義された以下の内容を読み取れるものとする。
 
@@ -138,10 +148,15 @@ Procedureの実行にあたっては、以下を本Skillの定義から特定し
 
 CIDR、IAM Policy、Security Group Rule、Resource Size等の詳細設定を網羅することは要求しない。
 
-ユーザーから配置完了の報告を受けるまで、次のStepへ進まない。
+構成図はdraw.ioで編集可能な形式とし、既存のArchitecture Decisionを変更・追加せず、**Artifacts**の内容を可視化する。
+
+### Post Step 3: Request to Export Cloud Architecture Image
+前Stepで生成・更新したdraw.ioファイルについて、ユーザーにdraw.ioで開いてPNG形式へExportし、以下の**Cloud Architecture Image**パスへ配置するよう依頼する。
+
+ユーザーから配置完了の報告を受けるまで、レビューへ進まない。
 
 
-### Post Step 3: Review Cloud Architecture Diagram
+### Post Step 4: Review Cloud Architecture Diagram
 
 ユーザーから提供されたCloud Architecture Diagramを **Artifacts** や および`CR`の場合は**Change Requirements** と比較し、以下を確認する。
 
@@ -151,15 +166,17 @@ CIDR、IAM Policy、Security Group Rule、Resource Size等の詳細設定を網�
 - Resource間のConnectivity / Traffic Flowが **Artifacts** と矛盾していないこと。
 - External Connectivity、Security、Management、Observability等の主要構成に欠落・矛盾がないこと。
 - 構成図だけに、**Artifacts** または **Change Requirements** に存在しないArchitecture Decisionが追加されていないこと。
+- **Cloud Architecture Diagram Source** と  **Cloud Architecture Image** の内容が一致していること。
 
-不一致または不足がある場合は、その内容と該当箇所をユーザーへ提示し、構成図を修正するか確認する。
+不一致または不足がある場合は、その内容と該当箇所をユーザーへ提示し、修正するか確認する。
 
-ユーザーが修正する場合は、修正版の配置完了報告を受けた後に再度レビューする。修正しない場合は、その判断を受け入れて本Stepを完了する。
+ユーザーが修正を希望する場合は、原則としてdraw.ioファイルを修正し、PNGの再Exportを依頼した後に再度レビューする。
 
-不一致、不足、不整合がない場合は、レビュー結果をユーザーへ報告して本Stepを完了する。
+修正しない場合は、その判断および残存する不一致・不足を報告して本Stepを完了する。
 
+不一致または不足がない場合は、レビュー結果をユーザーへ報告して本Stepを完了する。
 
-### Post Step 4: Extract Infrastructure-to-Application Dependencies
+### Post Step 5: Extract Infrastructure-to-Application Dependencies
 **Requirement Mode** に応じて、Agent `explorer` に以下の調査を依頼する。
 
 #### `INITIAL`
