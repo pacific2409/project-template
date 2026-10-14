@@ -5022,6 +5022,8 @@ Infrastructure Architectureを構成するResourceについては、全体構成
 
 ACM、WAF等のSecurity / Certificate Resourceを含め、Traffic、Security、Configuration、Observability、Management等を成立させるResourceについても、Infrastructure全体の構成要素として必要なものは図に含める。
 
+後続の工程で作成する**Cloud Architecture Diagram**とは別途で下記のようなMermaid形式の構成図を作成する。※この構成図は、**Cloud Architecture Diagram**作成時の重要な参考となる。
+
 **example**:
 
 ```mermaid

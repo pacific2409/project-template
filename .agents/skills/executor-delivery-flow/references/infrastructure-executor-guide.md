@@ -5,8 +5,10 @@
 ### **Overall Design Specifications**
 - `docs/persistent/system-architecture.md`
 - `docs/persistent/infrastructure-architecture.md`
+- `docs/persistent/infrastructure-to-application-dependencies.md`
 - `docs/change-requirements/system-architecture.md`
 - `docs/change-requirements/infrastructure-architecture.md`
+- `docs/change-requirements/infrastructure-to-application-dependencies.md`
 
 ### **Detailed Design Specifications**
 None.
