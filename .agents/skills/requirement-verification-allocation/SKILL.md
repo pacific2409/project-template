@@ -46,13 +46,13 @@ docs/.steering/<current-train>/shared/information/development-allocation-map.md
 ## Product Requirements Definition
 Projectの要求を定義した文書。本Work Skillでは、Goals、Functional RequirementsのAcceptance CriteriaおよびNon-functional Requirementsを検証対象の抽出元とする。本Work Skillでは、Read Onlyとして参照する。
 ```
-docs/persistent/product-requirements-definition.md
+docs/persistent/product-requirements.md
 ```
 
 ## PRD Change Requirements
 Current TrainにおけるProduct Requirementsの変更内容を定義した文書。`CR`の場合に参照する。本Work Skillでは、Read Onlyとして参照する。
 ```
-docs/change-requirements/product-requirements-definition.md
+docs/change-requirements/product-requirements.md
 ```
 
 ## Artifact
