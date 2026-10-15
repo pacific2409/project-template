@@ -199,7 +199,7 @@ Agent `explorer` に、`docs/persistent/function-design.md` と`docs/persistent/
 
 - Function Designに記載されたすべての内容をDetail Designへ対応付けることは要求せず、Applicationの実装にあたってDetail Designで具体化すべき機能を対象とする。
 
-Agentには以下の形式・内容で報告および`docs/reviews/detail-design-coverage-report-yyyymmddhmmss.md`に記録してもらう。
+Agentには以下の形式・内容で報告および`docs/reviews/detail-design-coverage-report-<yyyymmddhmmss>.md`に記録してもらう。
 - **Result**: 定義漏れが存在するか > `true` / `false`
 - **Findings**: `Result`が`true`、つまり、定義漏れが存在する場合、Function Designの該当Section、定義すべき内容、および不足しているDetail Designの種別・対象
 
