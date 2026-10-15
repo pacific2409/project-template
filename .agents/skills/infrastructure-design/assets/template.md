@@ -1391,7 +1391,7 @@
 
 ### 16.3 IaC Module Dependencies
 
-<!-- 記載条件: IaCでExternal Moduleを利用する場合。 -->
+<!-- 記載条件: IaCを採用する場合。External Moduleの採用要否を検討し、採用する場合は以下を記載する。 -->
 
 <!-- 採用するExternal IaC Module、そのSource、適用Scope、Versionおよび用途。 -->
 
