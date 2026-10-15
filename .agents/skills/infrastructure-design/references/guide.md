@@ -3955,7 +3955,11 @@ Terraform Resourceの全Parameterを設計書へ複製しない。Resource固有
 
 #### **16.3 IaC Module Dependencies**
 
-Terraform等のIaCで外部提供されるReusable / Public Moduleを利用する場合、採用するModule、その利用目的、Sourceおよび利用範囲を定義する。
+Terraform等のIaCについて、Infrastructure Resourceを構成する際に、外部提供されるReusable / Public Moduleを採用するかどうかを検討・決定する。
+
+採用判断にあたっては、Project内部でModuleを実装・管理する方式と、外部Moduleを利用する方式の比較・組合せを検討し、再利用性、保守性、実装負荷、柔軟性、Version / Compatibility、外部Dependencyによる制約等を考慮する。
+
+外部Moduleを採用する場合は、そのModule、利用目的、Source、Versionおよび利用範囲を定義する。
 
 Project内部で定義するModuleとExternal Moduleを区別し、Infrastructure Architectureが外部Moduleへ持つ主要なDependencyを明確にする。
 
@@ -3965,10 +3969,12 @@ Project内部で定義するModuleとExternal Moduleを区別し、Infrastructur
 | --- | --- | --- | --- | --- |
 | [Module] | [Registry / Repository] | Network | [Version] | VPC / Network Resourceを構成する |
 | [Module] | [Registry / Repository] | Container Platform | [Version] | Kubernetes Clusterを構成する |
-| terraform-aws-modules | eks | Container Platform | v21.26.0 | EKS Clusterおよび関連Resourceを構成する |
+| terraform-aws-modules/eks | `terraform-aws-modules/eks/aws` | Container Platform | v21.26.0 | EKS Clusterおよび関連Resourceを構成する |
 
 必要に応じて以下を扱う。
 
+- External Moduleの採用要否
+- External ModuleとProject内部Moduleの使い分け
 - Module Name
 - Source / Provider
 - Version
