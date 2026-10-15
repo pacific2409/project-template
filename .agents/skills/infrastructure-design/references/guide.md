@@ -3957,7 +3957,7 @@ Terraform Resourceの全Parameterを設計書へ複製しない。Resource固有
 
 Terraform等のIaCについて、Infrastructure Resourceを構成する際に、外部提供されるReusable / Public Moduleを採用するかどうかを検討・決定する。
 
-採用判断にあたっては、Project内部でModuleを実装・管理する方式と、外部Moduleを利用する方式を比較し、再利用性、保守性、実装負荷、柔軟性、Version / Compatibility、外部Dependencyによる制約等を考慮する。
+採用判断にあたっては、Project内部でModuleを実装・管理する方式と、外部Moduleを利用する方式の比較・組合せを検討し、再利用性、保守性、実装負荷、柔軟性、Version / Compatibility、外部Dependencyによる制約等を考慮する。
 
 外部Moduleを採用する場合は、そのModule、利用目的、Source、Versionおよび利用範囲を定義する。
 
