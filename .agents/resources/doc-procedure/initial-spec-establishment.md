@@ -109,6 +109,8 @@ Optional項目。指定は任意とする。本Flowにおける作業対象お�
 2. 作成した **Artifacts** が **Guide** に沿った内容になっているかを確認する。
 3. 作成した **Artifacts** が利用した**Template** に沿った内容になっているかを確認する。
 
+内容が確定したら、ここまでの内容をコミットする。
+
 ### Step 6: Select the Evaluation Mode for the following Artifacts Review
 ユーザーに後述のReview工程におけるレビュー強度(**Evaluation Mode**)をEasy/Medium/Proの中から選択させる。
 
