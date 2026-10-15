@@ -244,6 +244,8 @@ Otherwise、以降のStepへ進む。
 2. 作成した **Change Requirements** が **Guide** に沿った内容になっているかを確認する。
 3. 作成した **Change Requirements** が利用した**Template** に沿った内容になっているかを確認する。
 
+内容が確定したら、ここまでの内容をコミットする。
+
 ### Step 13: Select the Evaluation Mode for the following Reviews
 ユーザーに後述のReview工程におけるレビュー強度(**Evaluation Mode**)をEasy/Medium/Proの中から選択させる。
 
@@ -274,6 +276,8 @@ Agent `spec-comparator` に **Artifacts**と**Change Requirements** の比較レ
   - 新規作成した **Artifacts**
   - 追加・更新した **Artifacts** および **Section**・**Subsection**
   - 各対象に対して実施した変更内容
+
+内容が確定したら、ここまでの内容をコミットする。
 
 ### Step 16: Request Artifacts Review
 Agent `document-reviewer` に **Artifacts** のレビューを依頼する。
