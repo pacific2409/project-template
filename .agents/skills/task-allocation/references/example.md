@@ -11,18 +11,14 @@ Infrastructure
 └── AWS
     ├── Network Resources
     ├── EKS Resources
-    │   └── depends on: Network Resources
     └── RDS Resources
-        └── depends on: Network Resources
         
 Database
 │
 └── Database State Management
     ├── Create Category Table
     ├── Create Project Candidate Table
-    │   └── depends on: Create Category Table
     └── Insert Initial Category Data
-        └── depends on: Create Category Table
         
 Backend
 │
