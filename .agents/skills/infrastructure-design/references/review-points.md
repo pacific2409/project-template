@@ -224,15 +224,16 @@ docs/reviews/infrastructure-design-review-report.md
 
 - 16.1：Infrastructure Codeの構造とIaC・Platform設定・環境設定・補助Toolの責務が分かり、管理・適用単位に影響するDirectory構成が確定しているか。
 - 16.2：IaCを採用する場合、Root / Shared / 環境Module、Resource管理単位、Dependency、Variable / Output、Provider、環境差分が再現可能な構造か。補助Toolを使う場合の責務分担も明確か。
-- 16.3：Stateを管理する場合、単位・環境分離、Backend、Lock、Access、機密情報、Backup / Recovery、State間参照が明確で、変更・復旧に必要なStateを利用できるか。
-- 16.4：Kubernetesを採用する場合、Manifest / Chart / Base / Overlay等の管理方式、環境差分、Namespace対応、Application / Platform / 共通Resourceの管理単位が配置設計に一致しているか。
-- 16.5：Resource・Technology境界を跨ぐ依存と適用順序が明確で、前提Resource / Outputが成立してから次の構築・設定へ進めるか。図や順序表にも同じ依存が表れているか。
-- 16.6：環境別のManual / Pipeline、Trigger、Approval、実行主体、Create / Update / Destroy / Rebuild方式と根拠が明確か。
-- 16.7・Pipeline Separation：Infrastructure CI/CDを使う場合、責務・Target・Dependency・Stage・Output・失敗時動作が具体的か。Terraform層とKubernetes層の両方を使う場合、独立して実行・失敗・再実行できるPipelineとし、Terraformの適用・検証完了後にKubernetesを実行可能にしているか。常に一つのPipelineで一括適用する構造になっていないか。
-- 16.8：採用Layerごとの適用前後Validation / Testが独立して定義され、対象・時点・Tool / Methodが具体的か。必要なFormat / Lint、Plan / Diff、Policy / Security、Health / Connectivity、Drift検出を確認できるか。
-- 16.8・Verification Workload Strategy：Workloadを使う検証が必要な場合、対象とApplication完成時期に応じてTemporary / Actual Workloadを選んでいるか。Infrastructure単独検証を不必要にApplication完成待ちとせず、Temporary Resourceは最小限・Business Logic非模倣・検証後削除としているか。Workloadを用いない場合も、対象Infrastructureの成立性を何によって確認するかが明確か。
-- 16.9：Application PipelineへTarget、Registry、Identity、Configuration等を提供する接続とInfrastructure Ready条件が明確か。前提Resource、順序、Trigger関係が18章のContractと一致しているか。
-- 16.10：Code経由変更、直接変更の可否、Emergency Change、Drift、Review / Approval、環境Promotion、Codeと実Resourceの整合、Applicationとの同時変更順序を判断できるか。Application Pipeline内部を再設計していないか。
+- 16.3：IaCを採用する場合、External / Reusable Moduleの採用要否を検討し、Project内部Moduleとの比較・組合せを踏まえて判断しているか。採用する場合は、Module、Source、Version、用途・適用範囲、主要DependencyおよびCompatibility上の制約が明確で、再現可能な形で管理されているか。
+- 16.4：Stateを管理する場合、単位・環境分離、Backend、Lock、Access、機密情報、Backup / Recovery、State間参照が明確で、変更・復旧に必要なStateを利用できるか。
+- 16.5：Kubernetesを採用する場合、Manifest / Chart / Base / Overlay等の管理方式、環境差分、Namespace対応、Application / Platform / 共通Resourceの管理単位が配置設計に一致しているか。
+- 16.6：Resource・Technology境界を跨ぐ依存と適用順序が明確で、前提Resource / Outputが成立してから次の構築・設定へ進めるか。図や順序表にも同じ依存が表れているか。
+- 16.7：環境別のManual / Pipeline、Trigger、Approval、実行主体、Create / Update / Destroy / Rebuild方式と根拠が明確か。
+- 16.8・Pipeline Separation：Infrastructure CI/CDを使う場合、責務・Target・Dependency・Stage・Output・失敗時動作が具体的か。Terraform層とKubernetes層の両方を使う場合、独立して実行・失敗・再実行できるPipelineとし、Terraformの適用・検証完了後にKubernetesを実行可能にしているか。常に一つのPipelineで一括適用する構造になっていないか。
+- 16.9：採用Layerごとの適用前後Validation / Testが独立して定義され、対象・時点・Tool / Methodが具体的か。必要なFormat / Lint、Plan / Diff、Policy / Security、Health / Connectivity、Drift検出を確認できるか。
+- 16.9・Verification Workload Strategy：Workloadを使う検証が必要な場合、対象とApplication完成時期に応じてTemporary / Actual Workloadを選んでいるか。Infrastructure単独検証を不必要にApplication完成待ちとせず、Temporary Resourceは最小限・Business Logic非模倣・検証後削除としているか。Workloadを用いない場合も、対象Infrastructureの成立性を何によって確認するかが明確か。
+- 16.10：Application PipelineへTarget、Registry、Identity、Configuration等を提供する接続とInfrastructure Ready条件が明確か。前提Resource、順序、Trigger関係が18章のContractと一致しているか。
+- 16.11：Code経由変更、直接変更の可否、Emergency Change、Drift、Review / Approval、環境Promotion、Codeと実Resourceの整合、Applicationとの同時変更順序を判断できるか。Application Pipeline内部を再設計していないか。
 
 ### 17. Environment Lifecycle and Dormancy Strategy
 
