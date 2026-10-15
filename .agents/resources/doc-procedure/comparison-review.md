@@ -77,7 +77,7 @@ Agent `document-reviewer` に **Artifacts** のレビューを依頼する。
 
 依頼時には、以下の情報を明示する。
  - レビュー対象となる **Artifacts** のパス
- - 比較対象として、 **Review Sources** のパス
+ - 比較対象として、 **Review Sources** および **Artifacts**作成時に前提としたファイルのパス
  - **Specific Review Points Sheet**のパス
  - 前項で選択された**Evaluation Mode**
  - **Review Scope** *(Optional)*: **Input**で指定された**Scope**がある場合、その内容を連携する。
