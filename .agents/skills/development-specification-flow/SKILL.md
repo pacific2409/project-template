@@ -205,6 +205,8 @@ Agentには以下の形式・内容で報告および`docs/reviews/detail-design
 
 報告を受けた後の対応については、後述の**Action for Findings** に従う。
 
+対応が完了し、次のStepに進む際には、本項で`explorer`から受け取ったReportsを、Current TrainのSteering領域にあるManagerディレクトリ下のそれぞれ対応する場所に移動する。
+
 
 ### Task 14: Validate Infrastructure Adequacy for Detail Design
 Work Skill `$infrastructure-design` の**On-Demand Execution** : **Request Specification Comparison Review** を **Execution Parameters**とともに実行し、Application Detail Designを実装する上でInfrastructure Architectureが十分であることを確認する。
