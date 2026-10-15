@@ -83,7 +83,7 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 
 ### **Load Project Rules**
 - Projectルートの `AGENTS.md` を全て読み、その内容を以降のすべての作業の前提とする。
-- `docs/persistent/product-requirement-definition.md`を読みプロジェクトの概要を把握する。
+- `docs/persistent/product-requirements.md`を読みプロジェクトの概要を把握する。
 - `docs/change-requirements/` 配下に.gitkeep以外のファイルが存在する場合は、Current Trainにおける変更対応の内容を確認する。
 
 ### **Identify Workflow Position**

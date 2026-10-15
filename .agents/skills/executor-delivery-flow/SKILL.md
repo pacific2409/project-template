@@ -123,7 +123,7 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 
 ### **Load Project Rules and Context**
 - **Executor Rules**、`AGENTS.md`、 **Development Guidelines** を全て読み、その内容を以降のすべての作業の前提とする。
-- `docs/persistent/product-requirement-definition.md`を読みプロジェクトの概要を把握する。
+- `docs/persistent/product-requirements.md`を読みプロジェクトの概要を把握する。
 - `docs/change-requirements/` 配下に.gitkeep以外のファイルが存在する場合は、Current Trainにおける変更対応の内容を確認する。
 - 担当Moduleの **Workspace** に `README.md` が存在する場合は、そこからプロジェクトの全体像のイメージを掴み、Moduleの概要、構成、利用方法および関連するSpecificationへの参照情報を把握する。
 - 担当Moduleの **Pending Information** および `blockers.md` が存在する場合は、その内容を確認し、後続のIntegration Test、Release準備その他のTaskへの影響を把握する。
