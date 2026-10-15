@@ -85,6 +85,7 @@ docs/.steering/<current-train>/shared/information/requirement-verification-matri
 
 - 目標・完了条件（Goals）
 - 機能要件（Functional Requirements）の各受け入れ条件
+  - ただしP2を除く。
 - 非機能要件（Non-functional Requirements）
 
 抽出した各項目について、PRD内の該当箇所と内容を整理し、**Draft** に記録する。
