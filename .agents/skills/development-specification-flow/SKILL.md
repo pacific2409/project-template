@@ -212,6 +212,7 @@ Agentには以下の形式・内容で報告および`docs/reviews/detail-design
 Work Skill `$infrastructure-design` の**On-Demand Execution** : **Request Specification Comparison Review** を **Execution Parameters**とともに実行し、Application Detail Designを実装する上でInfrastructure Architectureが十分であることを確認する。
 
 - Specification Comparison Reviewの結果、対応・修正が発生しない場合は、後続のArtifact Reviewを実行しない。
+- infrastructure-architectureへの修正が発生した場合は、必要に応じて、`infrastructure-to-application-dependencies`の更新も行う。
 
 #### **Execution Parameters**
 
