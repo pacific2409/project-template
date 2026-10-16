@@ -82,7 +82,7 @@ docs/train-status.md
 docs/.steering/<current-train>/<module-name>/flow-status.md
 ```
 
-以下のルールに従って管理または更新する。
+Task 0: Prepare Workflowでの作成以降、以下のルールに従って管理または更新する。
 - 作成・更新の際は所定のテンプレート(`assets/executor-flow-status-template.md`)を使用する。
 - 各Taskの開始時に、当該Taskの行をStatus `IN_PROGRESS` として表の先頭に追加する。
 - 各Taskの完了時に、当該TaskのStatusを `COMPLETED` に更新する。
