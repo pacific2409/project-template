@@ -3,9 +3,6 @@
 ## Pull Request Review Policy
 - 必ず日本語でレビューおよびコメントをしてください。
 
-## Specification Compliance
-[]
-
 ## Architecture and Responsibility
 []
 
