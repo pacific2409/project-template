@@ -15,9 +15,9 @@
 <module-root>/
 ├── .gitlab-ci.yml
 └── gitlab/
-    ├── gitlab-ci-dev.yml
-    ├── gitlab-ci-stg.yml
-    ├── gitlab-ci-prod.yml
+    ├── .gitlab-ci-dev.yml
+    ├── .gitlab-ci-stg.yml
+    ├── .gitlab-ci-prod.yml
     └── scripts/
         ├── dev/
         ├── stg/
