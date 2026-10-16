@@ -105,6 +105,7 @@ docs/.steering/<current-train>/<module-name>/working/pending-information.md
 - Configure CI/CD Platform
 - Implement Pipeline Definitions
 - Validate Available Pipeline Behavior
+- Configure CI/CD Platform After Implementation
 - Check Consistency with Specifications
 
 ## Execution Steps
@@ -231,7 +232,16 @@ Specificationに明示されていないCI/CD Pipelineの構成、Job、Tool、�
 4. 検証できなかった内容については、その理由と後続で必要となる確認を整理する。
 5. 検証によって問題が確認された場合は、必要な修正を行い、再度検証する。
 
-### Step 8: Check Consistency with Specifications
+### Step 8: Configure CI/CD Platform After Implementation
+前項までのImplementationを踏まえ、CI/CD Platform側のConfigurationについて、現時点で実施可能な設定を行う。
+
+1. 実装した内容からCI/CD Platform側で設定が必要かつ、現段階で設定可能な項目とその設定内容を確認・特定する。
+2. 実施する設定、目的および対象範囲をユーザーに提示し、承認を得る。
+3. 承認された設定をCI/CD Platformへ適用する。
+4. 設定結果を確認し、また、適用内容についてß可能な範囲で動作を確認し、実施内容および結果をユーザーへ報告する。
+
+
+### Step 9: Check Consistency with Specifications
 構築・変更したCI/CD Pipelineについて、**Specification Sources** および **CI/CD Requirements** と照合し、要求された内容が欠落なく適切に反映されていることを確認する。
 
 1. Step 1で抽出した各CI/CD Requirementが、CI/CD Platform側のConfigurationまたはRepository側のPipeline Definitionに適切に反映されていることを確認する。
