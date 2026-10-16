@@ -152,6 +152,8 @@ Evidence Methodは可能な限りCommand / Script等による再実行可能か�
 ### Step 6: Validate Test Specification
 **Artifact**が**Draft**を欠落なく反映し、各TestについてExpected Result、Evidence Method、Evidence to RetainおよびTraceabilityが定義されていることを確認する。
 
+内容が確定したら、ここまでの内容をコミットする。
+
 ### Step 7: Request Coverage Review
 Agent `spec-comparator` に**Artifact**と**Specification Sources**の比較レビューを依頼する。
 
