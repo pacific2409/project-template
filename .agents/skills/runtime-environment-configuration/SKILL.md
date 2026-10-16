@@ -39,8 +39,6 @@ Current TrainのRequirement Mode
 .agents/resources/executor-rules.md
 ```
 
-## 前提条件
-- 
 ## Rule
 - ファイルの作成・更新を含め各作業は、Projectのルールに則って実施する。
 - 各Stepは**Execution Steps**に記載された順序で実行する。
