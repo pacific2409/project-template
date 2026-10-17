@@ -1,8 +1,8 @@
 # Development Progress Management Guide
 
-## Confirm Module Development Completion
+## Confirm Module Development and Integration Completion
 
-ユーザーから対象Moduleの完了報告を受けた場合は、以下を確認して当該ModuleをDevelopment完了として扱えることを確認する。
+ユーザーから対象Moduleの完了報告を受けた場合は、以下を確認して当該ModuleにおけるDevelopmentおよびIntegrationを完了として扱えることを確認する。
 
 1. 以下の成果物から対応内容確認する。
    - **Development Report**(`docs/.steering/<current-train>/shared/executor-reports/<module-name>-development-report.md`)

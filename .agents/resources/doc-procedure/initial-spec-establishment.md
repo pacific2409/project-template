@@ -40,17 +40,17 @@ Optional項目。指定は任意とする。本Flowにおける作業対象お�
 ## **Phase Progression Principle**
 本Principleは、各Module内におけるPhase間の進行およびPromotion順序を規定する。Module間のExecution Orderは本Principleでは規定せず、別途定義された依存関係に従う。また、Module間のPhase同期は要求せず、あるModuleをIntegrationへPromotionするための条件として、他Moduleが同一Phaseまで完了していることを要求しない。例えば、Frontend ModuleのDevelopment完了は、Backend ModuleのIntegrationへのPromotion条件とはならない。
 
-ただし、Releaseへの進行はCurrent Train全体のGateとして、Current Trainの対象となる全ModuleがIntegration Testを完了していることを前提とする。
+ただし、Releaseへの進行はCurrent Train全体のGateとして、Current Trainの対象となる全ModuleがIntegrationを完了していることを前提とする。
 
 Current Trainにおける各Module(定義についてはプロジェクトルールの用語定義を参照)のDevelopmentからReleaseまでの進行は、原則として以下の順序とする。
 
 `Development` → `Integration` → `Release`
 
 - **Development**: 作業ブランチまたは修正ブランチにて、Current Trainで当該Moduleに必要となるすべての要件または機能の構築・開発・改修を完了する。
-- **Integration**: Development完了後、作業・修正ブランチを統合ブランチへ統合し、検証環境（stg等）へ反映した上でIntegration Testを実施する。
+- **Integration**: Development完了後、作業・修正ブランチを統合ブランチへ統合する。Integration Testを実施する場合は、検証環境（stg等）へ反映した上で実施する。
 - **Release**: Integration完了後、Release開始が可能な状態になったら、統合ブランチをリリース用ブランチへ統合し、本番環境へReleaseを実施する。
 
-各Moduleについて前段階が完了する前に後続段階へ進まず、Development中の変更を直接検証環境または本番環境へPromotionせず、Integration Testが完了していない変更を本番環境へPromotionしない。
+各Moduleについて前段階が完了する前に後続段階へ進まず、Development中の変更を直接検証環境または本番環境へPromotionしない。また、Integration Testを実施する場合は、その完了前の変更を本番環境へPromotionしない。
 
 各Phaseは、**Current Train**で当該Moduleに必要となる一連の変更をまとめて完了させた上で次のPhaseへ進行し、個々のTaskや構成要素ごとに `Development → Integration → Release` を繰り返さない。
 
