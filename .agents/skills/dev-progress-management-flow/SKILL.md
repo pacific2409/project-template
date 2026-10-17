@@ -109,7 +109,7 @@ Workflowを開始する場合、または中断していたWorkflowを途中か�
 
 ── Progress Management Loop and Related Tasks ──
 - Development Progress Management
-- Development Phase Completion
+- Development and Integration Phase Completion
 - Prepare Release Procedure
 - Release Progress Management
 - Release Phase Completion
@@ -197,7 +197,7 @@ Work Skill `$requirement-verification-allocation` を使用し、Product Require
 1. 次に対応するModuleを **Development Allocation Map** から特定する。
 2. **Flow Status** に対象Moduleの進行状況を `Development Progress Management: <module-name>`の形式で新たなTaskとして記録する。
 3. 対象Moduleの担当Executorによる構築・開発を開始するようユーザーへ対応を依頼する。
-4. ユーザーから対象Moduleの完了報告を受けたら、**Guide** の**Confirm Module Development Completion**に従って当該ModuleのDevelopment Completionを確認し、完了として扱える場合は進捗を完了として**Flow Status**を更新する。
+4. ユーザーから対象Moduleの完了報告を受けたら、**Guide** の**Confirm Module Development and Integration Completion**に従って当該ModuleのDevelopment and Integration Completionを確認し、完了として扱える場合は進捗を完了として**Flow Status**を更新する。
 5. 未完了のModuleが存在する場合は本Taskを終了し、次のModuleについて新たに本Taskを開始する。
 6. すべてのModuleが完了している場合は、本Taskを終了して次のTaskへ進む。
 
@@ -205,8 +205,8 @@ Moduleの進行順序は **Development Allocation Map** に従い、先行する
 
 ユーザーからの完了報告を待つ間も、Current Trainに関する仕様、設計、進行その他の相談や対応依頼があった場合は、必要に応じて対応する。ただし、それによって対象Moduleの完了を未確認のまま次のModuleへ進めてはならない。
 
-### Task after X: Development Phase Completion
-すべてのModuleのDevelopmentが完了した後、Current TrainにおけるDevelopment Phase全体の完了状態を確認し、Release Phaseへ進行可能な状態であることを確認する。
+### Task after X: Development and Integration Phase Completion
+すべてのModuleのDevelopmentおよびIntegrationが完了した後、**Current Train**におけるDevelopment and Integration Phase全体の完了状態を確認し、Release Phaseへ進行可能な状態であることを確認する。
 
 **Development Report** (`docs/.steering/<current-train>/shared/executor-reports/<module-name>-development-report.md`)
 
