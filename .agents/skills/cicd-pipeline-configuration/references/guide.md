@@ -1,8 +1,9 @@
 # CI/CD Pipeline Configuration Guide
 
 ## Common Guideline
-### **Environment Trigger**
+- - `.gitlab-ci.yml` はPipeline全体の構成を担うものとし、複数Jobから `extends` して利用する共通処理は、`variables`、`include`、`default`、`stages` 等の全体定義を除き、`gitlab/.gitlab-common-ci.yml` に分離する。
 
+### **Environment Trigger**
 - EnvironmentごとのJobには、対象Environmentに対応するブランチのprefixをTrigger条件として含める。
 - 各ブランチの具体的なprefixおよび運用については、**Development Guidelines** に従う。
 
