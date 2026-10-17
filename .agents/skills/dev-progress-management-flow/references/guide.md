@@ -10,11 +10,11 @@
 
 2. **Development Report** について、以下を確認する。
    - **Requirement Verification Matrix** における担当項目のVerification結果
-   - Integration Test結果
+   - Integration Testを実施した場合は、その結果
    - 残存リスクおよび未解決事項
    - その他、Development完了の判断に必要となる報告内容
 
-3. 確認した成果物および報告内容から、当該ModuleをDevelopment完了として扱えることを確認する。
+3. 確認した成果物および報告内容から、当該ModuleをDevelopmentおよびIntegration完了として扱えることを確認する。
 
 
 ## Prepare Release Procedure

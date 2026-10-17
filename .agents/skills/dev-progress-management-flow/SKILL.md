@@ -214,7 +214,7 @@ Moduleの進行順序は **Development Allocation Map** に従い、先行する
 2. 各Development Reportに記録されたRequirement Verificationの実施結果を **Requirement Verification Matrix** と照合し、完了が確認された項目の `Status` を `TODO` から `VERIFIED` へ更新する。複数Moduleが同じRequirementを担当する場合は、そのうちいずれかの担当Moduleで完了が確認された時点で `VERIFIED` へ更新する。
 3. **Development Allocation Map**、**Requirement Verification Matrix**、各ModuleのDevelopment Reportその他の関連成果物を確認し、Current TrainがRelease Phaseへ進行可能な状態であることを確認する。
 4. Releaseへの進行を妨げる未完了事項、不整合または未解決事項が存在する場合は、必要な対応を完了した上で本Taskを再確認する。
-5. Development Phaseの完了についてユーザーの承認を得て、次のTaskへ進む。
+5. Development and Integration Phaseの完了についてユーザーの承認を得て、次のTaskへ進む。
 
 ### Task before Y: Prepare Release Procedure
 Current TrainでRelease対象となる各Moduleの **Release Instructions**、**Development Allocation Map** および関連するSpecificationをもとに、Module間の依存関係を踏まえたCurrent Train全体のRelease Procedureを作成する。
