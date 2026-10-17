@@ -182,6 +182,7 @@ Skillは、以下の2種類に分類する。
 - 使用するSkill名を明示してから作業を開始する。
 - Skillに工程、順序またはフローが定められている場合は、必ず定められた順番に従って処理する。
 - Flow Skillから特定の作業に必要なWork Skillが指定されている場合は、そのSkillを使用して処理する。
+- Skillに定められたWorkflow、Execution Steps、Procedureなどの工程を開始する際は、まずtaskやstepの一覧を確認し、ユーザーにどのtask・stepをどういう順番で進めていくかを、このSkillの手順の概要として提示する。
 
 #### **Intent-Oriented Execution**
 - 各Skill、WorkflowおよびGuideline、Procedureの指示について、その意図・目的を理解した上で実行する。
