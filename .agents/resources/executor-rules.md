@@ -50,6 +50,21 @@ docs/.steering/<current-train>/shared/information/requirement-verification-matri
 - `relevant-specifications.md` は関連するSpecificationを抽出・整理した補助情報であり、Specificationそのものの代替とはしない。必要に応じて参照元のSpecificationを確認する。
 - **Requirement Mode**が `CR` の場合、**Overall Design Specifications** や **Detailed Design Specifications** を含む各Specification Sourcesについては `docs/persistent/` の対象Specificationを現行仕様・設計の前提として扱い、それに対応する `docs/change-requirements/` のChange Requirementsが存在する場合は、Current Trainにおける変更対象および変更内容として併せて扱う。
 
+## **Phase Progression Principle**
+Current Trainは、原則として以下の順序でPhase単位に進行する。
+
+`Development` → `Integration` → `Release`
+
+- **Development**: 作業ブランチまたは修正ブランチにて、Current Trainで必要となるすべての要件または機能の構築・開発・改修を完了する。
+- **Integration**: Development完了後、作業・修正ブランチを統合ブランチへ統合し、検証環境（stg等）へ反映した上でIntegration Testを実施する。
+- **Release**: Integration完了後、Release開始が可能な状態になったら、統合ブランチをリリース用ブランチへ統合し、本番環境へReleaseを実施する。
+
+**Current Train**について前段階が完了する前に後続段階へ進まず、Development中の変更を直接検証環境または本番環境へPromotionせず、Integration Testが完了していない変更を本番環境へPromotionしない。
+
+各Phaseは、**Current Train**で当該対象に必要となる一連の変更をまとめて完了させた上で次のPhaseへ進行し、個々のTaskや構成要素ごとに `Development → Integration → Release` を繰り返さない。
+
+例えばInfrastructureでは、VPC、S3その他の個々のResourceごとにIntegrationおよびReleaseまで進めるのではなく、**Current Train**で必要となるInfrastructure ResourceのDevelopmentを完了した後、それらを一体としてIntegration、Releaseの順に進行する。
+
 ## **Steering Management**
 Executorは、自身のSteering領域にある以下のファイルおよびディレクトリを、作業全体を通して管理する。 管理・更新は各TemplateもしくはExample(assets/*.md)を元に行う。
 

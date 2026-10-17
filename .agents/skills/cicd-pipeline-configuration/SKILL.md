@@ -45,6 +45,7 @@ Current TrainのRequirement Mode
 - 各Stepの完了条件を満たすまで次のStepへ進まない。
 - ユーザーとの対話が必要なStepでは、合意した内容を以降のStepの前提とする。
 - 各Stepの完了、および次のStepへの進行にはユーザーの承認を得る。
+- **Executor Rules**に規定された**Phase Progression Principle** に沿って、またこれに矛盾しないよう、各Phaseの進行順序を遵守した内容になるように注意する。
 
 
 ## Task
@@ -159,7 +160,7 @@ Specificationに明示されていないCI/CD Pipelineの構成、Job、Tool、�
 
 ### Step 3: Draft Pipeline Configuration
 
-前項までで抽出したCI/CD Requirements、把握した既存・参考Pipeline、および **Guide** をもとに、担当Moduleで構築・変更するCI/CD Pipelineの全体構成と具体的なConfigurationを検討し、**Draft** に整理する。
+前項までで抽出したCI/CD Requirements、把握した既存・参考Pipeline、および **Guide** をもとに、担当Moduleで構築・変更するCI/CD Pipelineの全体構成と具体的なConfigurationを検討し、**Draft** に整理する。この工程では特に本Skillの**Rule**を遵守すること。
 
 また、`test/test-specification.md`、`decisions.md`、および **External Information** に担当ModuleのCI/CD Pipelineに関連する情報が存在する場合は、それらも確認しながら検討する。
 

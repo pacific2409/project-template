@@ -70,6 +70,22 @@ Optional項目。指定は任意とする。本Flowにおける作業対象お�
 - 各Stepの完了、および次のStepへの進行にはユーザーの承認を得る。ただし、承認不要と明記のあるStepはその内容を優先する。
 - Procedure Stepsの開始時、既存の**Artifacts**が存在する場合は、既存の構造と内容を維持しながら更新を行う。
 - 本FlowによるArtifactの新規作成または変更は、本Flowの全工程が完了した時点で確定したものとして扱う。ArtifactにChange Historyが存在する場合は、この単位を1件の履歴として記録する。
+- **Phase Progression Principle** に沿って設計を行う。またこれに矛盾しないよう、各Phaseの進行順序を遵守した内容になるように注意する。
+
+## **Phase Progression Principle**
+Current Trainは、原則として以下の順序でPhase単位に進行する。
+
+`Development` → `Integration` → `Release`
+
+- **Development**: 作業ブランチまたは修正ブランチにて、Current Trainで必要となるすべての要件または機能の構築・開発・改修を完了する。
+- **Integration**: Development完了後、作業・修正ブランチを統合ブランチへ統合し、検証環境（stg等）へ反映した上でIntegration Testを実施する。
+- **Release**: Integration完了後、Release開始が可能な状態になったら、統合ブランチをリリース用ブランチへ統合し、本番環境へReleaseを実施する。
+
+**Current Train**について前段階が完了する前に後続段階へ進まず、Development中の変更を直接検証環境または本番環境へPromotionせず、Integration Testが完了していない変更を本番環境へPromotionしない。
+
+各Phaseは、**Current Train**で当該対象に必要となる一連の変更をまとめて完了させた上で次のPhaseへ進行し、個々のTaskや構成要素ごとに `Development → Integration → Release` を繰り返さない。
+
+例えばInfrastructureでは、VPC、S3その他の個々のResourceごとにIntegrationおよびReleaseまで進めるのではなく、**Current Train**で必要となるInfrastructure ResourceのDevelopmentを完了した後、それらを一体としてIntegration、Releaseの順に進行する。
 
 ## Discussion Policy
 **Discuss and Draft**は、常に以下に従って実施する。
@@ -78,6 +94,7 @@ Optional項目。指定は任意とする。本Flowにおける作業対象お�
 - Skillに確認・議論方法について固有の規定がある場合は、その規定を本項の共通Policyより優先する。
 - Discussionにおける確認や議論は常に**Guide**、**CR Sources**、**Sources**を参照しながら進める。
 - 確認や議論は、**Guide**が**Artifacts**に対して求めている内容を十分に意識して行う。
+- **Phase Progression Principle** に矛盾しない設計を行うことを意識する。
 - 確認は、それまでの内容を踏まえた複数の選択肢のサジェストとセットで行う。
 - ただし、**Guide**の内容について、**Subsection**単位で設計事項を分割せず、**Section**単位の記載例および特記事項を中心とする形式で構成されている場合は、まずその**Section**で定義すべき内容の全体像を**CR Sources**から導出し、ユーザーに提示する。その上で、判断が必要となった細部の事項についてユーザーに対して議論や選択を求める。
 - ユーザーに確認を行う際、回答を受けたら、記録前に内容を精査する。その結果、要求や設計として十分に整理され、ユーザーとの合意が得られたと判断できた場合、回答内容を整理して**Draft**に記録する。そうでない場合は、そう判断できるようになるまで、ユーザーと議論を繰り返す。
@@ -204,6 +221,7 @@ Otherwise、以降のStepへ進む。
 2. 整理した**Draft**が、**CR Sources**や**Sources**と比較して一貫しているかを確認する。
 3. 整理した**CR Sources**や**Sources**と**Draft**を合わせた内容が**Guide**に沿ったものになっているかを確認する。
 4. **Draft**について、`Type: UPDATE` の**Change Requirement**に関する内容については、`AS-IS` が既存の **Artifact** と整合していること、および `TO-BE` や必要な変更内容が変更対象外の既存定義と矛盾なく成立することを確認する。
+5. **Draft**の内容が、**Phase Progression Principle** に矛盾しない設計になっているかを確認する。
 
 ### Step 10: Analyze Impact on Affected Modules
 **Affected Modules** が指定されている場合にのみ、本Stepを実行する。**Otherwise**、本Stepをスキップする。
