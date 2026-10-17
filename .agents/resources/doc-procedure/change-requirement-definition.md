@@ -73,13 +73,13 @@ Optional項目。指定は任意とする。本Flowにおける作業対象お�
 - **Phase Progression Principle** に沿って設計を行う。またこれに矛盾しないよう、各Phaseの進行順序を遵守した内容になるように注意する。
 
 ## **Phase Progression Principle**
-Current Trainにおける各ModuleのDevelopmentからReleaseまでの進行は、原則として以下の順序とする。
+本Principleは、各Module内におけるPhase間の進行およびPromotion順序を規定するものであり、Module間のExecution OrderやPhaseの同期を要求するものではない。あるModuleをIntegrationへPromotionするための条件として、他Moduleが同一Phaseまで完了していることを要求しない。(例えば、Frontend ModuleのDevelopmentの完了は、Backend ModuleのIntegrationへのPromotionの前提条件とはならない) 
 
-※Module: Infrastructureのawsやgcp、Frontendのwebやios、Backendの特定のマイクロサービスなど。詳しくはプロジェクトルールのGlossaryを参照
+ただし、Releaseへの進行については本Principleとは別の全体進行上の条件として、全ModuleのIntegrationが完了していることを前提とする。
+
+Current Trainにおける各Module(定義についてはプロジェクトルールの用語定義を参照)のDevelopmentからReleaseまでの進行は、原則として以下の順序とする。
 
 `Development` → `Integration` → `Release`
-
-本Principleは、各Module内におけるPhase間の進行およびPromotion順序を規定するものであり、Module間のExecution OrderやPhaseの同期を要求するものではない。あるModuleのDevelopment、Integrationへの進行条件として、他Moduleが同一Phaseまで完了していることを要求しない。ただし、Releaseへの進行については本Principleとは別の全体進行上の条件として、全ModuleのIntegrationが完了していることを前提とする。
 
 - **Development**: 作業ブランチまたは修正ブランチにて、Current Trainで当該Moduleに必要となるすべての要件または機能の構築・開発・改修を完了する。
 - **Integration**: Development完了後、作業・修正ブランチを統合ブランチへ統合し、検証環境（stg等）へ反映した上でIntegration Testを実施する。
@@ -89,7 +89,7 @@ Current Trainにおける各ModuleのDevelopmentからReleaseまでの進行は�
 
 各Phaseは、**Current Train**で当該Moduleに必要となる一連の変更をまとめて完了させた上で次のPhaseへ進行し、個々のTaskや構成要素ごとに `Development → Integration → Release` を繰り返さない。
 
-例えばInfrastructureでは、VPC、S3その他の個々のResourceごとにIntegrationおよびReleaseまで進めるのではなく、**Current Train**で必要となるInfrastructure ResourceのDevelopmentを完了した後、それらを一体としてIntegration、Releaseの順に進行する。
+例えばInfrastructureでは、VPC、S3その他の個々のResourceごとにIntegrationおよびReleaseまで進めるのではなく、**Current Train**で対象Moduleに割り当てられたInfrastructure ResourceのDevelopmentを完了した後、それらを一体としてIntegration、Releaseの順に進行する。
 
 ## Discussion Policy
 **Discuss and Draft**は、常に以下に従って実施する。

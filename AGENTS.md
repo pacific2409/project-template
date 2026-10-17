@@ -29,6 +29,8 @@ Infrastructure、Database、Backend、Frontendなどを指し、各Domainは一�
 ### ▪️Module
 Domainを構成する、独立した担当・構築・開発の単位。
 各Moduleには担当Executorが割り当てられ、対応するWorkspaceを単位として構築・開発を行う。
+
+例えば、Infrastructureのawsやgcp、Frontendのwebやios、Backendの特定のマイクロサービスなどが該当する。
 ### ▪️Phase
 Train を構成する工程上の区切り。
 要件定義、設計、構築、開発、IT、リリースなどを指す。
