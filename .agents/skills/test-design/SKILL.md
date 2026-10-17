@@ -43,6 +43,8 @@ Current TrainのRequirement Mode
 - 各Stepの完了条件を満たすまで次のStepへ進まない。
 - ユーザーとの対話が必要なStepでは、合意した内容を以降のStepの前提とする。
 - 各Stepの完了、および次のStepへの進行にはユーザーの承認を得る。
+- **Executor Rules**に規定された**Phase Progression Principle** に沿って、またこれに矛盾しないよう、各Phaseの進行順序を遵守した内容になるように注意する。
+- **Test Specification**の範囲は検証環境でのIntegration Testに限定し、それ以外の開発環境や本番環境での確認・検証は対象外とする。
 
 
 ## Task
@@ -133,6 +135,8 @@ Requirement Verification Matrixにおいて担当Moduleへ割り当てられた�
 - Expected Result
 - Evidence Method
 - Evidence to Retain
+
+本Skillの**Rule**に従い、Draftを作成する。
 
 Requirement Verification Matrixで担当Moduleに割り当てられたVerificationはすべて網羅する。
 

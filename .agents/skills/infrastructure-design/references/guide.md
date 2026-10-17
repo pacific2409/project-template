@@ -4115,7 +4115,9 @@ Application機能間のDependencyやApplication Detail Designの設計順序は�
 
 dev / stg / prod等について、Infrastructureをどの方式でProvision / Updateするかを定義する。
 
-ここでは特に、EnvironmentごとにManual OperationとCI/CD Pipelineのどちらを利用するかを明確にする。
+各Environmentについて、CI/CD Pipelineによる自動または手動Triggerでの適用を行うか、Developer / OperatorによるManual Operationを許容するかを明確にする。
+
+Environmentの目的、変更頻度、検証段階、再現性、統制の必要性等を踏まえ、Environmentごとに適切なProvisioning / Delivery方式を決定する。
 
 **example**:
 

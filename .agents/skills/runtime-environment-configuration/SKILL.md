@@ -46,6 +46,7 @@ Current TrainのRequirement Mode
 - ユーザーとの対話が必要なStepでは、合意した内容を以降のStepの前提とする。
 - 各Stepの完了、および次のStepへの進行にはユーザーの承認を得る。
 - Step内で具体的な手順や判断について **Guide** の該当プロセスに従うよう指定されている場合は、**Guide**にある当該Step名と同名の項目のプロセスの内容に従ってStepを実施する。
+- **Executor Rules**に規定された**Phase Progression Principle** に沿って、またこれに矛盾しないよう、各Phaseの進行順序を遵守した内容になるように注意する。
 
 
 ## Task
