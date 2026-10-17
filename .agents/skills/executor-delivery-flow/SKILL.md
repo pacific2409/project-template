@@ -232,6 +232,7 @@ Pull Request / Merge RequestのReviewが完了し、必要な対応がすべて�
 4. ユーザーにPull Request / Merge RequestのMergeを依頼し、完了報告を待つ。
 5. Remote上でMergeが正常に完了し、対象のPull Request / Merge RequestがMerged状態になっていることを確認する。
 6. ローカルで統合ブランチへCheckoutし、Remoteの最新状態へ同期する。
+7. `test/test-specification.md` が存在し、かつ検証環境への反映工程にManual Jobや付随する手順が含まれる場合は、その内容を整理し、それらを実施する。
 
 Merge完了後、ローカルとRemoteの統合ブランチの状態を確認し、次のTaskへ進む。
 
