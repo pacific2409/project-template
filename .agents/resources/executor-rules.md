@@ -51,7 +51,9 @@ docs/.steering/<current-train>/shared/information/requirement-verification-matri
 - **Requirement Mode**が `CR` の場合、**Overall Design Specifications** や **Detailed Design Specifications** を含む各Specification Sourcesについては `docs/persistent/` の対象Specificationを現行仕様・設計の前提として扱い、それに対応する `docs/change-requirements/` のChange Requirementsが存在する場合は、Current Trainにおける変更対象および変更内容として併せて扱う。
 
 ## **Phase Progression Principle**
-本Principleは、担当Module内におけるPhase間の進行およびPromotion順序を規定するものであり、Module間のExecution OrderやPhaseの同期を要求するものではない。担当ModuleをIntegrationへPromotionするための条件として、他Moduleが同一Phaseまで完了していることを要求しない。ただし、Releaseへの進行については本Principleとは別の全体進行上の条件として、全ModuleのIntegrationが完了していることを前提とする。
+本Principleは、担当Module内におけるPhase間の進行およびPromotion順序を規定する。Module間のExecution Orderは本Principleでは規定せず、別途定義された依存関係に従う。また、Module間のPhase同期は要求せず、担当ModuleをIntegrationへPromotionするための条件として、他Moduleが同一Phaseまで完了していることを要求しない。
+
+ただし、Releaseへの進行はCurrent Train全体のGateとして、Current Trainの対象となる全ModuleがIntegration Testを完了していることを前提とする。
 
 Current Trainにおける担当ModuleのDevelopmentからReleaseまでの進行は、原則として以下の順序とする。
 
