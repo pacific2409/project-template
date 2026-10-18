@@ -15,7 +15,7 @@
     "--security-opt",
     "seccomp=unconfined"
   ],
-  "postCreateCommand": "pip install --upgrade pip && pip install pyyaml && glab config set git_protocol https --host gitlab.com",
+  "postCreateCommand": "pip install --upgrade pip && pip install pyyaml checkov==3.3.21 && glab config set git_protocol https --host gitlab.com",
   "features": {
     "ghcr.io/devcontainers/features/aws-cli:1": {},
     "ghcr.io/devcontainers/features/terraform:1": {

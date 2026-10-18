@@ -17,7 +17,7 @@ ENV VISUAL="code --wait"
 ENV EDITOR="code --wait"
 ENV TZ=Asia/Tokyo
 
-RUN brew install glab eksctl git-secrets \
+RUN brew install glab eksctl git-secrets trivy \
     && git secrets --register-aws --global \
     && git secrets --install /home/vscode/.git-templates/git-secrets \
     && git config --global init.templatedir '~/.git-templates/git-secrets'
