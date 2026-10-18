@@ -7,7 +7,7 @@
 - **Environment Lifecycle and Dormancy Strategy** の内容を確認し、停止、縮退、削除、再生成、復元その他の定義されたLifecycle Strategyに対応可能なImplementationとする。
 
 ## Operational Verification Guideline
-対象のImplementationについて、Environmentへの適用および適用後の動作・状態を確認するための方法と手順を整理し、**Draft** に整理の上、ユーザーに作業概要を提示する。
+対象のImplementationについて、Environmentへの適用および適用後の動作・状態を確認するための方法と手順を整理し、**Draft** に整理の上、ユーザーに作業概要を提示する。その際は適用・検証手順で使用するコマンドも明示する。
 
 stgその他の後続検証環境や本番環境へのApplyおよびVerificationは、本Implementation Loopでは実施せず、後続の対応工程で行う。
 

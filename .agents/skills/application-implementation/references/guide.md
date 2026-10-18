@@ -1,7 +1,7 @@
 # Application Implementation Guide
 
 ## Operational Verification Guideline
-対象のImplementationについて、開発環境もしくはローカル環境へのDeployおよびDeploy後の動作・状態を確認するための方法と手順を整理し、**Draft** に整理の上、ユーザーに作業概要を提示する。(Deploy先がローカル環境なのかクラウド上等の開発環境なのかについては仕様を確認する。)
+対象のImplementationについて、開発環境もしくはローカル環境へのDeployおよびDeploy後の動作・状態を確認するための方法と手順を整理し、**Draft** に整理の上、ユーザーに作業概要を提示する。その際はDeploy・検証手順で使用するコマンドも明示する。(Deploy先がローカル環境なのかクラウド上等の開発環境なのかについては仕様を確認する。)
 
 ### **Verification Plan**
 
