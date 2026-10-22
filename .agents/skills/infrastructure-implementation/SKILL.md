@@ -52,9 +52,10 @@ Current TrainのRequirement Mode。
 
 ## Draft
 ```
-docs/.steering/<current-train>/<module-name>/working/implementation/task-<task-no>.md
+docs/.steering/<current-train>/<module-name>/working/implementation/task-<task-no>/task-<task-no>.md
 ```
 - 各Implementation Loopでは、対象Taskに対応する **Draft**  を作業上の補助情報として使用する。
+- 対象Taskに固有のPlan、Policy、Evidenceその他の補助Artifactは、同じ `task-<task-no>/` 配下へまとめて配置する。
 - 各工程の中で調査・把握・整理した内容のうち、後続Stepで参照する必要がある要点やメモを適宜記録する。
 - 詳細な情報を複製するのではなく、後続作業に必要な要点と必要に応じて参照元を記録する。
 - 本ファイルはTaskのSpecificationや正式なDecisionの代替とはしない。重要な判断は `decisions.md`、Blockerは `blockers.md` など、**Executor Rules** で定められた正規の管理先へ記録する。
