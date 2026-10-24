@@ -200,7 +200,7 @@ Workflow内にて、各Taskは以下の形式で定義する。
 具体的な対応手順については、**Common Guide** の該当プロセスに従う。
 
 ### Task 3: Create Pull Requests
-**Development Guidelines** に従い、担当Moduleについて、現在対応中のブランチ(作業ブランチもしくはFixブランチ)から統合ブランチへのPull Request / Merge Requestを作成する。
+**Development Guidelines** に従い、担当Moduleについて、現在対応中のブランチ(作業ブランチもしくはFixブランチ)から統合ブランチへのPull Request / Merge Requestを作成する。`docs/`のリポジトリについてはこのTaskおよびMRやそのマージの対象ではない。
 
 使用するRemote Repositoryに応じて `gh` または `glab` などを使用し、必要な情報を整理してPR/MRを作成する。
 
@@ -262,7 +262,7 @@ READMEには、ProjectおよびModuleの概要、主要なSpecificationへの参
 具体的な記載内容および構成は、**Common Guide** の該当プロセスに従う。
 
 ### Task 10: Prepare Release Branch
-リリースブランチが存在しない場合は、**Development Guidelines** に従ってリリースブランチを準備する。
+リリースブランチが存在しない場合は、**Development Guidelines** に従ってリリースブランチを準備する。`docs/`のリポジトリについてはこのTaskの対象ではない。
 
   - ブランチ名は、`<prefix>/<current-train-name>` の形式とする。prefixの命名規則については**Development Guidelines** に従う。
 
@@ -283,7 +283,7 @@ READMEには、ProjectおよびModuleの概要、主要なSpecificationへの参
 待機中の相談・対応依頼については、**Common Guide** の **Handling Requests During Await** に従って対応する。
 
 ### Task 15: Merge for Release Branch
-Release準備が完了した旨の報告および進行指示をユーザーから受けた後、**Common Guide** の該当プロセスに従い、担当Moduleの統合ブランチからリリースブランチへのマージ工程を実施して、リリース用ブランチへチェックアウトする。
+Release準備が完了した旨の報告および進行指示をユーザーから受けた後、**Common Guide** の該当プロセスに従い、担当Moduleの統合ブランチからリリースブランチへのマージ工程を実施して、リリース用ブランチへチェックアウトする。`docs/`のリポジトリについてはこのTaskの対象ではない。
 
 ### Task 16: Execute Release and Production Verification
 Work Skill `$release-execution` を使用し、担当ModuleのRelease Instructionsに従ってReleaseおよびProduction Verificationを実施する。
@@ -315,7 +315,7 @@ Current TrainについてProject全体のProduction Verificationが完了した�
 該当する定義が存在しない場合は、本Taskをスキップする。
 
 ### Task 20: Merge for Master Branch
-**Common Guide** の該当プロセスに従い、担当Moduleのリリース用ブランチからMasterブランチへのマージ工程を実施して、Masterブランチへチェックアウトする。
+**Common Guide** の該当プロセスに従い、担当Moduleのリリース用ブランチからMasterブランチへのマージ工程を実施して、Masterブランチへチェックアウトする。`docs/`のリポジトリについてはこのTaskの対象ではない。
 
 ### Task 21: Finalize Module in Current Train
 担当Moduleについて、Current Trainにおける必要な作業および関連する対応がすべて完了していることを確認し、Moduleの作業を終了する。
