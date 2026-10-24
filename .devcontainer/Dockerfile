@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/devcontainers/base:resolute
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends vim \
+    && apt-get install -y --no-install-recommends vim mysql-client-core=8.4.11-0ubuntu0.26.04.1\
     && rm -rf /var/lib/apt/lists/*
 
 USER vscode
@@ -17,7 +17,8 @@ ENV VISUAL="code --wait"
 ENV EDITOR="code --wait"
 ENV TZ=Asia/Tokyo
 
-RUN brew install glab eksctl git-secrets trivy \
+RUN brew install glab eksctl git-secrets \
+    && brew version-install trivy 0.76.0 \
     && git secrets --register-aws --global \
     && git secrets --install /home/vscode/.git-templates/git-secrets \
     && git config --global init.templatedir '~/.git-templates/git-secrets'
