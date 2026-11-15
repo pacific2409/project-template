@@ -29,4 +29,4 @@
 
 | No | Train | Train Type | Status |
 |---:|-------|------------|--------|
-| 1 | **20260915-initial-implementation** | LAUNCH | OPEN |
+| 1 | **20260915-initial-implementation** | LAUNCH | CLOSED |
