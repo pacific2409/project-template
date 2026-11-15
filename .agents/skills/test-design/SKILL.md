@@ -78,7 +78,6 @@ docs/.steering/<current-train>/<module-name>/test/test-specification.md
 - Generate Test Specification
 - Validate Test Specification
 - Request Coverage Review
-- Move Review Report to Archive
 
 ## Execution Steps
 
